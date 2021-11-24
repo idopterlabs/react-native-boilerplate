@@ -29,7 +29,7 @@ const AnimatedStroke = ({ d, progress }: AnimatedStrokeProps) => {
         animatedProps={animatedBGProps}
         d={d}
         stroke={stroke}
-        strokeWidth={10}
+        strokeWidth={2}
         fill="white"
         strokeDasharray={length}
       />
@@ -38,8 +38,8 @@ const AnimatedStroke = ({ d, progress }: AnimatedStrokeProps) => {
         onLayout={() => setLength(ref.current!.getTotalLength())}
         ref={ref}
         d={d}
-        stroke="black"
-        strokeWidth={10}
+        stroke="#ff8635"
+        strokeWidth={2}
         strokeDasharray={length}
       />
     </>
