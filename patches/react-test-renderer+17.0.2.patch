@@ -1,0 +1,16 @@
+diff --git a/node_modules/react-test-renderer/cjs/react-test-renderer.development.js b/node_modules/react-test-renderer/cjs/react-test-renderer.development.js
+index f401dd2..16184a2 100644
+--- a/node_modules/react-test-renderer/cjs/react-test-renderer.development.js
++++ b/node_modules/react-test-renderer/cjs/react-test-renderer.development.js
+@@ -15292,7 +15292,10 @@ function act(callback) {
+     {
+       if (typeof Promise !== 'undefined') {
+         //eslint-disable-next-line no-undef
+-        Promise.resolve().then(function () {}).then(function () {
++        // This patch makes React's act play nicer with React Native
++        // https://github.com/facebook/react/issues/22634
++        // https://github.com/callstack/react-native-testing-library/issues/379#issuecomment-952031783
++        result.finally(function () {}).then(function () {
+           if (called === false) {
+             error('You called act(async () => ...) without await. ' + 'This could lead to unexpected testing behaviour, interleaving multiple act ' + 'calls and mixing their scopes. You should - await act(async () => ...);');
+           }

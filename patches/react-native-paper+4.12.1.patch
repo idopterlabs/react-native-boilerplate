@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native-paper/src/components/TextInput/TextInputOutlined.tsx b/node_modules/react-native-paper/src/components/TextInput/TextInputOutlined.tsx
+index f6d1880..3e0958f 100644
+--- a/node_modules/react-native-paper/src/components/TextInput/TextInputOutlined.tsx
++++ b/node_modules/react-native-paper/src/components/TextInput/TextInputOutlined.tsx
+@@ -41,7 +41,7 @@ import { AdornmentType, AdornmentSide } from './Adornment/enums';
+ const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -6;
+ const LABEL_PADDING_TOP = 8;
+ const MIN_HEIGHT = 64;
+-const MIN_DENSE_HEIGHT = 48;
++const MIN_DENSE_HEIGHT = 53;
+ const INPUT_PADDING_HORIZONTAL = 14;
+ 
+ const TextInputOutlined = ({

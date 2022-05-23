@@ -1,0 +1,12 @@
+diff --git a/node_modules/react-native-element-dropdown/src/components/Dropdown/index.tsx b/node_modules/react-native-element-dropdown/src/components/Dropdown/index.tsx
+index 81493c8..70454cb 100644
+--- a/node_modules/react-native-element-dropdown/src/components/Dropdown/index.tsx
++++ b/node_modules/react-native-element-dropdown/src/components/Dropdown/index.tsx
+@@ -272,7 +272,6 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>((props, currentRe
+         ref={refList}
+         onScrollToIndexFailed={scrollIndex}
+         data={listData}
+-        inverted
+         renderItem={_renderItem}
+         keyExtractor={(item, index) => index.toString()}
+         showsVerticalScrollIndicator={showsVerticalScrollIndicator}
