@@ -1,5 +1,17 @@
 {
 	"recommendations": [
-		"EditorConfig.EditorConfig"
+		"editorconfig.editorconfig",
+		"anseki.vscode-color",
+		"dbaeumer.vscode-eslint",
+		"ms-vscode.vscode-typescript-next",
+		"firsttris.vscode-jest-runner",
+		"tyriar.lorem-ipsum",
+		"esbenp.prettier-vscode",
+		"dsznajder.es7-react-js-snippets",
+		"equimper.react-native-react-redux",
+		"jpoissonnier.vscode-styled-components",
+		"msjsdiag.vscode-react-native",
+		"jock.svg",
+		"jgclark.vscode-todo-highlight"
 	]
 }
