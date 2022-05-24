@@ -1,8 +1,20 @@
-jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
+import * as ReactNative from 'react-native';
 
-jest.mock('react-native/Libraries/Utilities/Platform', () => ({
+const Platform = {
+  ...ReactNative.Platform,
   OS: 'android',
+  Version: 123,
+  isTesting: true,
   select: () => 'android',
-}));
+};
+
+Object.setPrototypeOf(
+  {
+    Platform,
+  },
+  ReactNative,
+);
+
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
 
 export {};
