@@ -1,3 +1,5 @@
+import { AnyObject, Maybe } from 'yup/lib/types';
+
 declare module 'yup' {
   interface StringSchema<
     TType extends Maybe<string> = string | undefined,
