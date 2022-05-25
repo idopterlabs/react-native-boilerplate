@@ -7,14 +7,17 @@ import Home from '@screens/App/Home';
 
 import { AppStackRouter } from '@typings/routes';
 
+import theme from '@theme/index';
+
 import { useAuth } from '@contexts/AuthContext';
 
 const AppStack = createNativeStackNavigator<AppStackRouter>();
 
 export default () => {
-  const { signOut } = useAuth();
+  const { deleteUser } = useAuth();
+
   const onLogout = () => {
-    signOut();
+    deleteUser();
   };
 
   return (
@@ -35,6 +38,9 @@ export default () => {
               color="#000"
             />
           ),
+          headerStyle: {
+            backgroundColor: theme.colors.primary,
+          },
         })}
       />
     </AppStack.Navigator>

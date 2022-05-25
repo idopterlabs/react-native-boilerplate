@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { AppStackRouter } from '@typings/routes';
 import { ParamsExampleMethodName } from '@typings/requests';
 
 import { states } from '@utils/statesList';
@@ -13,6 +10,8 @@ import { states } from '@utils/statesList';
 import { exampleMethodName } from '@services/api';
 
 import { extractPhoneNumber } from '@utils/normalization';
+
+import { useAuth } from '@contexts/AuthContext';
 
 import { FormInputs, useValidationSchema } from './useValidationSchema';
 
@@ -25,12 +24,13 @@ import {
   BoxInputView,
   ContainerBottomView,
   LoginButton,
-  Loading,
+  LoadingIndicator,
+  TitleText,
+  LogoSvg,
 } from './styles';
 
 const Login = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<AppStackRouter>>();
-
+  const { saveUser } = useAuth();
   const [isLoading, setLoading] = useState<boolean>(false);
 
   const [form] = useState<FormInputs>({
@@ -54,7 +54,7 @@ const Login = () => {
     setLoading(true);
     await exampleMethodName(params)
       .then(() => {
-        navigation.navigate('ddd');
+        // TODO: implement login method and call saveUser(...);
       })
       .catch((error) => {
         error.alert('Não foi possível realizar o login');
@@ -62,11 +62,19 @@ const Login = () => {
       .finally(() => {
         setLoading(false);
       });
+
+    // Example use saveUser():
+    saveUser({
+      accessToken: '4c0393ae35e1.4fb787d.564f2d02eba0e.3c3237aba0944c0',
+      idToken: '924af6cd-3e53-40dc-a89d-054cd90307a3',
+    });
   };
 
   return (
     <ContainerView>
       <ContainerScroll>
+        <TitleText>Bem-vindo</TitleText>
+        <LogoSvg />
         <BoxInputView>
           <Input
             testID="login:textInput:phone"
@@ -105,7 +113,7 @@ const Login = () => {
           />
         </BoxInputView>
         <ContainerBottomView>
-          {isLoading && <Loading />}
+          {isLoading && <LoadingIndicator />}
           {!isLoading && (
             <LoginButton onPress={handleSubmit(onSubmit)}>Entrar</LoginButton>
           )}

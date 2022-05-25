@@ -8,6 +8,7 @@ import { setAccessToken } from '@services/api';
 export type AuthContextData = {
   user: User;
   isAuthenticated: boolean;
+  isLoading: boolean;
   saveUser: (user: User, isUsedCached?: boolean) => Promise<void>;
   deleteUser: () => Promise<void>;
 };
@@ -19,6 +20,7 @@ export const AuthContext = createContext<AuthContextData>(
 export const AuthContextProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User>(userInitialState);
   const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
+  const [isLoading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     loadStorageData();
@@ -40,8 +42,10 @@ export const AuthContextProvider: React.FC = ({ children }) => {
   const loadStorageData = async () => {
     const userCached = await AsyncStorage.getItem('user:data');
     if (userCached) {
-      saveUser(JSON.parse(userCached), true);
+      await saveUser(JSON.parse(userCached), true);
     }
+
+    setLoading(false);
   };
 
   const deleteUser = async () => {
@@ -52,7 +56,7 @@ export const AuthContextProvider: React.FC = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, user, saveUser, deleteUser }}>
+      value={{ isAuthenticated, isLoading, user, saveUser, deleteUser }}>
       {children}
     </AuthContext.Provider>
   );

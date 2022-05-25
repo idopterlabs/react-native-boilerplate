@@ -60,9 +60,11 @@ buck-out/
 /ios/Pods/
 /vendor/bundle/
 
-# env
-
+# Environment files
 .env
 .env.*
 !.env.example
 !.env.test
+
+# Coverage
+/coverage

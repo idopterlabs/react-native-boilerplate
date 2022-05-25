@@ -6,24 +6,17 @@ import { MaskedTextInput as MaskedTextInputComponent } from 'react-native-mask-t
 import InputComponent from '@components/Input';
 import SelectComponent from '@components/Select';
 
+import Logo from '@assets/svg/logo.svg';
+
 import {
   ContainerView as ContainerViewComponent,
-  LoadingIndicator,
+  ContainerScroll as ContainerScrollComponent,
+  LoadingIndicator as LoadingIndicatorComponent,
 } from '@theme/common';
 
 import theme from '@theme/index';
 
-export const ContainerScroll = styled.ScrollView.attrs({
-  vertical: false,
-  showsVerticalScrollIndicator: true,
-  nestedScrollEnabled: true,
-  contentContainerStyle: {
-    paddingBottom: theme.dimensions.marginHorizontal / 2,
-  },
-})`
-  height: 100%;
-  width: 100%;
-`;
+export const ContainerScroll = styled(ContainerScrollComponent)``;
 
 export const ContainerView = styled(ContainerViewComponent)`
   align-items: center;
@@ -31,7 +24,7 @@ export const ContainerView = styled(ContainerViewComponent)`
   margin-right: ${theme.dimensions.marginHorizontal}px;
 `;
 
-export const Loading = styled(LoadingIndicator)``;
+export const LoadingIndicator = styled(LoadingIndicatorComponent)``;
 
 export const BoxInputView = styled.View`
   width: 100%;
@@ -57,9 +50,11 @@ export const LoginButton = styled(DefaultButton).attrs({
 })``;
 
 export const TitleText = styled(Text)`
+  margin-top: 10px;
   width: 100%;
-  font-size: 22px;
+  font-size: 28px;
   font-weight: bold;
+  text-align: center;
 `;
 
 export const SeparatorView = styled.View`
@@ -75,3 +70,10 @@ export const Input = styled(InputComponent)``;
 export const Select = styled(SelectComponent)``;
 
 export const MaskedTextInput = styled(MaskedTextInputComponent)``;
+
+export const LogoSvg = styled(Logo).attrs({
+  width: '100%',
+  preserveAspectRatio: 'xMidYMid',
+})`
+  margin-top: 10px;
+`;

@@ -5,13 +5,15 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import { useAuth } from '@contexts/AuthContext';
 
+import SplashScreen from '@screens/SplashScreen';
+
 import { PrimaryStatusBar } from '@theme/common';
 
 import AppNavigator from './AppNavigator';
 import AuthNavigator from './AuthNavigator';
 
 export default () => {
-  const { signedIn } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
 
   const hideSplashScreen = () => {
     setTimeout(() => {
@@ -22,7 +24,11 @@ export default () => {
   return (
     <NavigationContainer onReady={hideSplashScreen}>
       <PrimaryStatusBar />
-      {signedIn ? <AppNavigator /> : <AuthNavigator />}
+      {isLoading ? (
+        <SplashScreen />
+      ) : (
+        <>{isAuthenticated ? <AppNavigator /> : <AuthNavigator />}</>
+      )}
     </NavigationContainer>
   );
 };
