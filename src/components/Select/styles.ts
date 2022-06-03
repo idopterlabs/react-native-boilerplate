@@ -27,7 +27,7 @@ const colorVerification = (
   }
 
   if (isFocus) {
-    return theme.colors.primaryDark;
+    return theme.colors.primary;
   }
 
   if (isDisabled) {
@@ -49,7 +49,9 @@ export const Dropdown = styled(DropdownComponent).attrs(
     keyboardAvoiding: true,
     placeholderStyle: {
       fontSize: 16,
-      color: props.placeholderTextColor || '#6f6f6f',
+      color: props.hasError
+        ? props.theme.colors.attention
+        : props.placeholderTextColor || '#6f6f6f',
     },
     selectedTextStyle: {
       fontSize: 16,
@@ -80,13 +82,15 @@ export const Dropdown = styled(DropdownComponent).attrs(
       props.hasError,
       '#626466',
     )};
+  border-radius: 6px;
   border-width: ${(props) => (props.isFocus ? 1.75 : 1)}px;
 `;
 
 export const LabelText = styled(Text)`
+  opacity: ${(props) => (props.isFocus ? 1 : 0.5)};
   padding-left: 4px;
   padding-right: 4px;
-  font-size: 14px;
+  font-size: 12px;
   color: ${(props: CommonProps) =>
     colorVerification(
       props.theme,

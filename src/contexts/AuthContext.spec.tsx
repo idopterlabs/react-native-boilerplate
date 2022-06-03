@@ -29,11 +29,13 @@ describe('Auth Context Provider', () => {
     const { result } = renderHook(() => useAuth(), { wrapper });
 
     expect(result.current.isAuthenticated).toBeFalsy();
+    expect(result.current.isLoading).toBeTruthy();
     expect(result.current.user).toBe(userInitialState);
 
     await act(async () => {});
 
     expect(result.current.isAuthenticated).toBeFalsy();
+    expect(result.current.isLoading).toBeFalsy();
     expect(result.current.user).toBe(userInitialState);
   });
 
