@@ -1,6 +1,25 @@
-import styled from 'styled-components/native';
+import { useContext } from 'react';
+
+import styled, { ThemeContext } from 'styled-components/native';
 import { TextInput as TextInputComponent } from 'react-native-paper';
 import { Controller as ControllerComponent } from 'react-hook-form';
+
+export const getColorIcon = (
+  hasError: boolean = false,
+  isDisabled: boolean = false,
+) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const themeContext = useContext(ThemeContext);
+  if (hasError) {
+    return themeContext.colors.attention;
+  }
+
+  if (isDisabled) {
+    return themeContext.colors.disabled;
+  }
+
+  return themeContext.colors.primary;
+};
 
 export const ContainerTextInput = styled(TextInputComponent).attrs((props) => ({
   mode: props.mode || 'outlined',

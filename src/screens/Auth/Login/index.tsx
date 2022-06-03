@@ -81,6 +81,7 @@ const Login = () => {
             name="phone"
             control={control}
             param={form.phone}
+            icon="close"
             label="Telefone"
             placeholder="Telefone"
             keyboardType="phone-pad"

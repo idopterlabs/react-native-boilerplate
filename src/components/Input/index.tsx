@@ -4,9 +4,13 @@ import { TextInputProps } from 'react-native';
 import { Control } from 'react-hook-form/dist/types';
 import { RenderProps } from 'react-native-paper/lib/typescript/components/TextInput/types';
 
-import theme from '@theme/index';
+import {
+  FormController,
+  ErrorMessageText,
+  ContainerTextInput,
+  getColorIcon,
+} from './styles';
 
-import { FormController, ErrorMessageText, ContainerTextInput } from './styles';
 interface Props extends Omit<TextInputProps, 'mode'> {
   control?: Control<any>;
   name?: string;
@@ -15,7 +19,7 @@ interface Props extends Omit<TextInputProps, 'mode'> {
   icon?: string;
   onPressIcon?: () => void;
   selectionColor?: string;
-  disabled?: boolean;
+  isDisabled?: boolean;
   render?: (props: RenderProps) => React.ReactNode;
   hasError?: boolean;
   mode?: 'flat' | 'outlined' | undefined;
@@ -31,7 +35,7 @@ const TextInput = ({
   errorMessage,
   icon,
   onPressIcon,
-  disabled,
+  isDisabled,
   hasError,
   ...props
 }: Props) => {
@@ -40,15 +44,8 @@ const TextInput = ({
       <ContainerTextInput.Icon
         onPress={onPressIcon}
         name={icon}
-        disabled={disabled}
-        // TODO: convert to styled
-        color={
-          errorMessage
-            ? theme.colors.light.attention
-            : disabled
-            ? 'gray'
-            : theme.colors.light.primary
-        }
+        disabled={isDisabled}
+        color={getColorIcon(hasError, isDisabled)}
         size={25}
       />
     ) : null;
@@ -70,6 +67,7 @@ const TextInput = ({
                   onBlur={onBlur}
                   right={RightIcon()}
                   error={hasError}
+                  disabled={isDisabled}
                   {...props}
                 />
               );
