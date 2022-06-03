@@ -19,7 +19,7 @@ export default () => (
         animation: 'slide_from_left',
         headerShown: true,
         headerStyle: {
-          backgroundColor: theme.colors.primary,
+          backgroundColor: theme.colors.light.primary,
         },
       })}
     />

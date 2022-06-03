@@ -1,32 +1,37 @@
-import styled from 'styled-components/native';
+import styled, { DefaultTheme } from 'styled-components/native';
 
 import { Text } from 'react-native-paper';
 import { Dropdown as DropdownComponent } from 'react-native-element-dropdown';
-import globalTheme from '@theme/index';
 
-interface CommunProps {
+interface CommonProps {
+  theme: DefaultTheme;
   isFocus: boolean;
   isDisabled: boolean;
   hasError: boolean;
   placeholderTextColor?: string;
 }
 
+interface ListEmptyLabelProps {
+  isSelect: boolean;
+}
+
 const colorVerification = (
+  theme: DefaultTheme,
   isFocus: boolean,
   isDisabled: boolean,
   hasError: boolean,
   color: string,
 ) => {
   if (hasError) {
-    return globalTheme.colors.attention;
+    return theme.colors.attention;
   }
 
   if (isFocus) {
-    return globalTheme.colors.primaryDark;
+    return theme.colors.primaryDark;
   }
 
   if (isDisabled) {
-    return globalTheme.colors.disabled;
+    return theme.colors.disabled;
   }
 
   return color;
@@ -38,7 +43,7 @@ export const ErrorMessage = styled.Text`
 `;
 
 export const Dropdown = styled(DropdownComponent).attrs(
-  (props: CommunProps) => ({
+  (props: CommonProps) => ({
     disabled: props.isDisabled,
     dropdownPosition: 'auto',
     keyboardAvoiding: true,
@@ -48,27 +53,28 @@ export const Dropdown = styled(DropdownComponent).attrs(
     },
     selectedTextStyle: {
       fontSize: 16,
-      color: globalTheme.colors.primaryText,
+      color: props.theme.colors.primaryText,
     },
     inputSearchStyle: {
       height: 40,
       fontSize: 16,
     },
     selectedTextProps: {
-      color: globalTheme.colors.primaryText,
+      color: props.theme.colors.primaryText,
       fontSize: 17,
       paddingLeft: 12,
     },
     search: true,
     searchPlaceholder: 'Pesquise...',
   }),
-)<CommunProps>`
+)<CommonProps>`
   height: 45px;
   background-color: white;
   padding-left: 12px;
   padding-right: 12px;
   border-color: ${(props) =>
     colorVerification(
+      props.theme,
       props.isFocus,
       props.isDisabled,
       props.hasError,
@@ -81,12 +87,13 @@ export const LabelText = styled(Text)`
   padding-left: 4px;
   padding-right: 4px;
   font-size: 14px;
-  color: ${(props: CommunProps) =>
+  color: ${(props: CommonProps) =>
     colorVerification(
+      props.theme,
       props.isFocus,
       props.isDisabled,
       props.hasError,
-      globalTheme.colors.primaryText,
+      props.theme.colors.primaryText,
     )};
 `;
 
@@ -107,4 +114,17 @@ export const FixLabelBackgroundView = styled.View`
   background-color: ${(props) => props.theme.colors.backgroundLight};
   width: 100%;
   height: 8px;
+`;
+
+export const ListEmptyLabelContainerView = styled.View`
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ListEmptyLabelText = styled(Text)<ListEmptyLabelProps>`
+  font-size: 16px;
+  color: ${({ isSelect, theme }) =>
+    isSelect ? theme.colors.disabledText : theme.colors.backgroundLight};
 `;

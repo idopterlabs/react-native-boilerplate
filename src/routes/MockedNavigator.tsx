@@ -3,9 +3,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { ThemeProvider } from 'styled-components/native';
-
-import theme from '@theme/index';
+import { withThemeProvider } from '@tests/actions/styledTheme';
 
 const AppStack = createNativeStackNavigator();
 
@@ -15,9 +13,7 @@ interface Props {
 }
 
 const MockedNavigator = ({ component, params = {} }: Props) => {
-  const Providers: React.FC = (props) => (
-    <ThemeProvider theme={theme}>{component(props)}</ThemeProvider>
-  );
+  const Providers: React.FC = (props) => withThemeProvider(component, props);
 
   return (
     <NavigationContainer>

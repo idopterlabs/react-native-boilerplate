@@ -8,14 +8,14 @@ import {
   SplashScreenStatusBar as SplashScreenStatusBarComponent,
 } from '@theme/common';
 
-import theme from '@theme/index';
+import dimensions from '@theme/dimensions';
 
 export const ContainerScroll = styled(ContainerScrollComponent)``;
 
 export const ContainerView = styled(ContainerViewComponent)`
   justify-content: center;
-  margin-left: ${theme.dimensions.marginHorizontal}px;
-  margin-right: ${theme.dimensions.marginHorizontal}px;
+  padding-left: ${dimensions.marginHorizontal}px;
+  padding-right: ${dimensions.marginHorizontal}px;
 `;
 
 export const LogoSvg = styled(Logo).attrs({

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { Control } from 'react-hook-form/dist/types';
 
-import ListEmptyLabel from '@components/ListEmptyLabel';
+import ListEmptyLabel from './ListEmptyLabel';
 
 import {
   ErrorMessage,

@@ -14,14 +14,14 @@ import {
   LoadingIndicator as LoadingIndicatorComponent,
 } from '@theme/common';
 
-import theme from '@theme/index';
+import dimensions from '@theme/dimensions';
 
 export const ContainerScroll = styled(ContainerScrollComponent)``;
 
 export const ContainerView = styled(ContainerViewComponent)`
   align-items: center;
-  margin-left: ${theme.dimensions.marginHorizontal}px;
-  margin-right: ${theme.dimensions.marginHorizontal}px;
+  margin-left: ${dimensions.marginHorizontal}px;
+  margin-right: ${dimensions.marginHorizontal}px;
 `;
 
 export const LoadingIndicator = styled(LoadingIndicatorComponent)``;
@@ -45,9 +45,9 @@ export const DefaultButton = styled(Button).attrs({
   width: 100%;
 `;
 
-export const LoginButton = styled(DefaultButton).attrs({
-  color: theme.colors.primary,
-})``;
+export const LoginButton = styled(DefaultButton).attrs((props) => ({
+  color: props.theme.colors.primary,
+}))``;
 
 export const TitleText = styled(Text)`
   margin-top: 10px;
@@ -58,7 +58,7 @@ export const TitleText = styled(Text)`
 `;
 
 export const SeparatorView = styled.View`
-  background: ${theme.colors.disabledText};
+  background: ${(props) => props.theme.colors.disabledText};
   width: 100%;
   height: 1.5px;
   margin-top: 10px;

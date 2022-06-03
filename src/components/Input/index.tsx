@@ -41,12 +41,13 @@ const TextInput = ({
         onPress={onPressIcon}
         name={icon}
         disabled={disabled}
+        // TODO: convert to styled
         color={
           errorMessage
-            ? theme.colors.attention
+            ? theme.colors.light.attention
             : disabled
             ? 'gray'
-            : theme.colors.primary
+            : theme.colors.light.primary
         }
         size={25}
       />

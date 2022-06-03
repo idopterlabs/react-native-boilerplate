@@ -2,7 +2,9 @@ import React from 'react';
 import { cleanup, render } from '@testing-library/react-native';
 import '@testing-library/jest-native/extend-expect';
 
-import theme from '@styles/theme';
+import theme from '@theme/index';
+
+import { shadowTheme } from '@tests/actions/styledTheme';
 
 import Input from './index';
 
@@ -13,12 +15,18 @@ describe('Input component', () => {
   afterEach(cleanup);
 
   it('should render Input component correctly', () => {
-    render(<Input name={'input-test'} />);
+    render(shadowTheme(<Input placeholder="Test placeholder" />));
   });
 
   it('should render Input component with icon', () => {
     const { getByA11yRole } = render(
-      <Input placeholder="Test placeholder" name={'input-test'} icon="home" />,
+      shadowTheme(
+        <Input
+          placeholder="Test placeholder"
+          name={'input-test'}
+          icon="home"
+        />,
+      ),
     );
 
     const IconComponent = getByA11yRole('button');
@@ -28,13 +36,15 @@ describe('Input component', () => {
 
   it('should render Input component with icon and errorMessage and attention color', () => {
     const { getByA11yRole, getByText } = render(
-      <Input
-        placeholder="Test placeholder"
-        name={'input-test'}
-        icon="home"
-        errorMessage="Test error"
-        hasError={true}
-      />,
+      shadowTheme(
+        <Input
+          placeholder="Test placeholder"
+          name={'input-test'}
+          icon="home"
+          errorMessage="Test error"
+          hasError={true}
+        />,
+      ),
     );
 
     const IconComponent = getByA11yRole('button').parent as any;
@@ -42,17 +52,19 @@ describe('Input component', () => {
       IconComponent!.children[0].props.children[0].props.children.props.color;
 
     getByText('Test error');
-    expect(IconComponentColor).toEqual(theme.colors.attention);
+    expect(IconComponentColor).toEqual(theme.colors.light.attention);
   });
 
   it('should render Input component with disabled icon and with gray color', () => {
     const { getByA11yRole } = render(
-      <Input
-        placeholder="Test placeholder"
-        name={'input-test'}
-        icon="home"
-        disabled={true}
-      />,
+      shadowTheme(
+        <Input
+          placeholder="Test placeholder"
+          name={'input-test'}
+          icon="home"
+          disabled={true}
+        />,
+      ),
     );
 
     const IconComponent = getByA11yRole('button') as any;
@@ -68,12 +80,14 @@ describe('Input component', () => {
 
   it('should render Input component with enabled icon', () => {
     const { getByA11yRole } = render(
-      <Input
-        placeholder="Test placeholder"
-        name={'input-test'}
-        icon="home"
-        disabled={false}
-      />,
+      shadowTheme(
+        <Input
+          placeholder="Test placeholder"
+          name={'input-test'}
+          icon="home"
+          disabled={false}
+        />,
+      ),
     );
 
     const IconComponent = getByA11yRole('button') as any;
@@ -84,6 +98,6 @@ describe('Input component', () => {
 
     expect(IconComponent).not.toBeDisabled();
     expect(IconComponent).not.toBeUndefined();
-    expect(IconComponentColor).toEqual('#1F4977');
+    expect(IconComponentColor).toEqual('#ffba00');
   });
 });

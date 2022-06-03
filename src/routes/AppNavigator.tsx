@@ -39,7 +39,7 @@ export default () => {
             />
           ),
           headerStyle: {
-            backgroundColor: theme.colors.primary,
+            backgroundColor: theme.colors.light.primary,
           },
         })}
       />

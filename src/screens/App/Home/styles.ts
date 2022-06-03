@@ -9,14 +9,14 @@ import {
   ContainerScroll as ContainerScrollComponent,
 } from '@theme/common';
 
-import theme from '@theme/index';
+import dimensions from '@theme/dimensions';
 
 export const ContainerScroll = styled(ContainerScrollComponent)``;
 
 export const ContainerView = styled(ContainerViewComponent)`
   align-items: center;
-  margin-left: ${theme.dimensions.marginHorizontal}px;
-  margin-right: ${theme.dimensions.marginHorizontal}px;
+  margin-left: ${dimensions.marginHorizontal}px;
+  margin-right: ${dimensions.marginHorizontal}px;
 `;
 
 export const TitleText = styled(Text)`
