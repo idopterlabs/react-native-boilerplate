@@ -35,7 +35,6 @@
     "react-native-screens": "^3.13.1",
     "react-native-svg": "^12.3.0",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-tiny-toast": "^1.0.7",
     "react-native-vector-icons": "9.1.0",
     "styled-components": "^5.3.5",
     "yup": "^0.32.11"
