@@ -6,12 +6,12 @@ import { RN_BASE_URL_API } from '@env';
 
 import { Callback } from '@typings/common';
 import {
-  ErrorType,
+  AxiosErrorApplication,
   ParamsExampleMethodName,
   ResponseExampleMethodName,
 } from '@typings/requests';
 
-import { ErrorResponse, statusResponse } from './responseService';
+import { GetErrorResponse } from './responseService';
 
 export const URL_API: string = `${RN_BASE_URL_API}`;
 
@@ -58,9 +58,8 @@ export const exampleMethodName = async (
   } catch (error) {
     const genericError = 'Não foi possível obter o dados, tente mais tarde';
 
-    const { message } = statusResponse(error as ErrorType, genericError);
-    const callback: Callback | undefined = (error as ErrorType).callback;
-
-    throw new ErrorResponse(message, callback, error);
+    const axiosError = error as AxiosErrorApplication;
+    const callback: Callback | undefined = axiosError.callback;
+    throw GetErrorResponse(axiosError, genericError, callback);
   }
 };

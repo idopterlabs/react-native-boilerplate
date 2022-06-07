@@ -1,7 +1,7 @@
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { MockableFunction, mocked, MockedFunction } from 'jest-mock';
 
-import { ErrorResponse } from '@services/responseService';
+import { GetErrorResponse } from '@services/responseService';
 
 export interface AxiosMock {
   response: AxiosResponse<any, any>;
@@ -24,11 +24,26 @@ export const createAxiosMock = (
   }
 
   const genericError = 'Não foi possível obter dados';
-  const error = new Error(genericError);
+  const error: AxiosError<any, any> = {
+    name: '',
+    message: '',
+    response: {
+      headers: {},
+      config: {},
+      statusText: '',
+      status: 400,
+      data: [],
+    },
+    config: {},
+    code: '001',
+    request: {},
+    isAxiosError: true,
+    toJSON: () => ({} as object),
+  };
   const callback = () => {};
 
   const mock = mocked(method).mockRejectedValue(
-    new ErrorResponse(genericError, callback, error),
+    GetErrorResponse(error, genericError, callback),
   );
   mock.mockClear();
 

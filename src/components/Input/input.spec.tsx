@@ -55,14 +55,14 @@ describe('Input component', () => {
     expect(IconComponentColor).toEqual(theme.colors.light.attention);
   });
 
-  it('should render Input component with disabled icon and with gray color', () => {
+  it('should render Input component with disabled icon and with disabled color', () => {
     const { getByA11yRole } = render(
       shadowTheme(
         <Input
           placeholder="Test placeholder"
           name={'input-test'}
           icon="home"
-          disabled={true}
+          isDisabled={true}
         />,
       ),
     );
@@ -75,7 +75,7 @@ describe('Input component', () => {
 
     expect(IconComponent).toBeDisabled();
     expect(IconComponent).not.toBeUndefined();
-    expect(IconComponentColor).toEqual('gray');
+    expect(IconComponentColor).toEqual('rgba(235, 235, 228, 0.3)');
   });
 
   it('should render Input component with enabled icon', () => {
@@ -85,7 +85,7 @@ describe('Input component', () => {
           placeholder="Test placeholder"
           name={'input-test'}
           icon="home"
-          disabled={false}
+          isDisabled={false}
         />,
       ),
     );

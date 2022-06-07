@@ -1,59 +1,139 @@
 import { Alert } from 'react-native';
 
-import { ErrorType, StatusHttpType } from '@typings/requests';
+import { AxiosError, AxiosResponse } from 'axios';
+
+import {
+  DefaultChangesetError,
+  ResponseDataWithError,
+  StatusHttpType,
+} from '@typings/requests';
 import { Callback } from '@typings/common';
 
-const statusResponse = (obj: ErrorType, description: string): Error => {
-  if (obj.response === undefined) {
-    return new Error('Servidor indisponível, tente mais tarde');
+const GetErrorResponse = (
+  error: AxiosError<any, any>,
+  genericErrorDescription: string,
+  callback?: Callback,
+): ErrorResponse => {
+  if (error.response === undefined) {
+    return new ErrorResponse(
+      'Servidor indisponível, tente mais tarde',
+      callback,
+      error,
+    );
   }
 
-  const response = JSON.parse(JSON.stringify(obj.response));
-  return !response
-    ? new Error('Servidor indisponível, tente mais tarde')
-    : verifyStatusResponse(response, description);
+  const responseJsonTest = JSON.parse(JSON.stringify(error.response));
+  if (!responseJsonTest) {
+    return new ErrorResponse(
+      'Servidor indisponível, tente mais tarde',
+      callback,
+      error,
+    );
+  }
+
+  return verifyStatusResponse(error, genericErrorDescription, callback);
 };
 
 const verifyStatusResponse = (
-  response: ErrorType['response'],
-  description: string,
-) => {
-  const data = response.data;
+  error: AxiosError<any, any>,
+  genericErrorDescription: string,
+  callback?: Callback,
+): ErrorResponse => {
+  const response: AxiosResponse<ResponseDataWithError, any> =
+    error.response as AxiosResponse<ResponseDataWithError, any>;
 
   const statusHttp: StatusHttpType = {
-    400: () => verifyErrorsData(data, description),
+    400: () =>
+      new ErrorResponse(
+        verifyDataResponse(response) || genericErrorDescription,
+        callback,
+        error,
+      ),
     422: () =>
-      new Error(
+      new ErrorResponse(
         'Não foi possível processar as instruções presentes. Tente novamente mais tarde',
+        callback,
+        error,
       ),
     401: () =>
-      verifyErrorsData(
-        data,
-        'Você não está autenticado, por favor faça o login novamente',
+      new ErrorResponse(
+        verifyDataResponse(response) || genericErrorDescription,
+        callback,
+        error,
       ),
-    403: () => new Error('Não autorizado'),
-    404: () => new Error('Item não encontrado'),
-    500: () => new Error(description),
-    503: () => new Error('Servidor indisponível. Tente novamente mais tarde'),
-    default: () => new Error('Erro de verificação do status da requisição'),
+    403: () => new ErrorResponse('Não autorizado', callback, error),
+    404: () => new ErrorResponse('Item não encontrado', callback, error),
+    500: () =>
+      new ErrorResponse(
+        `Houve um problema no servidor. ${genericErrorDescription}`,
+        callback,
+        error,
+      ),
+    503: () =>
+      new ErrorResponse(
+        'Servidor indisponível. Tente novamente mais tarde',
+        callback,
+        error,
+      ),
+    default: () =>
+      new ErrorResponse(
+        `Erro de verificação do status da requisição para código ${
+          response?.status || '001'
+        }`,
+        callback,
+        error,
+      ),
   };
 
-  return (statusHttp[response.status] || statusHttp.default)();
+  return statusHttp[response.status]
+    ? statusHttp[response.status]()
+    : statusHttp.default();
 };
 
-const verifyErrorsData = (
-  data: ErrorType['response']['data'],
-  description: string,
-) => {
+const verifyDataResponse = (
+  response: AxiosResponse<ResponseDataWithError, any>,
+): string | undefined => {
+  const data = response.data;
+  if (data === undefined) {
+    return undefined;
+  }
+
   if (typeof data === 'string') {
-    return new Error(data);
+    return data;
   }
 
-  if (typeof data?.errors === 'string') {
-    return new Error(data.errors);
+  if (typeof data.errors === 'string') {
+    return data.errors;
   }
 
-  return new Error(description);
+  if (Array.isArray(data.errors)) {
+    const errors = data.errors;
+    if (errors.length === 1) {
+      return errors[0];
+    }
+
+    if (errors.length > 1) {
+      return errors.join('\n');
+    }
+  } else if (typeof data.errors === 'object') {
+    return extractErrorOfChangeset(data.errors);
+  }
+
+  if (typeof data.message === 'object') {
+    return extractErrorOfChangeset(data.message);
+  }
+};
+
+const extractErrorOfChangeset = (
+  error: DefaultChangesetError,
+): string | undefined => {
+  const keys = Object.keys(error);
+  if (keys.length > 0) {
+    const messages = error[keys[0]];
+    if (messages.length > 0) {
+      return `${keys[0]}: ${messages[0]}`;
+    }
+  }
 };
 
 class ErrorResponse extends Error {
@@ -105,4 +185,4 @@ class ErrorResponse extends Error {
   }
 }
 
-export { statusResponse, ErrorResponse };
+export { GetErrorResponse, ErrorResponse };
