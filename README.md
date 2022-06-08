@@ -15,7 +15,7 @@
 
 ## Sobre
 
-Este template possuir uma base sólida para desenvolvimento de aplicativos mobile usando React Native. São fornecidos estrutura de pastas organizadas, dependências comuns usadas, controle de rotas de navegação, configuração de testes usando jest e utilitários.
+Este template possuir uma base sólida para desenvolvimento de aplicativos mobile usando React Native. São fornecidos estrutura de pastas organizadas, dependências comuns usadas, controle de rotas de navegação, configuração de testes usando Jest e utilitários.
 
 ## Inicializando um projeto
 
@@ -25,14 +25,14 @@ Este template possuir uma base sólida para desenvolvimento de aplicativos mobil
 - Cocoapods
 - JDK 11
 - Xcode
-- Android SDKs (Recomendação de instalar via Android Studio)
+- Android SDKs (Recomendado instalar via Android Studio)
 
 ### Usando o Template
 
 Há duas maneiras de usar esse template.
 
-1. Clonado o repositório e usando a [react-native-rename](https://github.com/junedomingo/react-native-rename) ferramente para troca o nome do app de acordo com o projeto que será desenvolvido.
-2. Inicializar um novo projeto react native pela ferramente [oficial](https://reactnative.dev/docs/environment-setup#creating-a-new-application) e copias os demais arquivos desse repositório, excerto o  `package.json`, `app.json`, `android/` e `ios/`, e por final cópias as dependências que não estão inclusas no projeto oficial. Lembrando que algumas delas são preciso aplicar configurações especias nas pastas designado de cada sistema operacional (`android/` e `ios/`):
+1. Clonando o repositório e usando a [react-native-rename](https://github.com/junedomingo/react-native-rename) ferramenta  para troca o nome do app conforme o projeto que será desenvolvido.
+2. Inicializar um novo projeto react native pela ferramenta  [oficial](https://reactnative.dev/docs/environment-setup#creating-a-new-application) e copiar os demais arquivos desse repositório, excerto o  `package.json`, `app.json`, `android/` e `ios/`, e por final copiar as dependências que não estão inclusas no projeto oficial. Lembrando que algumas delas são necessárias aplicar configurações especias nas pastas designado de cada sistema operacional (`android/` e `ios/`):
 
 - [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons#installation)
 - [react-native-bootsplash](https://github.com/zoontek/react-native-bootsplash#setup-1)
@@ -42,10 +42,10 @@ Há duas maneiras de usar esse template.
 
 ### Variável de Ambiente
 
-As variáveis de ambiente devem ser colocadas no arquivo `.env`, um exemplo de como definir as variáveis usadas está localizadas em [`.env.example`](./.env.example), lembrando de que sempre que criar uma nova variável no projeto definir ela no .env.example também, para que outros membros possam ter conhecimento dela. Algumas regras para nomenclatura de variável:
+As variáveis de ambiente devem ser colocadas no arquivo `.env`, um exemplo de como definir as variáveis usadas está localizado em [`.env.example`](./.env.example), lembrando de que sempre que criar uma nova variável no projeto definir ela no .env.example também, para que outros membros possam ter conhecimento dela. Algumas regras para nomenclatura de variável:
 - Devem começar com "RN"
 - Usar estilo de nome de variável [snake case](https://en.wikipedia.org/wiki/Snake_case)
-- Usar somente letras maiusculizar e sem acentuação
+- Usar somente letras maiúsculas e sem acentuação
 
 Exemplos:
 - `RN_MINHA_VARIAVEL`
@@ -54,28 +54,31 @@ Exemplos:
 
 Por padrão todo projeto tem três variáveis:
 
-- `RN_BASE_URL`: Informar a URL base referente a URL de um serviço web que em algum momento o clinete pode ser redirecionado de dentro do app
+- `RN_BASE_URL`: Informar a URL base referente a URL de um serviço web que em algum momento o cliente pode ser redirecionado de dentro do app
 - `RN_BASE_URL_API`: Informar a URL base referente ao consumo de uma web API dedicado ao app
-- `RN_ENV`: O ambiente que está sendo usado, como por exemplo `development`, `test`, `staging`, `production`
+- `RN_ENV`: O ambiente que está sendo usado, como, por exemplo: `development`, `test`, `staging`, `production`
 
 ### Splashscreen
 
 Para criar uma splashscreen você deve usar o [generate-bootsplash](https://github.com/zoontek/react-native-bootsplash#assets-generation), informado o caminho para a logo da splashscreen e a cor de fundo, exemplo: 
-`yarn react-native generate-bootsplash src/assets/images/logoSplashScreen.png --background-color=ffffff --logo-width=100 --assets-path=src/assets --flavor=main`
+
+```sh
+yarn react-native generate-bootsplash src/assets/images/logoSplashScreen.png --background-color=ffffff --logo-width=100 --assets-path=src/assets --flavor=main
+```
+
+Uma segunda tela de abertura pode ser configurada em [`src/screens/SplashScreen`](./src/screens/SplashScreen/) (Recomendado deixar como Splashscreen nativo, para não ter efeito de "piscada de tela" entre as transições), essa não está limitada a apenas utilização de uma imagem, elementos como barra de carregamento podem ser adicionando. Essa tela é carregada após o SplashScreen nativo do sistema operacional (Android/iOS), essa tela em questão deve ser usado para esperar o carregamento ou verificação de dados do app, tal como se o usuário está autenticado.
 
 Para mais informações de padrões da SplashScreen veja em [Android Guide - Splash screens](https://developer.android.com/guide/topics/ui/splash-screen#splash_screen_dimensions).
 
-Uma segunda tela de abertura pode ser configurada em [`src/screens/SplashScreen`](./src/screens/SplashScreen/) (Recomendado deixa semelhante a Splashscreen nativa, para não ter efeito de "piscada de tela" entre as transições), essa não está limitada a apenas utilização de uma imagem, elementos como barra de carregamento podem ser adicionando,  essa tela é carregada após o SplashScreen nativo do sistema operacional (Android/iOS), essa tela em questão deve ser usado para esperar o carregamento ou verificação de dados do app, tal como se o usuário está autenticado.
-
 ### App Center
 
-Usamos o AppCenter para gerar build e monitorar crash, devido isso você deverá fornecer o "APP SECRET" do projeto registrado no AppCenter em `appcenter-config.json`. Lembrando 
+Usamos o AppCenter para gerar build e monitorar crash, devido isso você deverá fornecer o "APP SECRET" do projeto registrado no AppCenter em `appcenter-config.json`.
 
 ## Folha de Estilo
 
-O template é projeto para usar [Styled Component](https://styled-components.com/) e [React Native Paper](https://callstack.github.io/react-native-paper/), a customização do app é feito através de configurações de estilo localizado em [`src/theme`](./src/theme/).
+O template é projetado para utiliza [Styled Component](https://styled-components.com/) e [React Native Paper](https://callstack.github.io/react-native-paper/), a customização do app é feito através de configurações de estilo localizado em [`src/theme`](./src/theme/).
 
-A principal dele é as cores ([`src/theme/colors.ts`](./src/theme/colors.ts)), nele está contido as cores a serem consumido no app usado o [sistema de cores do Material Design](https://material.io/design/color/the-color-system.html#color-theme-creation), devido isso é possível inclusive usar a ferramente de customização de tema do Material Design: [https://material.io/resources/color/](material.io/resources/color/). Caso o App tenha uma variente de modo escuro, suas cores podem ser definido em [`src/theme/colors.dark.ts`](./src/theme/colors.dark.ts).
+A principal dele é as cores ([`src/theme/colors.ts`](./src/theme/colors.ts)), nele está contido as cores a serem consumido no app, usado o [sistema de cores do Material Design](https://material.io/design/color/the-color-system.html#color-theme-creation), devido isso é possível inclusive usar a ferramenta  de customização de tema do Material Design: [https://material.io/resources/color/](material.io/resources/color/). Caso o App tenha uma variente de modo escuro, suas cores podem ser definido em [`src/theme/colors.dark.ts`](./src/theme/colors.dark.ts).
 
 
 ## Estrutura do Projeto
@@ -99,10 +102,10 @@ A principal dele é as cores ([`src/theme/colors.ts`](./src/theme/colors.ts)), n
 </br> ┃ ┃ ┣ 📜`AllProviders.tsx` **(Importação de todos os Contextos usado no app)**
 </br> ┃ ┃ ┣ 📜`[Nome do Contexto]Context.spec.tsx` **(Implementação de controle de um contexto)**
 </br> ┃ ┃ ┗ 📜`[Nome do Contexto]Context.tsx` **(Testes de um contexto)**
-</br> ┃ ┣ 📂`routes` **(Gereciamento de rotas)**
-</br> ┃ ┃ ┣ 📜`AppNavigator.tsx` **(Gereciamento principal de rotas do app - usúario autendicado)**
-</br> ┃ ┃ ┣ 📜`AuthNavigator.tsx` **(Gereciamento de rotas de um usúario não autendicado)**
-</br> ┃ ┃ ┗ 📜`MockedNavigator.tsx` **(Gereciamento de rotas para testes)**
+</br> ┃ ┣ 📂`routes` **(Gerenciamento de rotas)**
+</br> ┃ ┃ ┣ 📜`AppNavigator.tsx` **(Gerenciamento principal de rotas do app - usúario autendicado)**
+</br> ┃ ┃ ┣ 📜`AuthNavigator.tsx` **(Gerenciamento de rotas de um usúario não autendicado)**
+</br> ┃ ┃ ┗ 📜`MockedNavigator.tsx` **(Gerenciamento de rotas para testes)**
 </br> ┃ ┣ 📂`screens` **(Telas usado no App)**
 </br> ┃ ┃ ┣ 📂`App` **(Telas principal do app - usúario autendicado)**
 </br> ┃ ┃ ┃ ┗ 📂`[Nome da Tela]`
@@ -161,9 +164,9 @@ A principal dele é as cores ([`src/theme/colors.ts`](./src/theme/colors.ts)), n
 
 ## Padrões de Estilo
 
-O projeto usar [ESlint](https://eslint.org/), [Prettier](https://prettier.io/) e [EditorConfig](https://editorconfig.org/), para controlar padrões de estilo. Abaixo estão algumas regras que ainda não podem ser aplicadas via uma dessas ferramentas.
+O projeto usa [ESlint](https://eslint.org/), [Prettier](https://prettier.io/) e [EditorConfig](https://editorconfig.org/), para controlar padrões de estilo. Abaixo estão algumas regras que ainda não podem ser aplicadas via uma dessas ferramentas.
 
-- Separar importação por contexto, sendo as primeiras importações do react e react native, depois do node module, em seguida pelo por grupo de pastar e por último importações com caminho relativo.
+- Separar importação por contexto, sendo as primeiras importações do react e react native, depois do node module, e em seguida por grupo de pastar e por último importações com caminho relativo.
 
 ❌ Não fazer
 
@@ -191,7 +194,7 @@ import MockedNavigator from '@routes/MockedNavigator';
 import Home from './index';
 ```
 
-- Usar [CamelCase](https://en.wikipedia.org/wiki/Camel_case) em nome clatura de variável. Permitido fuga do padrão quando tratar de uma variável dentro de um corpo de um HTTP response/request.
+- Usar [CamelCase](https://en.wikipedia.org/wiki/Camel_case) em nomenclatura de variável. Permitido fuga do padrão quando trata de uma variável dentro de um corpo de um HTTP response/request.
 
 ❌ Não fazer
 
@@ -225,13 +228,13 @@ const [currentValue, setNewValue] = useState<string>('');
 
 ## Testes
 
-Para testes unitários está sendo utilizado biblioteca Jest e para escrever os testes é necessário criar arquivos `.spec.ts`/ `.spec.tsx` dentro da mesma diretoria em que se encontra o fragmento
+Para testes unitários está sendo utilizado biblioteca [Jest](https://jestjs.io/docs/getting-started) e para escrever os testes é necessário criar arquivos `.spec.ts`/ `.spec.tsx` dentro do mesmo diretório em que se encontra o fragmento de código.
 
 ### HTTP Request
-Há alguns utilitários para facilitar a criação de testes, o primeiro deles é criar uma cópia mockado dos retornos da API localizado em [`src/tests/responses/`](./src/tests/responses/), veja o exemplo de como criar um espelho de um request em [`src/tests/responses/exampleMethodName.ts`](./src/tests/responses/exampleMethodName.ts).
+Há alguns utilitários para facilitar a criação de testes, o primeiro deles é criar uma copiar mockado dos retornos da API localizado em [`src/tests/responses/`](./src/tests/responses/), veja o exemplo de como criar um espelho de um request em [`src/tests/responses/exampleMethodName.ts`](./src/tests/responses/exampleMethodName.ts).
 
 ### Alert
-Caso tenha um teste que evolva alertar há um utilitário em [`src/tests/actions/alertSpy.ts`](./src/tests/actions/alertSpy.ts), como ele você pode usar selecionar um botão em específico pelo nome:
+Caso tenha um teste que envolva alerta, há um utilitário em [`src/tests/actions/alertSpy.ts`](./src/tests/actions/alertSpy.ts), como ele você pode selecionar um botão em específico pelo nome:
 
 ```ts
 import { alertSpy, onAlertActions } from '@tests/actions/alertSpy';
@@ -271,7 +274,7 @@ describe('Home Screen', () => {
 ```
 
 ### Render
-Para carregamento correto dos render deve está atento que ao realizar testes de tela, deve ser usado o `MockedNavigator`: 
+Para carregamento correto dos render deve estar atento que ao realizar os testes de tela, deve ser usado o `MockedNavigator`: 
 
 ```ts
 import MockedNavigator from '@routes/MockedNavigator';
@@ -315,7 +318,7 @@ describe('Name Component', () => {
 
 ### Mocks
 
-Os mocks a serem consumido no projeto podem ser criados em [`src/tests/mocks/`](./src/tests/mocks/) sendo separados em arquivos, de acordocom seu contexto ou biblioteca facilitando a manutenção. Os mocks que serão consumidos globalmente devem ser importados em [`src/tests/mocks/global.ts`](./src/tests/mocks/global.ts), os demais devem ser importando quando necessário no arquivo de spec do teste.
+Os mocks a serem consumido no projeto podem ser criados em [`src/tests/mocks/`](./src/tests/mocks/) sendo separados em arquivos, de acordo com seu contexto ou biblioteca facilitando a manutenção. Os mocks que serão consumidos globalmente devem ser importados em [`src/tests/mocks/global.ts`](./src/tests/mocks/global.ts), os demais devem ser importando quando necessário no arquivo de spec do teste.
 
 
 ## Dependências Recomendas
@@ -324,8 +327,8 @@ Os mocks a serem consumido no projeto podem ser criados em [`src/tests/mocks/`](
 - [react-navigation](https://reactnavigation.org/): Controle de rotas de navegação
 - [react-native-paper](https://callstack.github.io/react-native-paper): UIKit com vastar quantidade de componentes pronto, personalizável e seguindo o padrão de UX do Material Design. 
 - [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons): Pacotes de ícones
-- [react-native-bootsplash](https://github.com/zoontek/react-native-bootsplash): Implementar nativamente uma SplashScreen usando as API oficial de cada sistema operacional
-- [react-native-element-dropdown](https://github.com/hoaphantn7604/react-native-element-dropdown): Implementar um menu dropdown funcional e costumizado
+- [react-native-bootsplash](https://github.com/zoontek/react-native-bootsplash): Implementar nativamente uma SplashScreen usando as APIs oficial de cada sistema operacional
+- [react-native-element-dropdown](https://github.com/hoaphantn7604/react-native-element-dropdown): Implementar um menu dropdown funcional e customizado
 - [react-native-mask-text](https://github.com/akinncar/react-native-mask-text): Adicionar mascara nos componentes de Input
 - [react-native-tiny-toast](https://www.npmjs.com/package/react-native-tiny-toast): Um componente de Toast que funcionar em qualquer sistema sem permissão especial
 - [react-native-calendars](https://github.com/wix/react-native-calendars): Implementar visualização de calendário e DatePicker personalizável 
@@ -346,13 +349,13 @@ Os mocks a serem consumido no projeto podem ser criados em [`src/tests/mocks/`](
 
 ### Utilitário
 
-- [appcenter](https://docs.microsoft.com/en-us/appcenter/sdk/getting-started/react-native): Intregração com AppCenter
+- [appcenter](https://docs.microsoft.com/en-us/appcenter/sdk/getting-started/react-native): Integração com AppCenter
 - [axios](https://axios-http.com/docs/intro): HTTP Cliente.
 - [luxon](https://moment.github.io/luxon/#/): Formatação de data
 - [patch-package](https://www.npmjs.com/package/patch-package): Aplicação de correção em pacotes
-- [react-hook-form](https://react-hook-form.com/): Gereciamento de formulários
+- [react-hook-form](https://react-hook-form.com/): Gerenciamento de formulários
 - [yup](https://github.com/jquense/yup): Validação de dados
-- [react-native-device-info](https://github.com/react-native-device-info/react-native-device-info): Informar dados dos dispositivo
+- [react-native-device-info](https://github.com/react-native-device-info/react-native-device-info): Informar dados sobre o dispositivo
 - [react-native-svg-transformer](https://github.com/kristerkari/react-native-svg-transformer): Permitir importar arquivos .SVG
-- [@react-native-firebase/remote-config](https://rnfirebase.io/remote-config/usage): Intregração com Firebase Remote Config
-- [react-native-camera](https://github.com/react-native-camera/react-native-camera): Suporte a usar câmera nativamente do dispositivo
+- [@react-native-firebase/remote-config](https://rnfirebase.io/remote-config/usage): Integração com Firebase Remote Config
+- [react-native-camera](https://github.com/react-native-camera/react-native-camera): Suporte para usar câmera nativamente do dispositivo
