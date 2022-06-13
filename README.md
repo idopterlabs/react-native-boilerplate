@@ -1,4 +1,4 @@
-# Idopterlabs React Native Template
+# Idopterlabs React Native Boilerplate
 
 | | | |
 | - | - | - |
@@ -15,7 +15,7 @@
 
 ## Sobre
 
-Este template possuir uma base sólida para desenvolvimento de aplicativos mobile usando React Native. São fornecidos estrutura de pastas organizadas, dependências comuns usadas, controle de rotas de navegação, configuração de testes usando Jest e utilitários.
+Este boilerplate possuir uma base sólida para desenvolvimento de aplicativos mobile usando React Native. São fornecidos estrutura de pastas organizadas, dependências comuns usadas, controle de rotas de navegação, configuração de testes usando Jest e utilitários.
 
 ## Inicializando um projeto
 
@@ -27,9 +27,9 @@ Este template possuir uma base sólida para desenvolvimento de aplicativos mobil
 - Xcode
 - Android SDKs (Recomendado instalar via Android Studio)
 
-### Usando o Template
+### Usando o Boilerplate
 
-Há duas maneiras de usar esse template.
+Há duas maneiras de usar esse boilerplate.
 
 1. Clonando o repositório e usando a [react-native-rename](https://github.com/junedomingo/react-native-rename) ferramenta  para troca o nome do app conforme o projeto que será desenvolvido.
 2. Inicializar um novo projeto react native pela ferramenta  [oficial](https://reactnative.dev/docs/environment-setup#creating-a-new-application) e copiar os demais arquivos desse repositório, excerto o  `package.json`, `app.json`, `android/` e `ios/`, e por final copiar as dependências que não estão inclusas no projeto oficial. Lembrando que algumas delas são necessárias aplicar configurações especias nas pastas designado de cada sistema operacional (`android/` e `ios/`):
@@ -76,14 +76,14 @@ Usamos o AppCenter para gerar build e monitorar crash, devido isso você deverá
 
 ## Folha de Estilo
 
-O template é projetado para utiliza [Styled Component](https://styled-components.com/) e [React Native Paper](https://callstack.github.io/react-native-paper/), a customização do app é feito através de configurações de estilo localizado em [`src/theme`](./src/theme/).
+O boilerplate é projetado para utiliza [Styled Component](https://styled-components.com/) e [React Native Paper](https://callstack.github.io/react-native-paper/), a customização do app é feito através de configurações de estilo localizado em [`src/theme`](./src/theme/).
 
 A principal dele é as cores ([`src/theme/colors.ts`](./src/theme/colors.ts)), nele está contido as cores a serem consumido no app, usado o [sistema de cores do Material Design](https://material.io/design/color/the-color-system.html#color-theme-creation), devido isso é possível inclusive usar a ferramenta  de customização de tema do Material Design: [https://material.io/resources/color/](material.io/resources/color/). Caso o App tenha uma variente de modo escuro, suas cores podem ser definido em [`src/theme/colors.dark.ts`](./src/theme/colors.dark.ts).
 
 
 ## Estrutura do Projeto
 
-</br>📦`(root template)`
+</br>📦`(root boilerplate)`
 </br> ┣ 📂`.vscode` **(Configurações e extensões para o VSCode)**
 </br> ┣ 📂`android` **(Configurações e código nativo referente ao Android)**
 </br> ┣ 📂`ios` **(Configurações e código nativo referente ao iOS)**
