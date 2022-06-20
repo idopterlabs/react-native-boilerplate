@@ -10,6 +10,6 @@ export default {
 
   disabled: 'rgba(235, 235, 228, 0.8)',
 
-  backgroundLight: 'red',
+  backgroundLight: '#222222',
   backgroundSecondaryLight: '#333333',
 };
