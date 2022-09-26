@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Definindo versão fixa de instalação do React Native Reanimated
 - Primeira letra do campo de erro é mostrado com letra maiúscula
+- Novo componente de input com suporte melhor a dark mode, eventos de troca de texto e mostrar label personalizada.
 
 ### Fixed
 
