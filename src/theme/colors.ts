@@ -22,7 +22,7 @@ export default {
   attention: colorsPaper.red500,
   attentionLight: colorsPaper.red300,
 
-  disabled: 'rgba(235, 235, 228, 0.3)',
+  disabled: '#bbbbbb',
 
   backgroundLight: '#f0f2f5',
   backgroundSecondaryLight: '#eeeeee',

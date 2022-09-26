@@ -8,7 +8,7 @@ export default {
   disabledText: '#bbbbbb',
   placeholderText: '#cbcbcb',
 
-  disabled: 'rgba(235, 235, 228, 0.8)',
+  disabled: '#bbbbbb',
 
   backgroundLight: '#222222',
   backgroundSecondaryLight: '#333333',
