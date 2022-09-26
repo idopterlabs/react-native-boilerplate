@@ -37,7 +37,7 @@ Há duas maneiras de usar esse boilerplate.
 - [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons#installation)
 - [react-native-bootsplash](https://github.com/zoontek/react-native-bootsplash#setup-1)
 - [react-native-screens](https://github.com/software-mansion/react-native-screens#installation)
-
+- [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation)
 ## Configurações
 
 ### Variável de Ambiente

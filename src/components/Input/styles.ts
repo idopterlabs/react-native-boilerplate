@@ -39,5 +39,7 @@ export const FormController = styled(ControllerComponent)``;
 
 export const ErrorMessageText = styled.Text`
   margin-top: 5px;
+  margin-left: 8px;
+  margin-bottom: -5px;
   color: ${(props) => props.theme.colors.attentionLight};
 `;

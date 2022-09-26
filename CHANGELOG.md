@@ -13,11 +13,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
--  
+- Definindo versão fixa de instalação do React Native Reanimated
 
 ### Fixed
 
 - Usando estilo compatível com VSCode Styled
+- Alinhando texto de erro no input
 
 ### Deprecated
 
@@ -36,7 +37,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 
 - Aplicando cor no fundo que faltava 
-
 
 ## [1.0.0] - 2022-06-13
 

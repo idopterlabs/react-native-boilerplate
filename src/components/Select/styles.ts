@@ -39,6 +39,8 @@ const colorVerification = (
 
 export const ErrorMessage = styled.Text`
   margin-top: 5px;
+  margin-left: 8px;
+  margin-bottom: -5px;
   color: ${(props) => props.theme.colors.attentionLight};
 `;
 
