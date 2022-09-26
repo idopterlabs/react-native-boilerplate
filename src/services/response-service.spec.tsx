@@ -164,9 +164,7 @@ describe('Response Service', () => {
     };
 
     expect(errorFunction).toThrow(ErrorResponse);
-    expect(errorFunction).toThrowError(
-      'Não foi possível processar as instruções presentes. Tente novamente mais tarde',
-    );
+    expect(errorFunction).toThrowError('Status 422 message error');
   });
 
   it('should return the GetErrorResponse default error when a request return status 400', async () => {
@@ -437,7 +435,7 @@ describe('Response Service', () => {
     };
 
     expect(errorFunction).toThrow(ErrorResponse);
-    expect(errorFunction).toThrowError('cpf: test error 1');
+    expect(errorFunction).toThrowError('Cpf: Test error 1');
   });
 
   it('should return the error when a response has errors in object "message"', async () => {
@@ -467,7 +465,7 @@ describe('Response Service', () => {
     };
 
     expect(errorFunction).toThrow(ErrorResponse);
-    expect(errorFunction).toThrowError('cpf: test error 1');
+    expect(errorFunction).toThrowError('Cpf: Test error 1');
   });
 
   it('should return the specific error (ErrorResponse) with the message', async () => {
