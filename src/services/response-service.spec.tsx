@@ -167,6 +167,32 @@ describe('Response Service', () => {
     expect(errorFunction).toThrowError('Status 422 message error');
   });
 
+  it('should return the GetErrorResponse generic error when data.errors is not exist (status 422)', async () => {
+    const error: AxiosError<any, any> = {
+      name: '',
+      message: '',
+      response: {
+        headers: {},
+        config: {},
+        statusText: '',
+        status: 422,
+        data: '',
+      },
+      config: {},
+      code: '001',
+      request: {},
+      isAxiosError: true,
+      toJSON: () => ({} as object),
+    };
+
+    const errorFunction = () => {
+      throw GetErrorResponse(error, 'Default error');
+    };
+
+    expect(errorFunction).toThrow(ErrorResponse);
+    expect(errorFunction).toThrowError('Default error');
+  });
+
   it('should return the GetErrorResponse default error when a request return status 400', async () => {
     const error: AxiosError<any, any> = {
       name: '',
@@ -487,8 +513,12 @@ describe('Response Service', () => {
   it('should return the specific error (ErrorResponse) with the alert message and callback action', async () => {
     const callback = () => {};
     const error = new ErrorResponse('Message error', callback);
+
+    expect(alertSpy).toBeCalledTimes(0);
+
     error.alert('Title error');
 
+    expect(alertSpy).toBeCalledTimes(1);
     expect(alertSpy).toHaveBeenLastCalledWith(
       'Title error',
       'Message error',
@@ -502,5 +532,46 @@ describe('Response Service', () => {
     const error = new ErrorResponse('Message error', callback);
 
     expect(error.toString()).toBe('AxiosErrorResponse: Message error');
+  });
+
+  it('should return the specific error (ErrorResponse) with the snackbar error props', async () => {
+    const callback = () => {};
+    const error = new ErrorResponse('Message error', callback);
+    const snackbarErrorProps = error.snackbar('Title error');
+
+    expect(snackbarErrorProps.title).toEqual('Title error');
+
+    expect(alertSpy).toBeCalledTimes(0);
+    snackbarErrorProps.callback();
+
+    expect(alertSpy).toBeCalledTimes(1);
+    expect(alertSpy).toHaveBeenLastCalledWith(
+      'Title error',
+      'Message error',
+      [{ onPress: callback, text: 'OK' }],
+      { cancelable: false },
+    );
+  });
+
+  it('should return the specific error (ErrorResponse) with the snackbar error props and custom alert title', async () => {
+    const callback = () => {};
+    const error = new ErrorResponse('Message error', callback);
+    const snackbarErrorProps = error.snackbar(
+      'Title snackbar error',
+      'Title alert error',
+    );
+
+    expect(snackbarErrorProps.title).toEqual('Title snackbar error');
+
+    expect(alertSpy).toBeCalledTimes(0);
+    snackbarErrorProps.callback();
+
+    expect(alertSpy).toBeCalledTimes(1);
+    expect(alertSpy).toHaveBeenLastCalledWith(
+      'Title alert error',
+      'Message error',
+      [{ onPress: callback, text: 'OK' }],
+      { cancelable: false },
+    );
   });
 });

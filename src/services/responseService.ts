@@ -8,6 +8,8 @@ import {
 } from '@typings/requests';
 import { Callback } from '@typings/common';
 
+import { Data as PropsSnackbarError } from '@components/SnackbarError';
+
 import { uppercaseFirstLetter } from '@utils/normalization';
 
 const GetErrorResponse = (
@@ -132,6 +134,8 @@ class ErrorResponse extends Error {
     public message: string,
     public callback?: Callback,
     public originalError?: unknown,
+    public httpStatusCode?: number,
+    public httpResponseData?: unknown,
   ) {
     super(message);
     this.name = 'AxiosErrorResponse';
@@ -142,6 +146,15 @@ class ErrorResponse extends Error {
 
     if (originalError) {
       this.originalError = originalError;
+
+      const axiosError = originalError as AxiosError<any, any>;
+      if (
+        axiosError.response?.status &&
+        typeof axiosError.response.status === 'number'
+      ) {
+        this.httpStatusCode = axiosError.response.status;
+        this.httpResponseData = axiosError.response.data;
+      }
     }
 
     // eslint-disable-next-line prettier/prettier
@@ -173,6 +186,19 @@ class ErrorResponse extends Error {
     }
 
     Alert.alert(title, this.message);
+  }
+
+  snackbar(titleSnackbar: string, titleAlert: string = ''): PropsSnackbarError {
+    if (!titleAlert) {
+      titleAlert = titleSnackbar;
+    }
+
+    return {
+      title: titleSnackbar,
+      callback: () => {
+        this.alert(titleAlert);
+      },
+    };
   }
 }
 

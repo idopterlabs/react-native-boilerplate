@@ -9,7 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- 
+- Adicionado componente alternativo ao Alert para mostrar erros de formar mais sútil (Snackbar)
+- Adicionado retornos original de http status e http response data para erros de request
 
 ### Changed
 
