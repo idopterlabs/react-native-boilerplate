@@ -2,23 +2,33 @@ import { StatusBar as StatusBarReact } from 'react-native';
 
 import styled from 'styled-components/native';
 
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 import { ActivityIndicator } from 'react-native-paper';
+
+export const ContainerSafeAreaView = styled(SafeAreaView)`
+  flex: 1;
+  background: ${(props) => props.theme.colors.backgroundLight};
+`;
 
 export const ContainerView = styled.View`
   flex: 1;
   background: ${(props) => props.theme.colors.backgroundLight};
 `;
 
-export const ContainerScroll = styled.ScrollView.attrs((props) => {
-  return {
-    vertical: true,
-    showsVerticalScrollIndicator: true,
-    nestedScrollEnabled: true,
-    contentContainerStyle: {
-      paddingBottom: props.theme.dimensions.marginHorizontal / 2,
-    },
-  };
-})`
+export const ContainerScroll = styled(KeyboardAwareScrollView).attrs(
+  (props) => {
+    return {
+      vertical: true,
+      showsVerticalScrollIndicator: true,
+      nestedScrollEnabled: true,
+      contentContainerStyle: {
+        paddingBottom: props.theme.dimensions.marginHorizontal / 2,
+      },
+    };
+  },
+)`
   height: 100%;
   width: 100%;
 `;

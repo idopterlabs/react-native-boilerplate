@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Tirando opacidade da cores em componentes desabilitados
 - Adicionado opção para configurar `placeholder` color
 - Mock de navegação incorporar o tema
+- Evitar problemas de sobreposição do teclado no iOS onde há scroll
 
 ### Deprecated
 
