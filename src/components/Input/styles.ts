@@ -21,13 +21,15 @@ export const getColorIcon = (
   return themeContext.colors.primary;
 };
 
-export const ContainerTextInput = styled(TextInputComponent).attrs((props) => ({
-  mode: props.mode || 'outlined',
-  autoCapitalize: props.autoCapitalize || 'words',
-  placeholderTextColor:
-    props.placeholderTextColor || props.theme.colors.placeholderText,
-  dense: true,
-}))`
+export const ContainerTextInput = styled(TextInputComponent).attrs((props) => {
+  return {
+    mode: props.mode || 'outlined',
+    autoCapitalize: props.autoCapitalize || 'words',
+    placeholderTextColor:
+      props.placeholderTextColor || props.theme.colors.placeholderText,
+    dense: true,
+  };
+})`
   font-size: 18px;
   padding-bottom: 0px;
   background-color: white;

@@ -43,32 +43,34 @@ export const ErrorMessage = styled.Text`
 `;
 
 export const Dropdown = styled(DropdownComponent).attrs(
-  (props: CommonProps) => ({
-    disabled: props.isDisabled,
-    dropdownPosition: 'auto',
-    keyboardAvoiding: true,
-    placeholderStyle: {
-      fontSize: 16,
-      color: props.hasError
-        ? props.theme.colors.attention
-        : props.placeholderTextColor || '#6f6f6f',
-    },
-    selectedTextStyle: {
-      fontSize: 16,
-      color: props.theme.colors.primaryText,
-    },
-    inputSearchStyle: {
-      height: 40,
-      fontSize: 16,
-    },
-    selectedTextProps: {
-      color: props.theme.colors.primaryText,
-      fontSize: 17,
-      paddingLeft: 12,
-    },
-    search: true,
-    searchPlaceholder: 'Pesquise...',
-  }),
+  (props: CommonProps) => {
+    return {
+      disabled: props.isDisabled,
+      dropdownPosition: 'auto',
+      keyboardAvoiding: true,
+      placeholderStyle: {
+        fontSize: 16,
+        color: props.hasError
+          ? props.theme.colors.attention
+          : props.placeholderTextColor || '#6f6f6f',
+      },
+      selectedTextStyle: {
+        fontSize: 16,
+        color: props.theme.colors.primaryText,
+      },
+      inputSearchStyle: {
+        height: 40,
+        fontSize: 16,
+      },
+      selectedTextProps: {
+        color: props.theme.colors.primaryText,
+        fontSize: 17,
+        paddingLeft: 12,
+      },
+      search: true,
+      searchPlaceholder: 'Pesquise...',
+    };
+  },
 )<CommonProps>`
   height: 45px;
   background-color: white;

@@ -226,6 +226,34 @@ const [isFocus, setIsFocus] = useState<boolean>(false);
 const [currentValue, setNewValue] = useState<string>('');
 ```
 
+- Passando atributos no Styled. Atributos que utilizam as `props`, devem ter `return` em seu corpo pois a extensão do VSCode do styled bugar sem esse padrão de estilo de código.
+
+❌ Não fazer
+
+```ts
+export const ContainerTextInput = styled(TextInputComponent).attrs((props) => ({
+  mode: props.mode || 'outlined',
+  autoCapitalize: props.autoCapitalize || 'words',
+  placeholderTextColor:
+    props.placeholderTextColor || props.theme.colors.placeholderText,
+  dense: true,
+}))``;
+```
+
+✅ Fazer isso
+
+```ts
+export const ContainerTextInput = styled(TextInputComponent).attrs((props) => {
+  return {
+    mode: props.mode || 'outlined',
+    autoCapitalize: props.autoCapitalize || 'words',
+    placeholderTextColor:
+      props.placeholderTextColor || props.theme.colors.placeholderText,
+    dense: true,
+  };
+})``;
+```
+
 ## Testes
 
 Para testes unitários está sendo utilizado biblioteca [Jest](https://jestjs.io/docs/getting-started) e para escrever os testes é necessário criar arquivos `.spec.ts`/ `.spec.tsx` dentro do mesmo diretório em que se encontra o fragmento de código.
