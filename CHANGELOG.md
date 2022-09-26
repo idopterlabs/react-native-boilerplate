@@ -23,6 +23,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Alinhando texto de erro no input
 - Status 422 agora mostrar o erro processado
 - Tirando opacidade da cores em componentes desabilitados
+- Adicionado opção para configurar `placeholder` color
+- Mock de navegação incorporar o tema
 
 ### Deprecated
 

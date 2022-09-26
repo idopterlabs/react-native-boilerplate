@@ -14,6 +14,7 @@ export default {
   primaryText: '#000000',
   secondaryText: '#ffffff',
   disabledText: '#bbbbbb',
+  placeholder: '#6f6f6f',
   placeholderText: '#cbcbcb',
 
   accepted: '#70e467',

@@ -13,6 +13,7 @@ export const withThemeProvider = (
       theme={{
         colors: theme.colors.light,
         dimensions: theme.dimensions,
+        colorScheme: 'light',
       }}>
       {component(params)}
     </ThemeProvider>
