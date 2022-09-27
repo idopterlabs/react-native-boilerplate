@@ -5,13 +5,13 @@ import { User } from '@typings/common';
 
 import { setAccessToken } from '@services/api';
 
-export type AuthContextData = {
+export interface AuthContextData {
   user: User;
   isAuthenticated: boolean;
   isLoading: boolean;
   saveUser: (user: User, isUsedCached?: boolean) => Promise<void>;
   deleteUser: () => Promise<void>;
-};
+}
 
 export const AuthContext = createContext<AuthContextData>(
   {} as AuthContextData,

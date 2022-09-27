@@ -27,7 +27,7 @@
     "react-hook-form": "^7.29.0",
     "react-native": "0.68.2",
     "react-native-device-info": "^8.7.1",
-    "react-native-element-dropdown": "^1.8.10",
+    "react-native-element-dropdown": "^2.3.0",
     "react-native-gesture-handler": "^2.5.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-mask-text": "^0.7.0",

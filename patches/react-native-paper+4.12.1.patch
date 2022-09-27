@@ -1,3 +1,20 @@
+diff --git a/node_modules/react-native-paper/src/components/TextInput/Label/InputLabel.tsx b/node_modules/react-native-paper/src/components/TextInput/Label/InputLabel.tsx
+index 07e6d3c..75dc406 100644
+--- a/node_modules/react-native-paper/src/components/TextInput/Label/InputLabel.tsx
++++ b/node_modules/react-native-paper/src/components/TextInput/Label/InputLabel.tsx
+@@ -91,12 +91,6 @@ const InputLabel = (props: InputLabelProps) => {
+         labelTranslationX,
+       ]}
+     >
+-      {labelBackground?.({
+-        parentState,
+-        labelStyle,
+-        labelProps: props.labelProps,
+-        maxFontSizeMultiplier: maxFontSizeMultiplier,
+-      })}
+       <AnimatedText
+         onLayout={onLayoutAnimatedText}
+         style={[
 diff --git a/node_modules/react-native-paper/src/components/TextInput/TextInputOutlined.tsx b/node_modules/react-native-paper/src/components/TextInput/TextInputOutlined.tsx
 index f6d1880..3e0958f 100644
 --- a/node_modules/react-native-paper/src/components/TextInput/TextInputOutlined.tsx

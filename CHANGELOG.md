@@ -4,13 +4,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-
 ## [1.0.2] - 2022-09-26
 
 ### Added
 
 - Adicionado componente alternativo ao Alert para mostrar erros de formar mais sútil (Snackbar)
 - Adicionado retornos original de http status e http response data para erros de request
+- Adicionado exemplo de testes usando FireEvent
+- Adicionado Mock para RN Reanimated
+- Adicionado Mock para RN Safe Area Context
 
 ### Changed
 
@@ -27,18 +29,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Adicionado opção para configurar `placeholder` color
 - Mock de navegação incorporar o tema
 - Evitar problemas de sobreposição do teclado no iOS onde há scroll
-
-### Deprecated
-
-- 
-
-### Removed
-
--
-
-### Security
-
--
+- Suporte a DarkMode para o Select
+- FormData não funcionar no Jest
+- Falhas na importação de funções do RN Platform
+- Corrigido problema do Safe Area Context não funcionar no Jest
 
 ## [1.0.1] - 2022-06-20
 

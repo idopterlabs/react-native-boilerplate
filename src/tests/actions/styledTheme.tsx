@@ -1,5 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import theme from '@theme/index';
 
@@ -8,15 +9,17 @@ export const withThemeProvider = (
   params: any = {},
 ) => {
   return (
-    <ThemeProvider
-      // @ts-ignore
-      theme={{
-        colors: theme.colors.light,
-        dimensions: theme.dimensions,
-        colorScheme: 'light',
-      }}>
-      {component(params)}
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <ThemeProvider
+        // @ts-ignore
+        theme={{
+          colors: theme.colors.light,
+          dimensions: theme.dimensions,
+          colorScheme: 'light',
+        }}>
+        {component(params)}
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 };
 
