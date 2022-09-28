@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- Adicionado componente alternativo ao Alert para mostrar erros de formar mais sútil (Snackbar)
+- Adicionado componente alternativo ao Alert para mostrar erros de forma mais sutil (Snackbar)
 - Adicionado retornos original de http status e http response data para erros de request
 - Adicionado exemplo de testes usando FireEvent
 - Adicionado Mock para RN Reanimated
@@ -26,7 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Alinhando texto de erro no input
 - Status 422 agora mostrar o erro processado
 - Tirando opacidade da cores em componentes desabilitados
-- Adicionado opção para configurar `placeholder` color
+- Adicionado opção para configurar cor do `placeholder`
 - Mock de navegação incorporar o tema
 - Evitar problemas de sobreposição do teclado no iOS onde há scroll
 - Suporte a DarkMode para o Select

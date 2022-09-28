@@ -226,7 +226,7 @@ const [isFocus, setIsFocus] = useState<boolean>(false);
 const [currentValue, setNewValue] = useState<string>('');
 ```
 
-- Passando atributos no Styled. Atributos que utilizam as `props`, devem ter `return` em seu corpo pois a extensão do VSCode do styled bugar sem esse padrão de estilo de código.
+- Passando atributos no Styled. Atributos que utilizam as `props`, devem ter `return` em seu corpo pois a extensão do VSCode do styled buga sem esse padrão de estilo de código.
 
 ❌ Não fazer
 
