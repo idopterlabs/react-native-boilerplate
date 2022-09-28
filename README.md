@@ -37,7 +37,7 @@ Há duas maneiras de usar esse boilerplate.
 - [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons#installation)
 - [react-native-bootsplash](https://github.com/zoontek/react-native-bootsplash#setup-1)
 - [react-native-screens](https://github.com/software-mansion/react-native-screens#installation)
-
+- [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation)
 ## Configurações
 
 ### Variável de Ambiente
@@ -226,6 +226,34 @@ const [isFocus, setIsFocus] = useState<boolean>(false);
 const [currentValue, setNewValue] = useState<string>('');
 ```
 
+- Passando atributos no Styled. Atributos que utilizam as `props`, devem ter `return` em seu corpo pois a extensão do VSCode do styled buga sem esse padrão de estilo de código.
+
+❌ Não fazer
+
+```ts
+export const ContainerTextInput = styled(TextInputComponent).attrs((props) => ({
+  mode: props.mode || 'outlined',
+  autoCapitalize: props.autoCapitalize || 'words',
+  placeholderTextColor:
+    props.placeholderTextColor || props.theme.colors.placeholderText,
+  dense: true,
+}))``;
+```
+
+✅ Fazer isso
+
+```ts
+export const ContainerTextInput = styled(TextInputComponent).attrs((props) => {
+  return {
+    mode: props.mode || 'outlined',
+    autoCapitalize: props.autoCapitalize || 'words',
+    placeholderTextColor:
+      props.placeholderTextColor || props.theme.colors.placeholderText,
+    dense: true,
+  };
+})``;
+```
+
 ## Testes
 
 Para testes unitários está sendo utilizado biblioteca [Jest](https://jestjs.io/docs/getting-started) e para escrever os testes é necessário criar arquivos `.spec.ts`/ `.spec.tsx` dentro do mesmo diretório em que se encontra o fragmento de código.
@@ -359,3 +387,4 @@ Os mocks a serem consumido no projeto podem ser criados em [`src/tests/mocks/`](
 - [react-native-svg-transformer](https://github.com/kristerkari/react-native-svg-transformer): Permitir importar arquivos .SVG
 - [@react-native-firebase/remote-config](https://rnfirebase.io/remote-config/usage): Integração com Firebase Remote Config
 - [react-native-camera](https://github.com/react-native-camera/react-native-camera): Suporte para usar câmera nativamente do dispositivo
+- [react-native-keyboard-aware-scroll-view](https://github.com/APSL/react-native-keyboard-aware-scroll-view): Evitar problemas de sobreposição do teclado 

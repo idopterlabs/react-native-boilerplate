@@ -47,17 +47,25 @@ export const Dropdown = styled(DropdownComponent).attrs(
     disabled: props.isDisabled,
     dropdownPosition: 'auto',
     keyboardAvoiding: true,
+    activeColor: props.theme.colors.backgroundSecondaryLight,
+    itemTextStyle: {
+      color: props.theme.colors.primaryText,
+    },
     placeholderStyle: {
       fontSize: 16,
       color: props.hasError
         ? props.theme.colors.attention
         : props.placeholderTextColor || '#6f6f6f',
     },
+    containerStyle: {
+      backgroundColor: props.theme.colors.backgroundLight,
+    },
     selectedTextStyle: {
       fontSize: 16,
       color: props.theme.colors.primaryText,
     },
     inputSearchStyle: {
+      backgroundColor: props.theme.colors.backgroundLight,
       height: 40,
       fontSize: 16,
     },
@@ -71,7 +79,7 @@ export const Dropdown = styled(DropdownComponent).attrs(
   }),
 )<CommonProps>`
   height: 45px;
-  background-color: white;
+  background-color: ${(props) => props.theme.colors.backgroundLight};
   padding-left: 12px;
   padding-right: 12px;
   border-color: ${(props) =>
@@ -82,12 +90,12 @@ export const Dropdown = styled(DropdownComponent).attrs(
       props.hasError,
       '#626466',
     )};
-  border-radius: 6px;
+  border-radius: 20px;
   border-width: ${(props) => (props.isFocus ? 1.75 : 1)}px;
 `;
 
 export const LabelText = styled(Text)`
-  opacity: ${(props) => (props.isFocus ? 1 : 0.5)};
+  opacity: ${(props) => (props.isFocus ? 1 : 0.75)};
   padding-left: 4px;
   padding-right: 4px;
   font-size: 12px;
@@ -101,12 +109,21 @@ export const LabelText = styled(Text)`
     )};
 `;
 
+export const PlaceholderText = styled(Text)`
+  font-size: 20px;
+  color: #626466;
+`;
+
+export const AlertText = styled(Text)`
+  color: ${(props) => props.theme.colors.attention}; ;
+`;
+
 export const ContainerView = styled.View`
   margin-top: 6px;
 `;
 
 export const LabelBackgroundView = styled.View`
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.colors.backgroundLight};
   z-index: 999;
   position: absolute;
   left: 10px;

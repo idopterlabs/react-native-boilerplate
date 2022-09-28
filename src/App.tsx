@@ -9,6 +9,7 @@ import {
 import { Theme } from 'react-native-paper/lib/typescript/types';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 import {
   ThemeProvider,
   DefaultTheme as DefaultThemeStyled,
@@ -21,6 +22,9 @@ import Routes from '@routes/index';
 import AllProviders from './contexts/AllProviders';
 
 LogBox.ignoreLogs([
+  'Could not find Fiber with id "225"',
+  'Non-serializable values were found in the navigation state',
+  "ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'",
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
 ]);
 
@@ -54,6 +58,7 @@ export default () => {
         text: theme.colors[colorSchemeName].primaryText,
         error: theme.colors[colorSchemeName].attention,
         disabled: theme.colors[colorSchemeName].disabled,
+        placeholder: theme.colors[colorSchemeName].placeholder,
       },
     };
 

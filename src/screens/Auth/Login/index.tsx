@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { ParamsExampleMethodName } from '@typings/requests';
 
-import { states } from '@utils/statesList';
+import { states } from '@utils/lists';
 
 import { exampleMethodName } from '@services/api';
 
@@ -77,7 +77,7 @@ const Login = () => {
         <LogoSvg />
         <BoxInputView>
           <Input
-            testID="login:textInput:phone"
+            testID="textInput:phoneNumber"
             name="phone"
             control={control}
             param={form.phone}
@@ -101,6 +101,7 @@ const Login = () => {
         <BoxInputView>
           <Select
             name="state"
+            testID="select:state"
             control={control}
             param={form.state}
             data={states}

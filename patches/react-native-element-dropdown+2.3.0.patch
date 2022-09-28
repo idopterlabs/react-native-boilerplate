@@ -1,0 +1,24 @@
+diff --git a/node_modules/react-native-element-dropdown/src/components/Dropdown/index.tsx b/node_modules/react-native-element-dropdown/src/components/Dropdown/index.tsx
+index a8feae8..94edebf 100644
+--- a/node_modules/react-native-element-dropdown/src/components/Dropdown/index.tsx
++++ b/node_modules/react-native-element-dropdown/src/components/Dropdown/index.tsx
+@@ -449,7 +449,6 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
+               ref={refList}
+               onScrollToIndexFailed={scrollIndex}
+               data={listData}
+-              inverted
+               renderItem={_renderItem}
+               keyExtractor={(_item, index) => index.toString()}
+               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
+diff --git a/node_modules/react-native-element-dropdown/src/components/MultiSelect/index.tsx b/node_modules/react-native-element-dropdown/src/components/MultiSelect/index.tsx
+index ad33b78..2c306e8 100644
+--- a/node_modules/react-native-element-dropdown/src/components/MultiSelect/index.tsx
++++ b/node_modules/react-native-element-dropdown/src/components/MultiSelect/index.tsx
+@@ -420,7 +420,6 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
+               {...flatListProps}
+               keyboardShouldPersistTaps="handled"
+               data={listData}
+-              inverted
+               renderItem={_renderItem}
+               keyExtractor={(_item, index) => index.toString()}
+               showsVerticalScrollIndicator={showsVerticalScrollIndicator}

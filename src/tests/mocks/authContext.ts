@@ -1,13 +1,15 @@
+import { User } from '@typings/common';
+
 export const mockedUpdateStateUser = jest.fn();
 jest.mock('@contexts/AuthContext', () => {
   return {
     useAuth: () => {
       return {
-        saveUser: async () => {
-          mockedUpdateStateUser();
+        saveUser: async (user: User) => {
+          mockedUpdateStateUser(user);
         },
         deleteUser: async () => {
-          mockedUpdateStateUser();
+          mockedUpdateStateUser('delete');
         },
         user: {
           accessToken: 'Test',

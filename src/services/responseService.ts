@@ -5,9 +5,12 @@ import { AxiosError, AxiosResponse } from 'axios';
 import {
   DefaultChangesetError,
   ResponseDataWithError,
-  StatusHttpType,
 } from '@typings/requests';
 import { Callback } from '@typings/common';
+
+import { Data as PropsSnackbarError } from '@components/SnackbarError';
+
+import { uppercaseFirstLetter } from '@utils/normalization';
 
 const GetErrorResponse = (
   error: AxiosError<any, any>,
@@ -42,52 +45,40 @@ const verifyStatusResponse = (
   const response: AxiosResponse<ResponseDataWithError, any> =
     error.response as AxiosResponse<ResponseDataWithError, any>;
 
-  const statusHttp: StatusHttpType = {
-    400: () =>
-      new ErrorResponse(
+  switch (response.status) {
+    case 400:
+    case 422:
+    case 401:
+      return new ErrorResponse(
         verifyDataResponse(response) || genericErrorDescription,
         callback,
         error,
-      ),
-    422: () =>
-      new ErrorResponse(
-        'Não foi possível processar as instruções presentes. Tente novamente mais tarde',
-        callback,
-        error,
-      ),
-    401: () =>
-      new ErrorResponse(
-        verifyDataResponse(response) || genericErrorDescription,
-        callback,
-        error,
-      ),
-    403: () => new ErrorResponse('Não autorizado', callback, error),
-    404: () => new ErrorResponse('Item não encontrado', callback, error),
-    500: () =>
-      new ErrorResponse(
+      );
+    case 403:
+      return new ErrorResponse('Não autorizado', callback, error);
+    case 404:
+      return new ErrorResponse('Item não encontrado', callback, error);
+    case 500:
+      return new ErrorResponse(
         `Houve um problema no servidor. ${genericErrorDescription}`,
         callback,
         error,
-      ),
-    503: () =>
-      new ErrorResponse(
+      );
+    case 503:
+      return new ErrorResponse(
         'Servidor indisponível. Tente novamente mais tarde',
         callback,
         error,
-      ),
-    default: () =>
-      new ErrorResponse(
+      );
+    default:
+      return new ErrorResponse(
         `Erro de verificação do status da requisição para código ${
           response?.status || '001'
         }`,
         callback,
         error,
-      ),
-  };
-
-  return statusHttp[response.status]
-    ? statusHttp[response.status]()
-    : statusHttp.default();
+      );
+  }
 };
 
 const verifyDataResponse = (
@@ -131,7 +122,9 @@ const extractErrorOfChangeset = (
   if (keys.length > 0) {
     const messages = error[keys[0]];
     if (messages.length > 0) {
-      return `${keys[0]}: ${messages[0]}`;
+      return `${uppercaseFirstLetter(keys[0])}: ${uppercaseFirstLetter(
+        messages[0],
+      )}`;
     }
   }
 };
@@ -141,6 +134,8 @@ class ErrorResponse extends Error {
     public message: string,
     public callback?: Callback,
     public originalError?: unknown,
+    public httpStatusCode?: number,
+    public httpResponseData?: unknown,
   ) {
     super(message);
     this.name = 'AxiosErrorResponse';
@@ -151,6 +146,15 @@ class ErrorResponse extends Error {
 
     if (originalError) {
       this.originalError = originalError;
+
+      const axiosError = originalError as AxiosError<any, any>;
+      if (
+        axiosError.response?.status &&
+        typeof axiosError.response.status === 'number'
+      ) {
+        this.httpStatusCode = axiosError.response.status;
+        this.httpResponseData = axiosError.response.data;
+      }
     }
 
     // eslint-disable-next-line prettier/prettier
@@ -182,6 +186,19 @@ class ErrorResponse extends Error {
     }
 
     Alert.alert(title, this.message);
+  }
+
+  snackbar(titleSnackbar: string, titleAlert: string = ''): PropsSnackbarError {
+    if (!titleAlert) {
+      titleAlert = titleSnackbar;
+    }
+
+    return {
+      title: titleSnackbar,
+      callback: () => {
+        this.alert(titleAlert);
+      },
+    };
   }
 }
 
