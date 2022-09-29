@@ -251,10 +251,14 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
-    //noinspection GradleDynamicVersion
-    implementation "com.facebook.react:react-native:+"  // From node_modules
+      //noinspection GradleDynamicVersion
+    implementation "com.facebook.react:react-native:+" 
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+
+    // react-native-bootsplash
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    implementation "androidx.core:core-splashscreen:1.0.0-rc01"
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
@@ -271,7 +275,7 @@ dependencies {
 
     if (enableHermes) {
         //noinspection GradleDynamicVersion
-        implementation("com.facebook.react:hermes-engine:+") { // From node_modules
+        implementation("com.facebook.react:hermes-engine:+") { 
             exclude group:'com.facebook.fbjni'
         }
     } else {
@@ -303,6 +307,12 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+
+project.ext.vectoricons = [
+  iconFontNames: [ 'MaterialCommunityIcons.ttf', 'MaterialIcons.ttf']
+]
+
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 def isNewArchitectureEnabled() {
     // To opt-in for the New Architecture, you can either:
