@@ -32,7 +32,7 @@ std::shared_ptr<TurboModule>
 MainApplicationTurboModuleManagerDelegate::getTurboModule(
     const std::string &name,
     const JavaTurboModule::InitParams &params) {
-  return MainApplicationModuleProvider(name, params);
+  return MainApplicationModuleProvider(&name, &params);
 }
 
 bool MainApplicationTurboModuleManagerDelegate::canCreateTurboModule(
