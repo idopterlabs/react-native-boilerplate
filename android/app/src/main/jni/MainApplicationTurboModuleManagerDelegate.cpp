@@ -37,8 +37,8 @@ MainApplicationTurboModuleManagerDelegate::getTurboModule(
 
 bool MainApplicationTurboModuleManagerDelegate::canCreateTurboModule(
   const std::string &name) {
-  return getTurboModule(name, nullptr) != nullptr ||
-      getTurboModule(name, {.moduleName = name}) != nullptr;
+  return getTurboModule(&name, nullptr) != nullptr ||
+      getTurboModule(&name, {.moduleName = &name}) != nullptr;
 }
 
 } // namespace react
