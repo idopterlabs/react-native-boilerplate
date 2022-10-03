@@ -90,7 +90,7 @@ export const Dropdown = styled(DropdownComponent).attrs(
       props.hasError,
       '#626466',
     )};
-  border-radius: 20px;
+  border-radius: 6px;
   border-width: ${(props) => (props.isFocus ? 1.75 : 1)}px;
 `;
 

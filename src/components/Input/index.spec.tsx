@@ -159,7 +159,7 @@ describe('Input component', () => {
   });
 
   it('should render Input component with icon', () => {
-    const { getByA11yRole } = render(
+    const { getByRole } = render(
       shadowTheme(
         <Input
           placeholder="Test placeholder"
@@ -169,13 +169,13 @@ describe('Input component', () => {
       ),
     );
 
-    const IconComponent = getByA11yRole('button');
+    const IconComponent = getByRole('button');
 
     expect(IconComponent).not.toBeUndefined();
   });
 
   it('should render Input component with icon and errorMessage and attention color', () => {
-    const { getByA11yRole, getByText } = render(
+    const { getByRole, getByText } = render(
       shadowTheme(
         <Input
           placeholder="Test placeholder"
@@ -187,7 +187,7 @@ describe('Input component', () => {
       ),
     );
 
-    const IconComponent = getByA11yRole('button').parent as any;
+    const IconComponent = getByRole('button').parent as any;
     const IconComponentColor =
       IconComponent!.children[0].props.children[0].props.children.props.color;
 
@@ -196,7 +196,7 @@ describe('Input component', () => {
   });
 
   it('should render Input component with disabled icon and with disabled color', () => {
-    const { getByA11yRole } = render(
+    const { getByRole } = render(
       shadowTheme(
         <Input
           placeholder="Test placeholder"
@@ -207,14 +207,14 @@ describe('Input component', () => {
       ),
     );
 
-    const IconComponent = getByA11yRole('button') as any;
+    const IconComponent = getByRole('button') as any;
 
     expect(IconComponent).toBeDisabled();
     expect(IconComponent).not.toBeUndefined();
   });
 
   it('should render Input component with enabled icon', async () => {
-    const { getByA11yRole } = render(
+    const { getByRole } = render(
       shadowTheme(
         <Input
           testID="Input:textInput:input"
@@ -226,7 +226,7 @@ describe('Input component', () => {
       ),
     );
 
-    const IconComponent = getByA11yRole('button') as any;
+    const IconComponent = getByRole('button') as any;
 
     const IconComponentColor =
       IconComponent.parent.children[0].props.children[0].props.children.props
@@ -278,10 +278,10 @@ describe('Input component', () => {
         />
       );
     };
-    const { getByA11yRole, getByTestId } = render(shadowTheme(<Component />));
+    const { getByRole, getByTestId } = render(shadowTheme(<Component />));
 
     await act(async () => {
-      const IconComponent = getByA11yRole('button') as any;
+      const IconComponent = getByRole('button') as any;
 
       await fireEvent.press(IconComponent);
     });
