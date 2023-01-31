@@ -33,7 +33,6 @@ export interface Props extends Omit<TextInputProps, 'mode'> {
   dense?: boolean;
   isPasswordInput?: boolean;
   isShowRequired?: boolean;
-  onChangeCustom?: (text: string) => void;
 }
 
 const TextInput = ({
@@ -50,7 +49,6 @@ const TextInput = ({
   hasError = false,
   isPasswordInput = false,
   isShowRequired = false,
-  onChangeCustom,
   ...props
 }: Props) => {
   const [isShowPassword, setPasswordShow] = React.useState<boolean>(
@@ -77,6 +75,7 @@ const TextInput = ({
         disabled={isDisabled}
         color={iconForceColor || getColorIcon(hasError, isDisabled)}
         size={25}
+        testID={props.testID ? `${props.testID}:icon` : undefined}
       />
     ) : null;
   };
@@ -124,10 +123,7 @@ const TextInput = ({
                     render={render}
                     value={value}
                     defaultValue={param}
-                    onChangeText={(text) => {
-                      onChange(text);
-                      onChangeCustom && onChangeCustom(text);
-                    }}
+                    onChangeText={onChange}
                     onBlur={() => {
                       setIsFocus(false);
                       onBlur();
@@ -145,10 +141,7 @@ const TextInput = ({
                     render={render}
                     value={value}
                     defaultValue={param}
-                    onChangeText={(text) => {
-                      onChange(text);
-                      onChangeCustom && onChangeCustom(text);
-                    }}
+                    onChangeText={onChange}
                     onBlur={() => {
                       setIsFocus(false);
                       onBlur();

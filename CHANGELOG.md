@@ -18,10 +18,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Atualizado patch do React Native Paper para 4.12.4
 - Nova pasta na estrutura `configs` destinado a gerenciar configurações
+- Mostrar que campo é obrigatório em input e select com * vermelho (`isShowRequired={true}`)
 
 ### Fixed
 
 - Usando cor de fundo da barra de navegação via contexto do tema
+- Ao atualizar o valor pelo métodos do `react-hook-form` de um input/select o valor novo é mostrado na tela
 
 
 ## [1.0.2] - 2022-09-26

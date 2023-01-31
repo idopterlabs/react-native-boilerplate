@@ -48,9 +48,7 @@ export const Dropdown = styled(DropdownComponent).attrs(
     dropdownPosition: 'auto',
     keyboardAvoiding: true,
     activeColor: props.theme.colors.backgroundSecondaryLight,
-    itemTextStyle: {
-      color: props.theme.colors.primaryText,
-    },
+    itemTextColor: props.theme.colors.primaryText,
     placeholderStyle: {
       fontSize: 16,
       color: props.hasError
@@ -74,8 +72,7 @@ export const Dropdown = styled(DropdownComponent).attrs(
       fontSize: 17,
       paddingLeft: 12,
     },
-    search: true,
-    searchPlaceholder: 'Pesquise...',
+    search: false,
   }),
 )<CommonProps>`
   height: 45px;

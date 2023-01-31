@@ -88,6 +88,7 @@ const Login = () => {
             keyboardType="phone-pad"
             hasError={errors?.phone?.message ? true : false}
             errorMessage={errors?.phone?.message}
+            isShowRequired={true}
             render={(props) => (
               <MaskedTextInput
                 onChangeText={
@@ -112,6 +113,7 @@ const Login = () => {
             valueField="value"
             hasError={errors?.state?.message ? true : false}
             errorMessage={errors?.state?.message}
+            isShowRequired={true}
             label="Estado"
           />
         </BoxInputView>
