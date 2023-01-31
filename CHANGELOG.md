@@ -26,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Usando cor de fundo da barra de navegação via contexto do tema
 - Ao atualizar o valor pelo métodos do `react-hook-form` de um input/select o valor novo é mostrado na tela
+- Ocupado o fundo por 100% em todas as telas
 
 ## [1.0.2] - 2022-09-26
 
