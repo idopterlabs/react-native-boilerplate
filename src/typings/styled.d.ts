@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-restricted-imports
 import 'styled-components';
 import theme from '@styles/theme';
 
