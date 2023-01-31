@@ -22,7 +22,7 @@ export default () => {
           animation: 'slide_from_left',
           headerShown: true,
           headerStyle: {
-            backgroundColor: themeContext.colors.primary,
+            backgroundColor: themeContext.colors.stackBackground,
           },
         })}
       />

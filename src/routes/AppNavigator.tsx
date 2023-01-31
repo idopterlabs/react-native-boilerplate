@@ -40,7 +40,7 @@ export default () => {
             />
           ),
           headerStyle: {
-            backgroundColor: themeContext.colors.primary,
+            backgroundColor: themeContext.colors.stackBackground,
           },
         })}
       />

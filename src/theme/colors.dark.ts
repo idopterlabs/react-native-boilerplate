@@ -12,4 +12,8 @@ export default {
 
   backgroundLight: '#222222',
   backgroundSecondaryLight: '#333333',
+
+  stackBackground: '#111111',
+
+  primaryStatusBar: '#111111',
 };
