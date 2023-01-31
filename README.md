@@ -52,11 +52,12 @@ Exemplos:
 - `RN_USER_ID`
 - `RN_PASS`
 
-Por padrão todo projeto tem três variáveis:
+Por padrão todo projeto tem quatro variáveis:
 
 - `RN_BASE_URL`: Informar a URL base referente a URL de um serviço web que em algum momento o cliente pode ser redirecionado de dentro do app
 - `RN_BASE_URL_API`: Informar a URL base referente ao consumo de uma web API dedicado ao app
 - `RN_ENV`: O ambiente que está sendo usado, como, por exemplo: `development`, `test`, `staging`, `production`
+- `RN_FEATURES_OFF`: Informar quais funções vão ser desativado no app, essa env é opcional
 
 ### Splashscreen
 
@@ -98,6 +99,7 @@ A principal dele é as cores ([`src/theme/colors.ts`](./src/theme/colors.ts)), n
 </br> ┃ ┃ ┃ ┣ 📜`index.tsx` **(Implementação do componente)**
 </br> ┃ ┃ ┃ ┣ 📜`index.spec.tsx` **(Teste do componente)**
 </br> ┃ ┃ ┃ ┗ 📜`styles.ts` **(Folha de estilo do componente)**
+</br> ┃ ┣ 📂`configs` **(Grupo de variáveis de configuração destinado a uma lib ou parte do app)**
 </br> ┃ ┣ 📂`contexts` **(Contexto)**
 </br> ┃ ┃ ┣ 📜`AllProviders.tsx` **(Importação de todos os Contextos usado no app)**
 </br> ┃ ┃ ┣ 📜`[Nome do Contexto]Context.spec.tsx` **(Implementação de controle de um contexto)**

@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import featuresFlag from '@configs/featuresFlag';
+
 import { ParamsExampleMethodName } from '@typings/requests';
 
 import { states } from '@utils/lists';
@@ -74,7 +76,7 @@ const Login = () => {
     <ContainerView>
       <ContainerScroll>
         <TitleText>Bem-vindo</TitleText>
-        <LogoSvg />
+        {featuresFlag.logo && <LogoSvg />}
         <BoxInputView>
           <Input
             testID="textInput:phoneNumber"

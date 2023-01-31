@@ -4,17 +4,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.3] - 2022-01-31
+## [1.1.0] - 2022-01-31
 
 ### Added
 
 - Adicionado tema do React Navigation
 - Adicionado tipo de estilo (dark/light) na status bar
-- Adicionado comando no NPM para verificar tipagem do Typescript em todo o projeto (ts-check)
+- Adicionado comando no NPM para verificar tipagem do Typescript em todo o projeto (`yarn ts-check`)
+- Adicionado controle de features do app via variável de ambiente (`RN_FEATURES_OFF`)
 
 ### Changed
 
 - Atualizado patch do React Native Paper para 4.12.4
+- Nova pasta na estrutura `configs` destinado a gerenciar configurações
 
 ### Fixed
 
