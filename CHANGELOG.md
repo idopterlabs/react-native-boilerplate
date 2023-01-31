@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.1.0] - 2022-01-31
 
+| | | | |
+| - | - | - | - |
+| ![image](https://user-images.githubusercontent.com/5731176/215854212-c04da10b-bc73-4705-af33-ad652ce0e646.png) | ![image](https://user-images.githubusercontent.com/5731176/215854280-ba446d06-07fe-4fcd-8ab6-db3148b2471c.png) | ![image](https://user-images.githubusercontent.com/5731176/215854322-dc032f35-9ea0-4f76-8948-7bebf440799c.png) | ![image](https://user-images.githubusercontent.com/5731176/215854860-50e69246-086d-463e-b532-df2f1ee7f8ae.png) |
+
 ### Added
 
 - Adicionado regra no eslint para evitar exportação errado do Styled (Web)
@@ -65,6 +69,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Aplicando cor no fundo que faltava 
 
 ## [1.0.0] - 2022-06-13
+
+| | | |
+| - | - | - |
+![image](https://user-images.githubusercontent.com/5731176/172487765-efc86b04-5244-438d-b441-94bf5d544399.png) | ![image](https://user-images.githubusercontent.com/5731176/172487825-4ac12b38-511c-45d7-b4c4-967620b2ea3e.png) | ![image](https://user-images.githubusercontent.com/5731176/172487790-709491b1-9361-4e96-98be-edb9d3cf86f7.png) |
 
 ### Added
 
