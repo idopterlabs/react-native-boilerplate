@@ -12,6 +12,7 @@
 - 🚀 Splashscreen
 - 🚀 Serviços para HTTP Request e tratamento de erros
 - 🚀 Monitoramento de bugs via AppCenter
+- 🚀 CI via Gitlab
 
 ## Sobre
 
@@ -144,6 +145,7 @@ A principal dele é as cores ([`src/theme/colors.ts`](./src/theme/colors.ts)), n
 </br> ┣ 📜`.env.test` **(Configurações de variável de ambiente para teste)**
 </br> ┣ 📜`.env` **(Configurações de variável de ambiente para o app)**
 </br> ┣ 📜`.eslintrc.js`**(Configurações do ESlint)**
+</br> ┣ 📜`.gitlab-ci.yml`**(Configurações pipeline do Gitlab)**
 </br> ┣ 📜`.gitignore`
 </br> ┣ 📜`.nvmrc` **(Configurações da versão do Node)**
 </br> ┣ 📜`.prettierrc.js`

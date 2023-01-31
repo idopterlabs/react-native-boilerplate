@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Adicionado tipo de estilo (dark/light) na status bar
 - Adicionado comando no NPM para verificar tipagem do Typescript em todo o projeto (`yarn ts-check`)
 - Adicionado controle de features do app via variável de ambiente (`RN_FEATURES_OFF`)
+- Adicionado configurações para pipeline de teste via Gitlab
 
 ### Changed
 
@@ -24,7 +25,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Usando cor de fundo da barra de navegação via contexto do tema
 - Ao atualizar o valor pelo métodos do `react-hook-form` de um input/select o valor novo é mostrado na tela
-
 
 ## [1.0.2] - 2022-09-26
 

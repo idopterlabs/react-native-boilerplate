@@ -1,0 +1,43 @@
+image: node:16.10.0
+
+variables:
+  TZ: "America/Sao_Paulo"
+  FF_USE_FASTZIP: "true"
+  ARTIFACT_COMPRESSION_LEVEL: "fast"
+  CACHE_COMPRESSION_LEVEL: "fast"
+
+cache:
+  - key:
+      files:
+        - yarn.lock
+    paths:
+      - node_modules/
+    policy: pull-push
+  - key: yarn-$CI_JOB_IMAGE
+    paths:
+      - .yarn
+    policy: pull-push
+
+before_script:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+stages:
+  - build-deps
+  - test
+
+build-deps:
+  stage: build-deps
+  script:
+    - yarn install --cache-folder .yarn
+
+run_tests:
+  stage: test
+  coverage: '/All\sfiles[\s]*\|[\s]*(\d+\.\d+)/'
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - junit.xml
+  script:
+    - yarn test:ci
