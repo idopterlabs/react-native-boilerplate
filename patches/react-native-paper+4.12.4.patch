@@ -16,7 +16,7 @@ index 07e6d3c..75dc406 100644
          onLayout={onLayoutAnimatedText}
          style={[
 diff --git a/node_modules/react-native-paper/src/components/TextInput/TextInputOutlined.tsx b/node_modules/react-native-paper/src/components/TextInput/TextInputOutlined.tsx
-index f6d1880..3e0958f 100644
+index 710839f..d8e8bde 100644
 --- a/node_modules/react-native-paper/src/components/TextInput/TextInputOutlined.tsx
 +++ b/node_modules/react-native-paper/src/components/TextInput/TextInputOutlined.tsx
 @@ -41,7 +41,7 @@ import { AdornmentType, AdornmentSide } from './Adornment/enums';
