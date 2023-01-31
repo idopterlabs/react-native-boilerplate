@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Adicionado comando no NPM para verificar tipagem do Typescript em todo o projeto (`yarn ts-check`)
 - Adicionado controle de features do app via variável de ambiente (`RN_FEATURES_OFF`)
 - Adicionado configurações para pipeline de teste via Gitlab
+- Adicionado novo utilitário padrão onde pode ser trocado fácil o banco de dados de um app
 
 ### Changed
 
