@@ -9,7 +9,8 @@
     "test": "jest",
     "test:coverage": "jest  --coverage --watchAll=false",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "ts-check": "tsc -p tsconfig.json"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.8.8",

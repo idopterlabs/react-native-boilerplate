@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Adicionado tema do React Navigation
 - Adicionado tipo de estilo (dark/light) na status bar
+- Adicionado comando no NPM para verificar tipagem do Typescript em todo o projeto (ts-check)
 
 ### Changed
 
