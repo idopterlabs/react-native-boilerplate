@@ -1,5 +1,7 @@
 import React from 'react';
 
+import featuresFlag from '@configs/featuresFlag';
+
 import { ContainerScroll, ContainerView, TitleText, LogoSvg } from './styles';
 
 const Login = () => {
@@ -7,7 +9,7 @@ const Login = () => {
     <ContainerView>
       <ContainerScroll>
         <TitleText>App</TitleText>
-        <LogoSvg />
+        {featuresFlag.logo && <LogoSvg />}
       </ContainerScroll>
     </ContainerView>
   );

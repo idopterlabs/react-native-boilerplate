@@ -1,9 +1,14 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { User } from '@typings/common';
 
 import { setAccessToken } from '@services/api';
+
+import Storage from '@utils/storage';
+
+export const StorageKeys = {
+  user: 'user:data',
+};
 
 export interface AuthContextData {
   user: User;
@@ -32,7 +37,7 @@ export const AuthContextProvider: React.FC = ({ children }) => {
     setAccessToken(token);
 
     if (!isUsedCached) {
-      await AsyncStorage.setItem('user:data', JSON.stringify(newUser));
+      await Storage.setObject<User>(StorageKeys.user, newUser);
     }
 
     setUser(newUser);
@@ -40,16 +45,16 @@ export const AuthContextProvider: React.FC = ({ children }) => {
   };
 
   const loadStorageData = async () => {
-    const userCached = await AsyncStorage.getItem('user:data');
+    const userCached = await Storage.getObject<User>(StorageKeys.user);
     if (userCached) {
-      await saveUser(JSON.parse(userCached), true);
+      await saveUser(userCached, true);
     }
 
     setLoading(false);
   };
 
   const deleteUser = async () => {
-    await AsyncStorage.removeItem('user:data');
+    await Storage.clear(StorageKeys.user);
     setUser(userInitialState);
     setAuthenticated(false);
   };

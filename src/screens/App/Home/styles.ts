@@ -15,8 +15,8 @@ export const ContainerScroll = styled(ContainerScrollComponent)``;
 
 export const ContainerView = styled(ContainerViewComponent)`
   align-items: center;
-  margin-left: ${dimensions.marginHorizontal}px;
-  margin-right: ${dimensions.marginHorizontal}px;
+  padding-left: ${dimensions.marginHorizontal}px;
+  padding-right: ${dimensions.marginHorizontal}px;
 `;
 
 export const TitleText = styled(Text)`

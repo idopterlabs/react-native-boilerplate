@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Controller } from 'react-hook-form';
 import { Control } from 'react-hook-form/dist/types';
@@ -77,22 +77,30 @@ export default ({
     <ContainerView>
       {control && name ? (
         <>
-          {label && (isFocus || currentValue !== '') && (
-            <LabelBackgroundView>
-              <FixLabelBackgroundView />
-              <LabelText
-                isFocus={isFocus ? true : false}
-                isDisabled={isDisabled ? true : false}
-                hasError={hasError ? true : false}>
-                {label}
-                {isShowRequired && <AlertText>*</AlertText>}
-              </LabelText>
-            </LabelBackgroundView>
-          )}
+          {label &&
+            (isFocus ||
+              (currentValue !== '' && currentValue !== undefined)) && (
+              <LabelBackgroundView>
+                <FixLabelBackgroundView />
+                <LabelText
+                  isFocus={isFocus ? true : false}
+                  isDisabled={isDisabled ? true : false}
+                  hasError={hasError ? true : false}>
+                  {label}
+                  {isShowRequired && <AlertText>*</AlertText>}
+                </LabelText>
+              </LabelBackgroundView>
+            )}
           <Controller
             control={control}
             render={
               /* istanbul ignore next */ ({ field: { onChange, value } }) => {
+                useEffect(() => {
+                  if (currentValue !== value) {
+                    setNewValue(value);
+                  }
+                }, [value]);
+
                 return (
                   <>
                     <Dropdown

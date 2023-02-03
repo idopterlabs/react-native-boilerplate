@@ -7,6 +7,10 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import { ActivityIndicator } from 'react-native-paper';
 
+const statusBarColorContent = (themeColor: string): string => {
+  return themeColor === 'dark' ? 'light-content' : 'dark-content';
+};
+
 export const ContainerSafeAreaView = styled(SafeAreaView)`
   flex: 1;
   background: ${(props) => props.theme.colors.backgroundLight};
@@ -35,7 +39,7 @@ export const ContainerScroll = styled(KeyboardAwareScrollView).attrs(
 
 export const PrimaryStatusBar = styled(StatusBarReact).attrs((props) => {
   return {
-    barStyle: 'dark-content',
+    barStyle: statusBarColorContent(props.theme.colorScheme),
     backgroundColor: props.theme.colors.primaryStatusBar,
     translucent: true,
   };
@@ -43,7 +47,7 @@ export const PrimaryStatusBar = styled(StatusBarReact).attrs((props) => {
 
 export const SecondaryStatusBar = styled(StatusBarReact).attrs((props) => {
   return {
-    barStyle: 'dark-content',
+    barStyle: statusBarColorContent(props.theme.colorScheme),
     backgroundColor: props.theme.colors.secondaryStatusBar,
     translucent: true,
   };
@@ -51,7 +55,7 @@ export const SecondaryStatusBar = styled(StatusBarReact).attrs((props) => {
 
 export const SplashScreenStatusBar = styled(StatusBarReact).attrs((props) => {
   return {
-    barStyle: 'dark-content',
+    barStyle: statusBarColorContent(props.theme.colorScheme),
     backgroundColor: props.theme.colors.backgroundLight,
     translucent: true,
   };
