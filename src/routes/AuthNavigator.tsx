@@ -6,9 +6,9 @@ import NavigationBar from '@components/NavigationBar';
 
 import { Login } from '@screens/Auth/Login';
 
-import { AuthRouter } from '@typings/routes';
+import { AuthStackRouter } from '@typings/routes';
 
-const AuthStack = createStackNavigator<AuthRouter>();
+const AuthStack = createStackNavigator<AuthStackRouter>();
 
 export default () => {
   return (

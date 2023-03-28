@@ -11,6 +11,7 @@ describe('Checkbox component', () => {
     const { getByText } = render(
       shadowTheme(<Checkbox isActive={false} onPress={() => {}} />),
     );
+
     await getByText('checkbox test');
   });
 });

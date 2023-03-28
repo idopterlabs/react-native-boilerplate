@@ -28,4 +28,5 @@ const Checkbox = ({
     </BoxView>
   );
 };
+
 export default Checkbox;
