@@ -6,7 +6,7 @@ install! 'cocoapods', :deterministic_uuids => false
 
 isProduction = ENV['RN_ENV'] != "development"
 
-target 'WowletProvider' do
+target 'NomedoMeuApp' do
   config = use_native_modules!
 
   # Flags change depending on the env values.
@@ -21,7 +21,7 @@ target 'WowletProvider' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'WowletProviderTests' do
+  target 'NomedoMeuAppTests' do
     inherit! :complete
   end
 
