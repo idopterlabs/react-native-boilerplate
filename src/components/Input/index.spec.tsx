@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 
+import '@testing-library/jest-native/extend-expect';
 import {
   act,
   cleanup,
@@ -7,13 +8,13 @@ import {
   render,
   waitFor,
 } from '@testing-library/react-native';
-import '@testing-library/jest-native/extend-expect';
 
 import { useForm } from 'react-hook-form';
 
-import theme from '@theme/index';
-
 import { shadowTheme } from '@tests/actions/styledTheme';
+
+// eslint-disable-next-line no-restricted-imports
+import theme from '@theme/index';
 
 import Input from './index';
 
@@ -175,7 +176,7 @@ describe('Input component', () => {
   });
 
   it('should render Input component with icon and errorMessage and attention color', () => {
-    const { getByRole, getByText } = render(
+    const { getByTestId, getByText } = render(
       shadowTheme(
         <Input
           placeholder="Test placeholder"
@@ -187,12 +188,12 @@ describe('Input component', () => {
       ),
     );
 
-    const IconComponent = getByRole('button').parent as any;
+    const IconComponent = getByTestId('icon-button').parent as any;
     const IconComponentColor =
-      IconComponent!.children[0].props.children[0].props.children.props.color;
+      IconComponent!.children[0].props.children[0].props.color;
 
     getByText('Test error');
-    expect(IconComponentColor).toEqual(theme.colors.light.attention);
+    expect(IconComponentColor).toEqual(theme.colors.light.error);
   });
 
   it('should render Input component with disabled icon and with disabled color', () => {
@@ -214,10 +215,10 @@ describe('Input component', () => {
   });
 
   it('should render Input component with enabled icon', async () => {
-    const { getByRole } = render(
+    const { getByTestId } = render(
       shadowTheme(
         <Input
-          testID="Input:textInput:input"
+          testID="input:textInput:input"
           placeholder="Test placeholder"
           name={'input-test'}
           icon="home"
@@ -226,15 +227,14 @@ describe('Input component', () => {
       ),
     );
 
-    const IconComponent = getByRole('button') as any;
-
+    const IconComponent = getByTestId('input:textInput:input:icon')
+      .parent as any;
     const IconComponentColor =
-      IconComponent.parent.children[0].props.children[0].props.children.props
-        .color;
+      IconComponent!.children[0].props.children[0].props.color;
 
     expect(IconComponent).not.toBeDisabled();
     expect(IconComponent).not.toBeUndefined();
-    expect(IconComponentColor).toEqual('#ffba00');
+    expect(IconComponentColor).toEqual(theme.colors.light.primary);
   });
 
   it('should render Input component with password eye icon', async () => {

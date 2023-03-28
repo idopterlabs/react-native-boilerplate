@@ -4,6 +4,7 @@ describe('Api Services', () => {
   it('should set a token in Authorization Header', async () => {
     const tokenFake =
       'eyJhbGciOiJIUzI1I6IkpXVCJ9.eyJzdWIiOiIxMNTE2MjM5MDIyfQ.SflKxwRJSMT4fwpMssw5c';
+
     setAccessToken(tokenFake);
 
     expect(api.defaults.headers.common.Authorization).toBe(

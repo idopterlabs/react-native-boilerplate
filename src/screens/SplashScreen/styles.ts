@@ -1,28 +1,24 @@
 import styled from 'styled-components/native';
 
-import Logo from '@assets/svg/logo.svg';
+import LogoLightSvg from '@assets/svg/logo.svg';
 
 import {
   ContainerView as ContainerViewComponent,
-  ContainerScroll as ContainerScrollComponent,
-  SplashScreenStatusBar as SplashScreenStatusBarComponent,
+  StatusBar as StatusBarVariantComponent,
 } from '@theme/common';
-
-import dimensions from '@theme/dimensions';
-
-export const ContainerScroll = styled(ContainerScrollComponent)``;
 
 export const ContainerView = styled(ContainerViewComponent)`
   justify-content: center;
-  padding-left: ${dimensions.marginHorizontal}px;
-  padding-right: ${dimensions.marginHorizontal}px;
+  padding-left: ${(props) => props.theme.dimensions.marginHorizontal}px;
+  padding-right: ${(props) => props.theme.dimensions.marginHorizontal}px;
+  background-color: #ffffff;
 `;
 
-export const LogoSvg = styled(Logo).attrs({
+export const LogoSvg = styled(LogoLightSvg).attrs({
   width: '100%',
   preserveAspectRatio: 'xMidYMid',
 })`
-  margin-top: 10px;
+  margin-top: ${(props) => props.theme.dimensions.marginTopElementsForm}px;
 `;
 
-export const SplashScreenStatusBar = styled(SplashScreenStatusBarComponent)``;
+export const SplashScreenStatusBar = styled(StatusBarVariantComponent)``;

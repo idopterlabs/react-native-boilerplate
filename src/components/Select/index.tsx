@@ -6,7 +6,7 @@ import { Control } from 'react-hook-form/dist/types';
 import ListEmptyLabel from './ListEmptyLabel';
 
 import {
-  ErrorMessage,
+  ErrorMessageText,
   Dropdown,
   LabelText,
   AlertText,
@@ -63,10 +63,17 @@ export default ({
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [currentValue, setNewValue] = useState<string>('');
 
+  if (!rest.placeholder) {
+    rest.placeholder = label;
+  }
+
   if (rest.placeholder) {
     // @ts-ignore
     rest.placeholder = (
-      <PlaceholderText>
+      <PlaceholderText
+        isFocus={isFocus ? true : false}
+        isDisabled={isDisabled ? true : false}
+        hasError={hasError ? true : false}>
         {rest.placeholder}
         {isShowRequired && <AlertText>*</AlertText>}
       </PlaceholderText>
@@ -148,7 +155,7 @@ export default ({
             rules={rules}
             defaultValue={param}
           />
-          {hasError && <ErrorMessage>{errorMessage}</ErrorMessage>}
+          {hasError && <ErrorMessageText>{errorMessage}</ErrorMessageText>}
         </>
       ) : (
         <Dropdown

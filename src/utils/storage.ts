@@ -15,6 +15,7 @@ const setBoolean = async (key: string, value: boolean) => {
 
 const getBoolean = async (key: string): Promise<boolean | null> => {
   const value = await getString(key);
+
   if (value === null) {
     return null;
   }
@@ -28,6 +29,7 @@ const setNumber = async (key: string, value: number) => {
 
 const getNumber = async (key: string): Promise<number | null> => {
   const value = await getString(key);
+
   if (value === null) {
     return null;
   }
@@ -41,6 +43,7 @@ const setObject = async <T extends {}>(key: string, value: T) => {
 
 const getObject = async <T extends {}>(key: string): Promise<T | null> => {
   const value = await getString(key);
+
   if (value === null) {
     return null;
   }

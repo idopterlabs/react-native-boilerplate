@@ -1,79 +1,89 @@
-import styled from 'styled-components/native';
+import styled, { DefaultTheme } from 'styled-components/native';
 
-import { Text, Button } from 'react-native-paper';
-import { MaskedTextInput as MaskedTextInputComponent } from 'react-native-mask-text';
+import { Text } from 'react-native-paper';
 
-import InputComponent from '@components/Input';
-import SelectComponent from '@components/Select';
+import { KeyboardAwareScrollViewProps } from 'react-native-keyboard-aware-scroll-view';
 
-import Logo from '@assets/svg/logo.svg';
+import LogoDarkSvg from '@assets/svg/logoDark.svg';
+import LogoLightSvg from '@assets/svg/logoLight.svg';
 
 import {
   ContainerView as ContainerViewComponent,
   ContainerScroll as ContainerScrollComponent,
-  LoadingIndicator as LoadingIndicatorComponent,
+  DefaultButton,
 } from '@theme/common';
 
-import dimensions from '@theme/dimensions';
-
-export const ContainerScroll = styled(ContainerScrollComponent)``;
+export const ContainerScroll = styled(ContainerScrollComponent).attrs(
+  (props): KeyboardAwareScrollViewProps => {
+    return {
+      contentContainerStyle: {
+        flexGrow: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-evenly',
+        paddingBottom: props.theme.dimensions.marginTopElementsForm,
+      },
+      keyboardShouldPersistTaps: 'always',
+    };
+  },
+)``;
 
 export const ContainerView = styled(ContainerViewComponent)`
   align-items: center;
-  padding-left: ${dimensions.marginHorizontal}px;
-  padding-right: ${dimensions.marginHorizontal}px;
+  justify-content: center;
+  padding-left: ${(props) => props.theme.dimensions.marginHorizontal}px;
+  padding-right: ${(props) => props.theme.dimensions.marginHorizontal}px;
 `;
-
-export const LoadingIndicator = styled(LoadingIndicatorComponent)``;
 
 export const BoxInputView = styled.View`
   width: 100%;
-  margin-top: 8px;
+  margin-top: ${(props) => props.theme.dimensions.marginTopElementsForm}px;
 `;
 
 export const ContainerBottomView = styled.View`
   width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
 `;
 
-export const DefaultButton = styled(Button).attrs({
-  mode: 'contained',
-  contentStyle: { justifyContent: 'center', height: 45 },
-})`
-  margin-top: 15px;
-  width: 100%;
-`;
-
-export const LoginButton = styled(DefaultButton).attrs((props) => ({
-  color: props.theme.colors.primary,
-}))``;
+export const RegisterButton = styled(DefaultButton)`
+  margin-top: ${(props: { theme: DefaultTheme }) =>
+    props.theme.dimensions.marginTopElementsForm}px;
+` as typeof DefaultButton;
 
 export const TitleText = styled(Text)`
-  margin-top: 10px;
+  margin-top: ${(props) => props.theme.dimensions.marginTopElementsForm}px;
   width: 100%;
   font-size: 28px;
   font-weight: bold;
   text-align: center;
 `;
 
-export const SeparatorView = styled.View`
-  background: ${(props) => props.theme.colors.disabledText};
-  width: 100%;
-  height: 1.5px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-`;
-
-export const Input = styled(InputComponent)``;
-
-export const Select = styled(SelectComponent)``;
-
-export const MaskedTextInput = styled(MaskedTextInputComponent)``;
-
-export const LogoSvg = styled(Logo).attrs({
-  width: '100%',
+export const LogoLightView = styled(LogoLightSvg).attrs({
+  width: '60%',
   preserveAspectRatio: 'xMidYMid',
 })`
-  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+export const LogoDarkView = styled(LogoDarkSvg).attrs({
+  width: '60%',
+  preserveAspectRatio: 'xMidYMid',
+})`
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+export const VersionView = styled.View`
+  width: 100%;
+  justify-content: flex-end;
+  z-index: 1;
+`;
+
+export const VersionText = styled(Text)`
+  width: 100%;
+  font-size: 17px;
+  font-weight: bold;
+  text-align: center;
+  color: ${(props) => props.theme.colors.onSurfaceVariant};
+  margin-top: ${(props) => props.theme.dimensions.marginTopElementsForm}px;
+  margin-bottom: ${(props) => props.theme.dimensions.marginTopElementsForm}px;
 `;

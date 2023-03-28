@@ -1,6 +1,6 @@
-import { Platform } from 'react-native';
-
 import axios, { AxiosResponse } from 'axios';
+
+import { Platform } from 'react-native';
 
 import { RN_BASE_URL_API } from '@env';
 
@@ -54,12 +54,14 @@ export const exampleMethodName = async (
 ): Promise<AxiosResponse<ResponseExampleMethodName, any>> => {
   try {
     const path = '/path_url';
+
     return await api.post<ResponseExampleMethodName>(path, params);
   } catch (error) {
     const genericError = 'Não foi possível obter o dados, tente mais tarde';
 
     const axiosError = error as AxiosErrorApplication;
     const callback: Callback | undefined = axiosError.callback;
+
     throw GetErrorResponse(axiosError, genericError, callback);
   }
 };

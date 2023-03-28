@@ -1,18 +1,26 @@
 import React from 'react';
 
-import featuresFlag from '@configs/featuresFlag';
+import { getAppVersion } from '@utils/device';
 
-import { ContainerScroll, ContainerView, TitleText, LogoSvg } from './styles';
+import {
+  ContainerScroll,
+  ContainerView,
+  VersionView,
+  VersionText,
+  TitleText,
+  LogoSvg,
+} from './styles';
 
-const Login = () => {
+export const Home = () => {
   return (
     <ContainerView>
       <ContainerScroll>
-        <TitleText>App</TitleText>
-        {featuresFlag.logo && <LogoSvg />}
+        <TitleText>Home </TitleText>
+        <LogoSvg />
       </ContainerScroll>
+      <VersionView>
+        <VersionText>v{getAppVersion()}</VersionText>
+      </VersionView>
     </ContainerView>
   );
 };
-
-export default Login;

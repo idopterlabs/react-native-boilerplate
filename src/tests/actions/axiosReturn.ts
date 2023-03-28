@@ -1,4 +1,5 @@
 import { AxiosError, AxiosResponse } from 'axios';
+
 import { MockableFunction, mocked, MockedFunction } from 'jest-mock';
 
 import { GetErrorResponse } from '@services/responseService';
@@ -13,6 +14,14 @@ export const createAxiosMock = (
   response: AxiosResponse,
   isSuccess: boolean = true,
 ): AxiosMock => {
+  const isJestRunning = typeof jest !== 'undefined';
+  if (!isJestRunning) {
+    return {
+      response,
+      mock: undefined as unknown as MockedFunction<MockableFunction>,
+    };
+  }
+
   if (isSuccess) {
     const mock = mocked(method).mockResolvedValue(response);
     mock.mockClear();
@@ -27,13 +36,7 @@ export const createAxiosMock = (
   const error: AxiosError<any, any> = {
     name: '',
     message: '',
-    response: {
-      headers: {},
-      config: {},
-      statusText: '',
-      status: 400,
-      data: [],
-    },
+    response: response,
     config: {},
     code: '001',
     request: {},

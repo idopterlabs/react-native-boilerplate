@@ -1,5 +1,6 @@
-import { cleanup } from '@testing-library/react-native';
 import { AxiosError } from 'axios';
+
+import { cleanup } from '@testing-library/react-native';
 
 import { alertSpy } from '@tests/actions/alertSpy';
 
@@ -505,6 +506,7 @@ describe('Response Service', () => {
 
   it('should return the specific error (ErrorResponse) with the alert message', async () => {
     const error = new ErrorResponse('Message error');
+
     error.alert('Title error');
 
     expect(alertSpy).toHaveBeenLastCalledWith('Title error', 'Message error');

@@ -1,14 +1,26 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
-    </style>
+  <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
+    <item name="android:textColor">@color/md_theme_light_primary</item>
+    <item name="android:editTextStyle">@style/ResetEditText</item>
+    <item name="colorPrimary">@color/md_theme_light_primary</item>
+    <item name="colorPrimaryDark">@color/md_theme_light_onPrimaryContainer</item>
+    <item name="android:windowBackground">@color/md_theme_light_background</item>
+    <item name="colorAccent">@color/md_theme_light_primary</item>
+  </style>
 
-    <style name="BootTheme" parent="Theme.SplashScreen">
-      <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
-      <item name="windowSplashScreenBackground">@color/bootsplash_background</item>
-      <item name="windowSplashScreenAnimatedIcon">@mipmap/bootsplash_logo</item>
-      <item name="postSplashScreenTheme">@style/AppTheme</item>
-      <item name="windowSplashScreenAnimationDuration">500</item>
-      <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
-    </style>
+  <style name="BootTheme" parent="Theme.SplashScreen">
+    <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+    <item name="windowSplashScreenBackground">@color/bootsplash_background</item>
+    <item name="windowSplashScreenAnimatedIcon">@mipmap/bootsplash_logo</item>
+    <item name="postSplashScreenTheme">@style/AppTheme</item>
+    <item name="windowSplashScreenAnimationDuration">500</item>
+    <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
+  </style>
+
+  <style name="ResetEditText" parent="@android:style/Widget.EditText">
+    <item name="android:padding">0dp</item>
+    <item name="android:textColorHint">#c8c8c8</item>
+    <item name="android:textColor">@android:color/black</item>
+  </style>
 </resources>

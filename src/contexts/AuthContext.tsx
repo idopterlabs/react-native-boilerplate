@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-import { User } from '@typings/common';
+import Storage from '@utils/storage';
+
+import { User } from '@entities/user';
 
 import { setAccessToken } from '@services/api';
-
-import Storage from '@utils/storage';
 
 export const StorageKeys = {
   user: 'user:data',
@@ -34,6 +34,7 @@ export const AuthContextProvider: React.FC = ({ children }) => {
 
   const saveUser = async (newUser: User, isUsedCached: boolean = false) => {
     const token = newUser?.accessToken;
+
     setAccessToken(token);
 
     if (!isUsedCached) {
@@ -46,6 +47,7 @@ export const AuthContextProvider: React.FC = ({ children }) => {
 
   const loadStorageData = async () => {
     const userCached = await Storage.getObject<User>(StorageKeys.user);
+
     if (userCached) {
       await saveUser(userCached, true);
     }
@@ -69,6 +71,7 @@ export const AuthContextProvider: React.FC = ({ children }) => {
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
+
   return context;
 };
 

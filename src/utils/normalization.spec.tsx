@@ -1,6 +1,12 @@
 import { cleanup } from '@testing-library/react-native';
 
-import { extractPhoneNumber, uppercaseFirstLetter } from './normalization';
+import {
+  extractPhoneNumber,
+  uppercaseFirstLetter,
+  hiddenCardNumber,
+  formatId,
+  getTranslationProduct,
+} from './normalization';
 
 describe('Normalization Utils', () => {
   beforeEach(cleanup);
@@ -30,5 +36,23 @@ describe('Normalization Utils', () => {
     expect(uppercaseFirstLetter('' as unknown as string)).toBe('');
     expect(uppercaseFirstLetter(null as unknown as string)).toBe('');
     expect(uppercaseFirstLetter(false as unknown as string)).toBe('');
+  });
+
+  it('should change mid char to * for hidden card number', async () => {
+    expect(hiddenCardNumber('1111222233334444')).toBe('1111********4444');
+  });
+
+  it('should return the 15 first char', () => {
+    expect(formatId('12345678901234567890')).toBe('123456789012345');
+
+    expect(formatId('1234567890')).toBe('1234567890');
+  });
+
+  it('should return corretcly translation product', () => {
+    expect(getTranslationProduct('fuel')).toBe('Abastecimento');
+    expect(getTranslationProduct('transportation')).toBe('Transporte');
+    expect(getTranslationProduct('service')).toBe('Serviços');
+    expect(getTranslationProduct('gas')).toBe('Vale gás');
+    expect(getTranslationProduct('other')).toBe('Tipo não cadastrado');
   });
 });

@@ -1,8 +1,9 @@
 import React from 'react';
-import { TextInput as TextInputRN, TextInputProps } from 'react-native';
+
+import { RenderProps } from 'react-native-paper/lib/typescript/src/components/TextInput/types';
 
 import { Control } from 'react-hook-form/dist/types';
-import { RenderProps } from 'react-native-paper/lib/typescript/components/TextInput/types';
+import { TextInput as TextInputRN, TextInputProps } from 'react-native';
 
 import { Callback } from '@typings/common';
 
@@ -60,7 +61,7 @@ const TextInput = ({
     if (isPasswordInput) {
       return (
         <ContainerTextInput.Icon
-          name={isShowPassword ? 'eye-outline' : 'eye-off-outline'}
+          icon={isShowPassword ? 'eye-outline' : 'eye-off-outline'}
           onPress={() => setPasswordShow(!isShowPassword)}
           disabled={isDisabled}
           size={25}
@@ -71,9 +72,9 @@ const TextInput = ({
     return icon ? (
       <ContainerTextInput.Icon
         onPress={onPressIcon}
-        name={icon}
+        icon={icon}
         disabled={isDisabled}
-        color={iconForceColor || getColorIcon(hasError, isDisabled)}
+        color={() => iconForceColor || getColorIcon(hasError, isDisabled)}
         size={25}
         testID={props.testID ? `${props.testID}:icon` : undefined}
       />
@@ -81,6 +82,7 @@ const TextInput = ({
   };
 
   const textInputOptions: Props = { ...props };
+
   if (isPasswordInput) {
     textInputOptions.autoComplete = 'password';
     textInputOptions.spellCheck = false;

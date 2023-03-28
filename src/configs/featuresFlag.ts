@@ -13,6 +13,7 @@ const featuresFlagDisabled: AllFeatures[] = RN_FEATURES_OFF
 
 const getFeaturesFlagEnabled = (): FeaturesEnabled => {
   const enabled: FeaturesEnabled = {};
+
   for (const featureName of featuresFlagList) {
     enabled[featureName] = !featuresFlagDisabled.includes(featureName);
   }

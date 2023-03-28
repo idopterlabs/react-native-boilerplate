@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { ListEmptyLabelContainerView, ListEmptyLabelText } from './styles';
 
 interface Props {

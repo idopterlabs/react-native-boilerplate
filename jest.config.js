@@ -22,13 +22,15 @@ module.exports = {
     '<rootDir>/src/screens/**/*.{js,jsx,ts,tsx}',
     '<rootDir>/src/services/**/*.{js,jsx,ts,tsx}',
     '<rootDir>/src/utils/**/*.{js,jsx,ts,tsx}',
-    '!<rootDir>/src/**/*spec.tsx',
-    '!<rootDir>/src/**/*yup.ts',
-    '!<rootDir>/src/**/*styles.ts',
+    '!**/*spec.tsx',
+    '!**/useValidationSchema.ts',
+    '!**/*styles.ts',
     '!<rootDir>/src/contexts/AllProviders.tsx',
     '!<rootDir>/node_modules/',
     '!<rootDir>/path/to/dir/',
+    '!<rootDir>/src/utils/lists.ts',
     '!<rootDir>/src/configs/featuresFlag.ts',
+    '!<rootDir>/src/services/notification.ts',
   ],
   coverageThreshold: {
     global: {

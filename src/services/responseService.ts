@@ -1,14 +1,13 @@
-import { Alert } from 'react-native';
-
 import { AxiosError, AxiosResponse } from 'axios';
 
+import { Alert } from 'react-native';
+
+import { Data as PropsSnackbarError } from '@components/SnackbarError';
+import { Callback } from '@typings/common';
 import {
   DefaultChangesetError,
   ResponseDataWithError,
 } from '@typings/requests';
-import { Callback } from '@typings/common';
-
-import { Data as PropsSnackbarError } from '@components/SnackbarError';
 
 import { uppercaseFirstLetter } from '@utils/normalization';
 
@@ -26,6 +25,7 @@ const GetErrorResponse = (
   }
 
   const responseJsonTest = JSON.parse(JSON.stringify(error.response));
+
   if (!responseJsonTest) {
     return new ErrorResponse(
       'Servidor indisponível, tente mais tarde',
@@ -85,6 +85,7 @@ const verifyDataResponse = (
   response: AxiosResponse<ResponseDataWithError, any>,
 ): string | undefined => {
   const data = response.data;
+
   if (data === undefined) {
     return undefined;
   }
@@ -99,6 +100,7 @@ const verifyDataResponse = (
 
   if (Array.isArray(data.errors)) {
     const errors = data.errors;
+
     if (errors.length === 1) {
       return errors[0];
     }
@@ -119,8 +121,10 @@ const extractErrorOfChangeset = (
   error: DefaultChangesetError,
 ): string | undefined => {
   const keys = Object.keys(error);
+
   if (keys.length > 0) {
     const messages = error[keys[0]];
+
     if (messages.length > 0) {
       return `${uppercaseFirstLetter(keys[0])}: ${uppercaseFirstLetter(
         messages[0],
@@ -148,6 +152,7 @@ class ErrorResponse extends Error {
       this.originalError = originalError;
 
       const axiosError = originalError as AxiosError<any, any>;
+
       if (
         axiosError.response?.status &&
         typeof axiosError.response.status === 'number'

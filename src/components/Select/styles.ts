@@ -1,6 +1,7 @@
 import styled, { DefaultTheme } from 'styled-components/native';
 
 import { Text } from 'react-native-paper';
+
 import { Dropdown as DropdownComponent } from 'react-native-element-dropdown';
 
 interface CommonProps {
@@ -15,15 +16,14 @@ interface ListEmptyLabelProps {
   isSelect: boolean;
 }
 
-const colorVerification = (
+const colorVerificationInput = (
   theme: DefaultTheme,
   isFocus: boolean,
   isDisabled: boolean,
   hasError: boolean,
-  color: string,
 ) => {
   if (hasError) {
-    return theme.colors.attention;
+    return theme.colors.error;
   }
 
   if (isFocus) {
@@ -31,15 +31,42 @@ const colorVerification = (
   }
 
   if (isDisabled) {
-    return theme.colors.disabled;
+    return theme.colors.surfaceDisabled;
   }
 
-  return color;
+  return theme.colors.onSurfaceVariant;
 };
 
-export const ErrorMessage = styled.Text`
+const colorVerificationBorder = (
+  theme: DefaultTheme,
+  isFocus: boolean,
+  isDisabled: boolean,
+  hasError: boolean,
+) => {
+  if (hasError) {
+    return theme.colors.error;
+  }
+
+  if (isFocus) {
+    return theme.colors.primary;
+  }
+
+  if (isDisabled) {
+    return theme.colors.surfaceDisabled;
+  }
+
+  return `${theme.colors.onSurface}50`;
+};
+
+export const ErrorMessageText = styled(Text).attrs(() => {
+  return {
+    variant: 'labelMedium',
+  };
+})`
   margin-top: 5px;
-  color: ${(props) => props.theme.colors.attentionLight};
+  margin-right: 8px;
+  margin-left: 8px;
+  color: ${(props) => props.theme.colors.error};
 `;
 
 export const Dropdown = styled(DropdownComponent).attrs(
@@ -47,72 +74,83 @@ export const Dropdown = styled(DropdownComponent).attrs(
     disabled: props.isDisabled,
     dropdownPosition: 'auto',
     keyboardAvoiding: true,
-    activeColor: props.theme.colors.backgroundSecondaryLight,
-    itemTextColor: props.theme.colors.primaryText,
+    activeColor: props.theme.colors.background,
+    itemTextColor: props.theme.colors.text,
     placeholderStyle: {
       fontSize: 16,
       color: props.hasError
-        ? props.theme.colors.attention
-        : props.placeholderTextColor || '#6f6f6f',
+        ? props.theme.colors.error
+        : props.placeholderTextColor || props.theme.colors.onSurfaceVariant,
     },
     containerStyle: {
-      backgroundColor: props.theme.colors.backgroundLight,
+      backgroundColor: props.theme.colors.background,
     },
     selectedTextStyle: {
       fontSize: 16,
-      color: props.theme.colors.primaryText,
+      color: props.theme.colors.text,
     },
     inputSearchStyle: {
-      backgroundColor: props.theme.colors.backgroundLight,
+      backgroundColor: props.theme.colors.background,
       height: 40,
       fontSize: 16,
     },
     selectedTextProps: {
-      color: props.theme.colors.primaryText,
+      color: props.theme.colors.text,
       fontSize: 17,
       paddingLeft: 12,
     },
     search: false,
   }),
 )<CommonProps>`
-  height: 45px;
-  background-color: ${(props) => props.theme.colors.backgroundLight};
+  height: ${(props) => props.theme.dimensions.heightElementsForm}px;
+  background-color: ${(props) => props.theme.colors.onSurface}05;
   padding-left: 12px;
   padding-right: 12px;
   border-color: ${(props) =>
-    colorVerification(
+    colorVerificationBorder(
       props.theme,
       props.isFocus,
       props.isDisabled,
       props.hasError,
-      '#626466',
     )};
-  border-radius: 6px;
-  border-width: ${(props) => (props.isFocus ? 1.75 : 1)}px;
+  border-radius: 4px;
+  border-width: ${(props) => (props.isFocus || props.hasError ? 2 : 1)}px;
 `;
 
-export const LabelText = styled(Text)`
-  opacity: ${(props) => (props.isFocus ? 1 : 0.75)};
+export const LabelText = styled(Text).attrs(() => {
+  return {
+    variant: 'labelLarge',
+  };
+})`
+  opacity: 1;
   padding-left: 4px;
   padding-right: 4px;
   font-size: 12px;
   color: ${(props: CommonProps) =>
-    colorVerification(
+    colorVerificationInput(
       props.theme,
       props.isFocus,
       props.isDisabled,
       props.hasError,
-      props.theme.colors.primaryText,
     )};
 `;
 
-export const PlaceholderText = styled(Text)`
-  font-size: 20px;
-  color: #626466;
+export const PlaceholderText = styled(Text).attrs(() => {
+  return {
+    variant: 'labelLarge',
+  };
+})`
+  color: ${(props: CommonProps) =>
+    colorVerificationInput(
+      props.theme,
+      false,
+      props.isDisabled,
+      props.hasError,
+    )};
 `;
 
 export const AlertText = styled(Text)`
-  color: ${(props) => props.theme.colors.attention}; ;
+  color: ${(props) => props.theme.colors.error}; ;
 `;
 
 export const ContainerView = styled.View`
@@ -120,7 +158,7 @@ export const ContainerView = styled.View`
 `;
 
 export const LabelBackgroundView = styled.View`
-  background-color: ${(props) => props.theme.colors.backgroundLight};
+  background-color: ${(props) => props.theme.colors.background};
   z-index: 999;
   position: absolute;
   left: 10px;
@@ -129,7 +167,7 @@ export const LabelBackgroundView = styled.View`
 
 export const FixLabelBackgroundView = styled.View`
   position: absolute;
-  background-color: ${(props) => props.theme.colors.backgroundLight};
+  background-color: ${(props) => props.theme.colors.background};
   width: 100%;
   height: 8px;
 `;
@@ -139,10 +177,10 @@ export const ListEmptyLabelContainerView = styled.View`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: ${(props) => props.theme.colors.background};
 `;
 
 export const ListEmptyLabelText = styled(Text)<ListEmptyLabelProps>`
   font-size: 16px;
-  color: ${({ isSelect, theme }) =>
-    isSelect ? theme.colors.disabledText : theme.colors.backgroundLight};
+  color: ${(props) => props.theme.colors.text};
 `;

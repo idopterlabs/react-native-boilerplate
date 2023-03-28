@@ -3,5 +3,25 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "typescript.tsdk": "node_modules\\typescript\\lib"
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "cSpell.words": [
+    "Adsf",
+    "Appbar",
+    "Barcodes",
+    "bootsplash",
+    "borderless",
+    "bordero",
+    "Borderos",
+    "cnpj",
+    "Cocoapods",
+    "Danin",
+    "Flatlist",
+    "hookform",
+    "lcov",
+    "luxon",
+    "Luxon",
+    "Roboto",
+    "Typescale",
+    "Wowlet"
+  ],
 }

@@ -1,22 +1,21 @@
 import React from 'react';
 
-import { act, cleanup } from '@testing-library/react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { renderHook } from '@testing-library/react-hooks';
-
-import { User } from '@typings/common';
-
-import Storage from '@utils/storage';
+import { act, cleanup } from '@testing-library/react-native';
 
 import {
   AuthContextProvider,
-  StorageKeys,
   useAuth,
   userInitialState,
 } from '@contexts/AuthContext';
 
+import { User } from '@typings/common';
+
 describe('Auth Context Provider', () => {
   beforeEach(async () => {
-    Storage.clearAll();
+    AsyncStorage.clear();
     jest.clearAllMocks();
   });
 
@@ -43,12 +42,12 @@ describe('Auth Context Provider', () => {
   });
 
   it('should initialize context with user', async () => {
-    const mockUser: User = {
+    const mockUser = {
       accessToken: 'test_access_token',
       idToken: '3119ee61-d7b5-4421-93c5-379f8c9ea684',
     };
 
-    await Storage.setObject<User>(StorageKeys.user, mockUser);
+    await AsyncStorage.setItem('user:data', JSON.stringify(mockUser));
 
     const wrapper = ({ children }: any) => (
       <AuthContextProvider>{children}</AuthContextProvider>
@@ -63,12 +62,12 @@ describe('Auth Context Provider', () => {
   });
 
   it('should delete a user', async () => {
-    const mockUser: User = {
+    const mockUser = {
       accessToken: 'test_access_token',
       idToken: '3119ee61-d7b5-4421-93c5-379f8c9ea684',
     };
 
-    await Storage.setObject<User>(StorageKeys.user, mockUser);
+    await AsyncStorage.setItem('user:data', JSON.stringify(mockUser));
 
     const wrapper = ({ children }: any) => (
       <AuthContextProvider>{children}</AuthContextProvider>
@@ -88,14 +87,16 @@ describe('Auth Context Provider', () => {
     expect(result.current.isAuthenticated).toBeFalsy();
     expect(result.current.user).toBe(userInitialState);
 
-    const storageUser = await Storage.getObject(StorageKeys.user);
+    const storageUser = await AsyncStorage.getItem('user:data');
     expect(storageUser).toEqual(null);
   });
 
   it('should create a user', async () => {
-    const mockUser = {
-      accessToken: 'test_access_token',
-      idToken: '3119ee61-d7b5-4421-93c5-379f8c9ea684',
+    const mockUser: User = {
+      accessToken: 'accessTest',
+      email: 'as.lucasalves@gmail.com',
+      handle: 'luccasalves',
+      name: 'lucas',
     };
 
     const wrapper = ({ children }: any) => (

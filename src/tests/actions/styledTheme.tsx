@@ -1,7 +1,9 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components/native';
+
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+// eslint-disable-next-line no-restricted-imports
 import theme from '@theme/index';
 
 export const withThemeProvider = (
@@ -16,6 +18,7 @@ export const withThemeProvider = (
           colors: theme.colors.light,
           dimensions: theme.dimensions,
           colorScheme: 'light',
+          fonts: theme.fonts,
         }}>
         {component(params)}
       </ThemeProvider>

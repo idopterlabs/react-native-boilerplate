@@ -1,13 +1,13 @@
 import React from 'react';
 
-import RNBootSplash from 'react-native-bootsplash';
 import { NavigationContainer, Theme } from '@react-navigation/native';
+import RNBootSplash from 'react-native-bootsplash';
 
 import { useAuth } from '@contexts/AuthContext';
 
 import SplashScreen from '@screens/SplashScreen';
 
-import { PrimaryStatusBar } from '@theme/common';
+import { StatusBar } from '@theme/common';
 
 import AppNavigator from './AppNavigator';
 import AuthNavigator from './AuthNavigator';
@@ -27,11 +27,21 @@ export default ({ theme }: Props) => {
 
   return (
     <NavigationContainer onReady={hideSplashScreen} theme={theme}>
-      <PrimaryStatusBar />
+      <StatusBar />
       {isLoading ? (
         <SplashScreen />
       ) : (
-        <>{isAuthenticated ? <AppNavigator /> : <AuthNavigator />}</>
+        <>
+          {isAuthenticated ? (
+            <>
+              <AppNavigator />
+            </>
+          ) : (
+            <>
+              <AuthNavigator />
+            </>
+          )}
+        </>
       )}
     </NavigationContainer>
   );

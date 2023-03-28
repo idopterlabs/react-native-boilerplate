@@ -1,10 +1,9 @@
 import { AxiosResponse } from 'axios';
 
+import { exampleMethodName } from '@services/api';
 import { createAxiosMock } from '@tests/actions/axiosReturn';
 
 import { ResponseExampleMethodName } from '@typings/requests';
-
-import { exampleMethodName } from '@services/api';
 
 export const withSuccess = () => {
   const response: AxiosResponse<ResponseExampleMethodName, any> = {
