@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "NomedoMeuApp.app"
-               BlueprintName = "NomedoMeuApp"
-               ReferencedContainer = "container:NomedoMeuApp.xcodeproj">
+               BuildableName = "AppTemplate.app"
+               BlueprintName = "AppTemplate"
+               ReferencedContainer = "container:AppTemplate.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "NomedoMeuAppTests.xctest"
-               BlueprintName = "NomedoMeuAppTests"
-               ReferencedContainer = "container:NomedoMeuApp.xcodeproj">
+               BuildableName = "AppTemplateTests.xctest"
+               BlueprintName = "AppTemplateTests"
+               ReferencedContainer = "container:AppTemplate.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "NomedoMeuApp.app"
-            BlueprintName = "NomedoMeuApp"
-            ReferencedContainer = "container:NomedoMeuApp.xcodeproj">
+            BuildableName = "AppTemplate.app"
+            BlueprintName = "AppTemplate"
+            ReferencedContainer = "container:AppTemplate.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "NomedoMeuApp.app"
-            BlueprintName = "NomedoMeuApp"
-            ReferencedContainer = "container:NomedoMeuApp.xcodeproj">
+            BuildableName = "AppTemplate.app"
+            BlueprintName = "AppTemplate"
+            ReferencedContainer = "container:AppTemplate.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
