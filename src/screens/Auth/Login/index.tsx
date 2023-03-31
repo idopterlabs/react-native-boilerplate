@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import featuresFlag from '@configs/featuresFlag';
+
 import { ParamsExampleMethodName } from '@typings/requests';
 
 import { states } from '@utils/lists';
@@ -74,7 +76,7 @@ const Login = () => {
     <ContainerView>
       <ContainerScroll>
         <TitleText>Bem-vindo</TitleText>
-        <LogoSvg />
+        {featuresFlag.logo && <LogoSvg />}
         <BoxInputView>
           <Input
             testID="textInput:phoneNumber"
@@ -86,6 +88,7 @@ const Login = () => {
             keyboardType="phone-pad"
             hasError={errors?.phone?.message ? true : false}
             errorMessage={errors?.phone?.message}
+            isShowRequired={true}
             render={(props) => (
               <MaskedTextInput
                 onChangeText={
@@ -110,6 +113,7 @@ const Login = () => {
             valueField="value"
             hasError={errors?.state?.message ? true : false}
             errorMessage={errors?.state?.message}
+            isShowRequired={true}
             label="Estado"
           />
         </BoxInputView>

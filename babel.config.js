@@ -23,6 +23,7 @@ plugins.push([
     alias: {
       '@assets': './src/assets',
       '@components': './src/components',
+      '@configs': './src/configs',
       '@contexts': './src/contexts',
       '@theme': './src/theme',
       '@typings': './src/typings',

@@ -1,8 +1,8 @@
 # Idopterlabs React Native Boilerplate
 
-| | | |
-| - | - | - |
-![image](https://user-images.githubusercontent.com/5731176/172487765-efc86b04-5244-438d-b441-94bf5d544399.png) | ![image](https://user-images.githubusercontent.com/5731176/172487825-4ac12b38-511c-45d7-b4c4-967620b2ea3e.png) | ![image](https://user-images.githubusercontent.com/5731176/172487790-709491b1-9361-4e96-98be-edb9d3cf86f7.png) |
+| | | | |
+| - | - | - | - |
+| ![image](https://user-images.githubusercontent.com/5731176/215854212-c04da10b-bc73-4705-af33-ad652ce0e646.png) | ![image](https://user-images.githubusercontent.com/5731176/215854280-ba446d06-07fe-4fcd-8ab6-db3148b2471c.png) | ![image](https://user-images.githubusercontent.com/5731176/215854322-dc032f35-9ea0-4f76-8948-7bebf440799c.png) | ![image](https://user-images.githubusercontent.com/5731176/215854860-50e69246-086d-463e-b532-df2f1ee7f8ae.png) |
 
 - 🚀 Typescript
 - 🚀 Testes
@@ -12,6 +12,7 @@
 - 🚀 Splashscreen
 - 🚀 Serviços para HTTP Request e tratamento de erros
 - 🚀 Monitoramento de bugs via AppCenter
+- 🚀 CI via Gitlab
 
 ## Sobre
 
@@ -52,11 +53,12 @@ Exemplos:
 - `RN_USER_ID`
 - `RN_PASS`
 
-Por padrão todo projeto tem três variáveis:
+Por padrão todo projeto tem quatro variáveis:
 
 - `RN_BASE_URL`: Informar a URL base referente a URL de um serviço web que em algum momento o cliente pode ser redirecionado de dentro do app
 - `RN_BASE_URL_API`: Informar a URL base referente ao consumo de uma web API dedicado ao app
 - `RN_ENV`: O ambiente que está sendo usado, como, por exemplo: `development`, `test`, `staging`, `production`
+- `RN_FEATURES_OFF`: Informar quais funções vão ser desativado no app, essa env é opcional
 
 ### Splashscreen
 
@@ -98,6 +100,7 @@ A principal dele é as cores ([`src/theme/colors.ts`](./src/theme/colors.ts)), n
 </br> ┃ ┃ ┃ ┣ 📜`index.tsx` **(Implementação do componente)**
 </br> ┃ ┃ ┃ ┣ 📜`index.spec.tsx` **(Teste do componente)**
 </br> ┃ ┃ ┃ ┗ 📜`styles.ts` **(Folha de estilo do componente)**
+</br> ┃ ┣ 📂`configs` **(Grupo de variáveis de configuração destinado a uma lib ou parte do app)**
 </br> ┃ ┣ 📂`contexts` **(Contexto)**
 </br> ┃ ┃ ┣ 📜`AllProviders.tsx` **(Importação de todos os Contextos usado no app)**
 </br> ┃ ┃ ┣ 📜`[Nome do Contexto]Context.spec.tsx` **(Implementação de controle de um contexto)**
@@ -142,6 +145,7 @@ A principal dele é as cores ([`src/theme/colors.ts`](./src/theme/colors.ts)), n
 </br> ┣ 📜`.env.test` **(Configurações de variável de ambiente para teste)**
 </br> ┣ 📜`.env` **(Configurações de variável de ambiente para o app)**
 </br> ┣ 📜`.eslintrc.js`**(Configurações do ESlint)**
+</br> ┣ 📜`.gitlab-ci.yml`**(Configurações pipeline do Gitlab)**
 </br> ┣ 📜`.gitignore`
 </br> ┣ 📜`.nvmrc` **(Configurações da versão do Node)**
 </br> ┣ 📜`.prettierrc.js`

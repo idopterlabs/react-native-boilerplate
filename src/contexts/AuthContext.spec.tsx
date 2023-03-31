@@ -1,19 +1,22 @@
 import React from 'react';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import { act, cleanup } from '@testing-library/react-native';
 import { renderHook } from '@testing-library/react-hooks';
 
+import { User } from '@typings/common';
+
+import Storage from '@utils/storage';
+
 import {
   AuthContextProvider,
+  StorageKeys,
   useAuth,
   userInitialState,
 } from '@contexts/AuthContext';
 
 describe('Auth Context Provider', () => {
   beforeEach(async () => {
-    AsyncStorage.clear();
+    Storage.clearAll();
     jest.clearAllMocks();
   });
 
@@ -40,12 +43,12 @@ describe('Auth Context Provider', () => {
   });
 
   it('should initialize context with user', async () => {
-    const mockUser = {
+    const mockUser: User = {
       accessToken: 'test_access_token',
       idToken: '3119ee61-d7b5-4421-93c5-379f8c9ea684',
     };
 
-    await AsyncStorage.setItem('user:data', JSON.stringify(mockUser));
+    await Storage.setObject<User>(StorageKeys.user, mockUser);
 
     const wrapper = ({ children }: any) => (
       <AuthContextProvider>{children}</AuthContextProvider>
@@ -60,12 +63,12 @@ describe('Auth Context Provider', () => {
   });
 
   it('should delete a user', async () => {
-    const mockUser = {
+    const mockUser: User = {
       accessToken: 'test_access_token',
       idToken: '3119ee61-d7b5-4421-93c5-379f8c9ea684',
     };
 
-    await AsyncStorage.setItem('user:data', JSON.stringify(mockUser));
+    await Storage.setObject<User>(StorageKeys.user, mockUser);
 
     const wrapper = ({ children }: any) => (
       <AuthContextProvider>{children}</AuthContextProvider>
@@ -85,7 +88,7 @@ describe('Auth Context Provider', () => {
     expect(result.current.isAuthenticated).toBeFalsy();
     expect(result.current.user).toBe(userInitialState);
 
-    const storageUser = await AsyncStorage.getItem('user:data');
+    const storageUser = await Storage.getObject(StorageKeys.user);
     expect(storageUser).toEqual(null);
   });
 

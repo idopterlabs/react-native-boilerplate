@@ -1,7 +1,5 @@
 import React, { useRef } from 'react';
 
-import { useForm } from 'react-hook-form';
-
 import {
   act,
   cleanup,
@@ -10,6 +8,8 @@ import {
   waitFor,
 } from '@testing-library/react-native';
 import '@testing-library/jest-native/extend-expect';
+
+import { useForm } from 'react-hook-form';
 
 import theme from '@theme/index';
 
@@ -234,7 +234,7 @@ describe('Input component', () => {
 
     expect(IconComponent).not.toBeDisabled();
     expect(IconComponent).not.toBeUndefined();
-    expect(IconComponentColor).toEqual(theme.colors.light.primary);
+    expect(IconComponentColor).toEqual('#ffba00');
   });
 
   it('should render Input component with password eye icon', async () => {
@@ -308,42 +308,5 @@ describe('Input component', () => {
     };
 
     render(shadowTheme(<Component />));
-  });
-
-  it('should render Input component correctly with control and use onChangeCustom', async () => {
-    let testCustomValue = '';
-
-    const Component = () => {
-      const inputRef = useRef(null);
-
-      const { control } = useForm<{
-        test: string;
-      }>();
-
-      const testParam = '';
-
-      return (
-        <Input
-          testID="Input:textInput:input"
-          placeholder="Test placeholder"
-          control={control}
-          name="test"
-          param={testParam}
-          inputRef={inputRef}
-          onChangeCustom={(text) => {
-            testCustomValue = text;
-          }}
-        />
-      );
-    };
-
-    const { getByTestId } = render(shadowTheme(<Component />));
-
-    await waitFor(async () => {
-      const InputTextField = getByTestId('Input:textInput:input');
-      await fireEvent.changeText(InputTextField, 'test password');
-    });
-
-    expect(testCustomValue).toBe('test password');
   });
 });

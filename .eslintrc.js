@@ -19,6 +19,13 @@ module.exports = {
             singleReturnOnly: false,
           },
         ],
+        'no-restricted-imports': [
+          'error',
+          {
+            name: 'styled-components',
+            message: 'Please use styled-components/native instead.',
+          },
+        ],
       },
     },
   ],

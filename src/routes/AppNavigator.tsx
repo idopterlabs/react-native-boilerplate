@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { ThemeContext } from 'styled-components/native';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -7,14 +9,13 @@ import Home from '@screens/App/Home';
 
 import { AppStackRouter } from '@typings/routes';
 
-import theme from '@theme/index';
-
 import { useAuth } from '@contexts/AuthContext';
 
 const AppStack = createNativeStackNavigator<AppStackRouter>();
 
 export default () => {
   const { deleteUser } = useAuth();
+  const themeContext = useContext(ThemeContext);
 
   const onLogout = () => {
     deleteUser();
@@ -39,7 +40,7 @@ export default () => {
             />
           ),
           headerStyle: {
-            backgroundColor: theme.colors.light.primary,
+            backgroundColor: themeContext.colors.stackBackground,
           },
         })}
       />

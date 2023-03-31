@@ -28,6 +28,7 @@ module.exports = {
     '!<rootDir>/src/contexts/AllProviders.tsx',
     '!<rootDir>/node_modules/',
     '!<rootDir>/path/to/dir/',
+    '!<rootDir>/src/configs/featuresFlag.ts',
   ],
   coverageThreshold: {
     global: {
@@ -41,5 +42,6 @@ module.exports = {
     RN_BASE_URL: 'https://example.com',
     RN_BASE_URL_API: 'https://example.com/api',
     RN_ENV: 'test',
+    RN_FEATURES_OFF: '',
   },
 };

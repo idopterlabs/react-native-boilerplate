@@ -28,6 +28,8 @@ export default {
   backgroundLight: '#f0f2f5',
   backgroundSecondaryLight: '#eeeeee',
 
-  primaryStatusBar: '#ffba00',
+  stackBackground: '#ffffff',
+
+  primaryStatusBar: '#ffffff',
   secondaryStatusBar: '#c78a00',
 };

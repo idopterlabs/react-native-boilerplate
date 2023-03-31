@@ -6,13 +6,20 @@ import {
   DefaultTheme as DefaultThemePaper,
   Provider as PaperProvider,
 } from 'react-native-paper';
-import { Theme } from 'react-native-paper/lib/typescript/types';
+import { Theme as ThemePaper } from 'react-native-paper/lib/typescript/types';
+
+import {
+  DarkTheme,
+  DefaultTheme,
+  Theme as ThemeNavigation,
+} from '@react-navigation/native';
+
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import {
   ThemeProvider,
-  DefaultTheme as DefaultThemeStyled,
+  DefaultTheme as ThemeStyled,
 } from 'styled-components/native';
 
 import theme from '@theme/index';
@@ -31,9 +38,9 @@ LogBox.ignoreLogs([
 export default () => {
   const [isDarkMode, setDarkMode] = useState<boolean>(false);
 
-  const getStyledTheme = () => {
+  const getStyledTheme = (): ThemeStyled => {
     const colorSchemeName = isDarkMode ? 'dark' : 'light';
-    const themeStyled: DefaultThemeStyled = {
+    const themeStyled: ThemeStyled = {
       colors: theme.colors[colorSchemeName],
       dimensions: theme.dimensions,
       colorScheme: colorSchemeName,
@@ -42,9 +49,9 @@ export default () => {
     return themeStyled;
   };
 
-  const getPaperTheme = (): Theme => {
+  const getPaperTheme = (): ThemePaper => {
     const colorSchemeName = isDarkMode ? 'dark' : 'light';
-    const themePaper: Theme = {
+    const themePaper: ThemePaper = {
       ...DefaultThemePaper,
       dark: isDarkMode,
       roundness: 6,
@@ -63,6 +70,19 @@ export default () => {
     };
 
     return themePaper;
+  };
+
+  const getNavigationTheme = (): ThemeNavigation => {
+    const currentScheme = isDarkMode ? DarkTheme : DefaultTheme;
+    const themeNavigation: ThemeNavigation = {
+      ...currentScheme,
+      dark: isDarkMode,
+      colors: {
+        ...currentScheme.colors,
+      },
+    };
+
+    return themeNavigation;
   };
 
   const onAppearanceChange = () => {
@@ -89,7 +109,7 @@ export default () => {
         <SafeAreaProvider>
           <GestureHandlerRootView style={{ flex: 1 }}>
             <AllProviders>
-              <Routes />
+              <Routes theme={getNavigationTheme()} />
             </AllProviders>
           </GestureHandlerRootView>
         </SafeAreaProvider>
