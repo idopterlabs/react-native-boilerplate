@@ -12,6 +12,7 @@ import { states } from '@utils/lists';
 import { exampleMethodName } from '@services/api';
 
 import { extractPhoneNumber } from '@utils/normalization';
+import { getAppVersion } from '@utils/device';
 
 import { useAuth } from '@contexts/AuthContext';
 
@@ -23,12 +24,13 @@ import {
   Select,
   MaskedTextInput,
   ContainerView,
-  BoxInputView,
-  ContainerBottomView,
+  ContainerBoxView,
   LoginButton,
   LoadingIndicator,
   TitleText,
   LogoSvg,
+  VersionView,
+  VersionText,
 } from './styles';
 
 const Login = () => {
@@ -75,9 +77,11 @@ const Login = () => {
   return (
     <ContainerView>
       <ContainerScroll>
-        <TitleText>Bem-vindo</TitleText>
-        {featuresFlag.logo && <LogoSvg />}
-        <BoxInputView>
+        <ContainerBoxView>
+          <TitleText>Bem-vindo</TitleText>
+          {featuresFlag.logo && <LogoSvg />}
+        </ContainerBoxView>
+        <ContainerBoxView>
           <Input
             testID="textInput:phoneNumber"
             name="phone"
@@ -100,8 +104,6 @@ const Login = () => {
               />
             )}
           />
-        </BoxInputView>
-        <BoxInputView>
           <Select
             name="state"
             testID="select:state"
@@ -116,13 +118,14 @@ const Login = () => {
             isShowRequired={true}
             label="Estado"
           />
-        </BoxInputView>
-        <ContainerBottomView>
           {isLoading && <LoadingIndicator />}
           {!isLoading && (
             <LoginButton onPress={handleSubmit(onSubmit)}>Entrar</LoginButton>
           )}
-        </ContainerBottomView>
+        </ContainerBoxView>
+        <VersionView>
+          <VersionText>v{getAppVersion()}</VersionText>
+        </VersionView>
       </ContainerScroll>
     </ContainerView>
   );

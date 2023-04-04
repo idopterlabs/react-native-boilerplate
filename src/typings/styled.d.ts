@@ -1,5 +1,6 @@
-// eslint-disable-next-line no-restricted-imports
+/* eslint-disable no-restricted-imports */
 import 'styled-components';
+
 import theme from '@styles/theme';
 
 declare module 'styled-components' {

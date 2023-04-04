@@ -13,6 +13,7 @@ const plugins = [
       verbose: false,
     },
   ],
+  'react-native-reanimated/plugin',
 ];
 
 plugins.push([

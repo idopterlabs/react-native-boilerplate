@@ -1,29 +1,29 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { ThemeContext } from 'styled-components/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { AuthRouter } from '@typings/routes';
+
+import NavigationBar from '@components/NavigationBar';
 
 import Login from '@screens/Auth/Login';
 
-import { AuthStackRouter } from '@typings/routes';
-
-const AuthStack = createNativeStackNavigator<AuthStackRouter>();
+const AuthStack = createStackNavigator<AuthRouter>();
 
 export default () => {
-  const themeContext = useContext(ThemeContext);
-
   return (
-    <AuthStack.Navigator initialRouteName="Login">
+    <AuthStack.Navigator
+      initialRouteName="Login"
+      screenOptions={{
+        header: (props) => <NavigationBar props={props} />,
+      }}>
       <AuthStack.Screen
         name="Login"
         component={Login}
         options={() => ({
-          animation: 'slide_from_left',
+          animation: 'slide_from_right',
           headerShown: true,
-          headerStyle: {
-            backgroundColor: themeContext.colors.stackBackground,
-          },
+          title: 'Login',
         })}
       />
     </AuthStack.Navigator>

@@ -5,7 +5,6 @@ import {
   Button,
   ButtonProps,
   Card,
-  Text,
   TouchableRipple,
 } from 'react-native-paper';
 
@@ -72,7 +71,7 @@ export const DefaultButton = styled(Button).attrs(
   },
 )``;
 
-export const DefaultButtonTonal = styled(Button).attrs(
+export const DefaultTonalButton = styled(Button).attrs(
   (props): Omit<ButtonProps, 'children'> => {
     return {
       mode: 'contained-tonal',
@@ -83,13 +82,7 @@ export const DefaultButtonTonal = styled(Button).attrs(
   },
 )``;
 
-export const DefaultTextButton = styled(Text).attrs((props) => {
-  return {
-    textColor: props.theme.colors.onPrimary,
-  };
-})``;
-
-export const DefaultButtonOutlined = styled(Button).attrs(
+export const DefaultOutlinedButton = styled(Button).attrs(
   (props): Omit<ButtonProps, 'children'> => {
     return {
       mode: 'outlined',
@@ -102,7 +95,7 @@ export const DefaultButtonOutlined = styled(Button).attrs(
   border-color: ${(props) => props.theme.colors.primary};
 `;
 
-export const DefaultButtonText = styled(Button).attrs((props) => {
+export const DefaultTextButton = styled(Button).attrs((props) => {
   return {
     mode: 'text',
     contentStyle: {

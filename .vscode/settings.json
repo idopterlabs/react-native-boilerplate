@@ -5,10 +5,13 @@
   },
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "cSpell.words": [
+    "Appbar",
     "appcenter",
     "bootsplash",
     "hookform",
     "luxon",
-    "Paulo"
-  ]
+    "Paulo",
+    "Typescale"
+  ],
+  "cSpell.language": "en,pt-BR"
 }

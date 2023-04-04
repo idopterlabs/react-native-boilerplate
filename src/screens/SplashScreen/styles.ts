@@ -4,13 +4,10 @@ import Logo from '@assets/svg/logo.svg';
 
 import {
   ContainerView as ContainerViewComponent,
-  ContainerScroll as ContainerScrollComponent,
-  SplashScreenStatusBar as SplashScreenStatusBarComponent,
+  StatusBar as StatusBarComponent,
 } from '@theme/common';
 
 import dimensions from '@theme/dimensions';
-
-export const ContainerScroll = styled(ContainerScrollComponent)``;
 
 export const ContainerView = styled(ContainerViewComponent)`
   justify-content: center;
@@ -25,4 +22,4 @@ export const LogoSvg = styled(Logo).attrs({
   margin-top: 10px;
 `;
 
-export const SplashScreenStatusBar = styled(SplashScreenStatusBarComponent)``;
+export const SplashScreenStatusBar = styled(StatusBarComponent)``;

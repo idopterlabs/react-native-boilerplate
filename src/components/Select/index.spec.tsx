@@ -1,12 +1,13 @@
 import React from 'react';
 
-import { act, cleanup, fireEvent, render } from '@testing-library/react-native';
 import '@testing-library/jest-native/extend-expect';
+import { act, cleanup, fireEvent, render } from '@testing-library/react-native';
 
 import { shadowTheme } from '@tests/actions/styledTheme';
 
-import Select from './index';
 import ListEmptyLabel from './ListEmptyLabel';
+
+import Select from './index';
 
 jest.useFakeTimers('legacy');
 
@@ -46,6 +47,7 @@ describe('Select component', () => {
 
     await act(async () => {
       const SelectView = await getByTestId('select');
+
       await fireEvent(SelectView, 'onChange', options[0]);
     });
 

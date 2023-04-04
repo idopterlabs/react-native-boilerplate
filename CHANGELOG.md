@@ -7,12 +7,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [1.2.0] - 2023-04-03
 
 ### Added
-- Atualizado para o Paper 5 (Material You)
+- Implementado Material You
 
 ### Changed
 - Atualizado todos as dependências para versão mais recente stable
 - Trocado versão do Node.js para o 18
 - Atualizado ReactNative para 0.70.7
+- Atualizado para o Paper 5
 
 ### Fixed
 - Removido patch para label personalizado, pois foi corrigido no dependência

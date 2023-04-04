@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import { shadowTheme } from '@tests/actions/styledTheme';
 
-const AppStack = createNativeStackNavigator();
+const AppStack = createStackNavigator();
 
 interface Props {
   component(params?: any): JSX.Element;

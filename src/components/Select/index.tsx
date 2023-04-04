@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
 
 import { Controller } from 'react-hook-form';
 import { Control } from 'react-hook-form/dist/types';
@@ -6,11 +7,11 @@ import { Control } from 'react-hook-form/dist/types';
 import ListEmptyLabel from './ListEmptyLabel';
 
 import {
-  ErrorMessage,
+  ContainerView,
+  ErrorMessageText,
   Dropdown,
   LabelText,
   AlertText,
-  ContainerView,
   FixLabelBackgroundView,
   LabelBackgroundView,
   PlaceholderText,
@@ -40,6 +41,7 @@ interface Props {
   placeholderTextColor?: string;
   testID?: string;
   isShowRequired?: boolean;
+  style?: StyleProp<ViewStyle> | undefined;
 }
 
 export default ({
@@ -58,15 +60,23 @@ export default ({
   isDisabled,
   testID,
   isShowRequired = false,
+  style = {},
   ...rest
 }: Props) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [currentValue, setNewValue] = useState<string>('');
 
+  if (!rest.placeholder) {
+    rest.placeholder = label;
+  }
+
   if (rest.placeholder) {
     // @ts-ignore
     rest.placeholder = (
-      <PlaceholderText>
+      <PlaceholderText
+        isFocus={isFocus ? true : false}
+        isDisabled={isDisabled ? true : false}
+        hasError={hasError ? true : false}>
         {rest.placeholder}
         {isShowRequired && <AlertText>*</AlertText>}
       </PlaceholderText>
@@ -74,7 +84,7 @@ export default ({
   }
 
   return (
-    <ContainerView>
+    <ContainerView style={style}>
       {control && name ? (
         <>
           {label &&
@@ -148,7 +158,7 @@ export default ({
             rules={rules}
             defaultValue={param}
           />
-          {hasError && <ErrorMessage>{errorMessage}</ErrorMessage>}
+          {hasError && <ErrorMessageText>{errorMessage}</ErrorMessageText>}
         </>
       ) : (
         <Dropdown
