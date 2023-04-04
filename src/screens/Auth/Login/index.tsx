@@ -20,6 +20,7 @@ import { FormInputs, useValidationSchema } from './useValidationSchema';
 
 import {
   ContainerScroll,
+  CloseKeyboardTouchableArea,
   Input,
   Select,
   MaskedTextInput,
@@ -75,59 +76,64 @@ const Login = () => {
   };
 
   return (
-    <ContainerView>
-      <ContainerScroll>
-        <ContainerBoxView>
-          <TitleText>Bem-vindo</TitleText>
-          {featuresFlag.logo && <LogoSvg />}
-        </ContainerBoxView>
-        <ContainerBoxView>
-          <Input
-            testID="textInput:phoneNumber"
-            name="phone"
-            control={control}
-            param={form.phone}
-            label="Telefone"
-            placeholder="Telefone"
-            keyboardType="phone-pad"
-            hasError={errors?.phone?.message ? true : false}
-            errorMessage={errors?.phone?.message}
-            isShowRequired={true}
-            render={(props) => (
-              <MaskedTextInput
-                onChangeText={
-                  props.onChangeText as (text: string, rawText: string) => void
-                }
-                {...props}
-                mask="(99) 99999-9999"
-                maxLength={16}
-              />
+    <CloseKeyboardTouchableArea>
+      <ContainerView>
+        <ContainerScroll>
+          <ContainerBoxView>
+            <TitleText>Bem-vindo</TitleText>
+            {featuresFlag.logo && <LogoSvg />}
+          </ContainerBoxView>
+          <ContainerBoxView>
+            <Input
+              testID="textInput:phoneNumber"
+              name="phone"
+              control={control}
+              param={form.phone}
+              label="Telefone"
+              placeholder="Telefone"
+              keyboardType="phone-pad"
+              hasError={errors?.phone?.message ? true : false}
+              errorMessage={errors?.phone?.message}
+              isShowRequired={true}
+              render={(props) => (
+                <MaskedTextInput
+                  onChangeText={
+                    props.onChangeText as (
+                      text: string,
+                      rawText: string,
+                    ) => void
+                  }
+                  {...props}
+                  mask="(99) 99999-9999"
+                  maxLength={16}
+                />
+              )}
+            />
+            <Select
+              name="state"
+              testID="select:state"
+              control={control}
+              param={form.state}
+              data={states}
+              placeholder="Estado"
+              labelField="label"
+              valueField="value"
+              hasError={errors?.state?.message ? true : false}
+              errorMessage={errors?.state?.message}
+              isShowRequired={true}
+              label="Estado"
+            />
+            {isLoading && <LoadingIndicator />}
+            {!isLoading && (
+              <LoginButton onPress={handleSubmit(onSubmit)}>Entrar</LoginButton>
             )}
-          />
-          <Select
-            name="state"
-            testID="select:state"
-            control={control}
-            param={form.state}
-            data={states}
-            placeholder="Estado"
-            labelField="label"
-            valueField="value"
-            hasError={errors?.state?.message ? true : false}
-            errorMessage={errors?.state?.message}
-            isShowRequired={true}
-            label="Estado"
-          />
-          {isLoading && <LoadingIndicator />}
-          {!isLoading && (
-            <LoginButton onPress={handleSubmit(onSubmit)}>Entrar</LoginButton>
-          )}
-        </ContainerBoxView>
-        <VersionView>
-          <VersionText>v{getAppVersion()}</VersionText>
-        </VersionView>
-      </ContainerScroll>
-    </ContainerView>
+          </ContainerBoxView>
+          <VersionView>
+            <VersionText>v{getAppVersion()}</VersionText>
+          </VersionView>
+        </ContainerScroll>
+      </ContainerView>
+    </CloseKeyboardTouchableArea>
   );
 };
 

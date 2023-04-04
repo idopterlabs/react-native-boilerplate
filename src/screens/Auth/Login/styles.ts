@@ -12,6 +12,7 @@ import Logo from '@assets/svg/logo.svg';
 import {
   ContainerView as ContainerViewComponent,
   ContainerScroll as ContainerScrollComponent,
+  CloseKeyboardTouchableArea as CloseKeyboardTouchableAreaComponent,
   LoadingIndicator as LoadingIndicatorComponent,
   DefaultButton,
 } from '@theme/common';
@@ -48,6 +49,10 @@ export const ContainerView = styled(ContainerViewComponent)`
   padding-left: ${(props) => props.theme.dimensions.marginHorizontal}px;
   padding-right: ${(props) => props.theme.dimensions.marginHorizontal}px;
 `;
+
+export const CloseKeyboardTouchableArea = styled(
+  CloseKeyboardTouchableAreaComponent,
+)``;
 
 export const LoginButton = styled(DefaultButton)`
   margin-top: ${(props: { theme: DefaultTheme }) =>

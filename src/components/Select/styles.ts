@@ -91,6 +91,9 @@ export const Dropdown = styled(DropdownComponent).attrs(
       fontSize: 16,
       color: props.theme.colors.text,
     },
+    itemTextStyle: {
+      color: props.theme.colors.text,
+    },
     inputSearchStyle: {
       backgroundColor: props.theme.colors.background,
       height: 40,

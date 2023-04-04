@@ -8,7 +8,7 @@ import {
   TouchableRipple,
 } from 'react-native-paper';
 
-import { StatusBar as StatusBarReact } from 'react-native';
+import { Keyboard, StatusBar as StatusBarReact } from 'react-native';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -22,6 +22,15 @@ export const ContainerView = styled.View`
   flex: 1;
   background: ${(props) => props.theme.colors.background};
 `;
+
+export const CloseKeyboardTouchableArea = styled.TouchableWithoutFeedback.attrs(
+  (props) => {
+    return {
+      ...props,
+      onPress: () => Keyboard.dismiss(),
+    };
+  },
+)``;
 
 export const ContainerScroll = styled(KeyboardAwareScrollView).attrs(
   (props) => {
