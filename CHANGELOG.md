@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.2.0] - 2023-04-05
 
+| | | | |
+| - | - | - | - |
+| ![image](https://user-images.githubusercontent.com/5731176/230104295-f879b18d-8e95-47ba-bb6d-b65a42a62633.png) | ![image](https://user-images.githubusercontent.com/5731176/230104356-fdb4ecfe-dbe3-4a0a-bdef-c2f025a8148a.png) | ![image](https://user-images.githubusercontent.com/5731176/230104428-29eda9ae-fbce-44f6-b431-a34073a20d84.png) | ![image](https://user-images.githubusercontent.com/5731176/230104485-38b8c275-0482-48f3-a0a7-cc5c2ec12ee5.png) |
+
 ### Added
 - Implementado Material You
 - Criado novo componente para fechar teclado ao clicar fora dele `CloseKeyboardTouchableArea`
