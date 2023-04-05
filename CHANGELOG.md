@@ -4,13 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.2.0] - 2023-04-04
+## [1.2.0] - 2023-04-05
 
 ### Added
 - Implementado Material You
-- Criado novo componente para fechar teclado ao clicar fora dele `CloseKeyboardTouchableArea`.
-- Criado novo componente para fazer Scroll in FlatList `ContainerScrollInFlatList`.
-- Criado arquivo para configurar fontes `src/theme/fonts`.
+- Criado novo componente para fechar teclado ao clicar fora dele `CloseKeyboardTouchableArea`
+- Criado novo componente para fazer Scroll in FlatList `ContainerScrollInFlatList`
+- Criado arquivo para configurar fontes `src/theme/fonts`
+- Configurado plugin do typescript para o styled
 
 ### Changed
 - Atualizado todos as dependências para versão mais recente stable
