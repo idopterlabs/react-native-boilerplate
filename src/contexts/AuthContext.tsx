@@ -6,9 +6,8 @@ import React, {
   useState,
 } from 'react';
 
-import { User } from '@typings/common';
-
 import { setAccessToken } from '@services/api';
+import { User } from '@typings/common';
 
 import Storage from '@utils/storage';
 

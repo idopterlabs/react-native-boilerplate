@@ -1,7 +1,8 @@
 import styled, { DefaultTheme } from 'styled-components/native';
 
-import { KeyboardAwareScrollViewProps } from 'react-native-keyboard-aware-scroll-view';
 import { Text, TextProps } from 'react-native-paper';
+
+import { KeyboardAwareScrollViewProps } from 'react-native-keyboard-aware-scroll-view';
 
 import Logo from '@assets/svg/logo.svg';
 

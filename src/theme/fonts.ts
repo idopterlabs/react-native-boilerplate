@@ -1,8 +1,9 @@
-import { Platform } from 'react-native';
 import {
   MD3Type,
   MD3TypescaleKey,
 } from 'react-native-paper/lib/typescript/src/types';
+
+import { Platform } from 'react-native';
 
 const regularType: Partial<MD3Type> = {
   fontFamily: Platform.select({

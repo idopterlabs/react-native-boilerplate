@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
 
-import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import featuresFlag from '@configs/featuresFlag';
 
+import { useAuth } from '@contexts/AuthContext';
+import { exampleMethodName } from '@services/api';
 import { ParamsExampleMethodName } from '@typings/requests';
 
+import { getAppVersion } from '@utils/device';
 import { states } from '@utils/lists';
 
-import { exampleMethodName } from '@services/api';
-
 import { extractPhoneNumber } from '@utils/normalization';
-import { getAppVersion } from '@utils/device';
-
-import { useAuth } from '@contexts/AuthContext';
-
-import { FormInputs, useValidationSchema } from './useValidationSchema';
 
 import {
   ContainerScroll,
@@ -33,6 +29,7 @@ import {
   VersionView,
   VersionText,
 } from './styles';
+import { FormInputs, useValidationSchema } from './useValidationSchema';
 
 const Login = () => {
   const { saveUser } = useAuth();

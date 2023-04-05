@@ -1,6 +1,6 @@
-import { Platform } from 'react-native';
-
 import axios, { AxiosResponse } from 'axios';
+
+import { Platform } from 'react-native';
 
 import { RN_BASE_URL_API } from '@env';
 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, forwardRef, Ref } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
 
 import { Controller } from 'react-hook-form';
 import { Control } from 'react-hook-form/dist/types';
+import { StyleProp, ViewStyle } from 'react-native';
 import { IDropdownRef } from 'react-native-element-dropdown';
 
 import ListEmptyLabel from './ListEmptyLabel';

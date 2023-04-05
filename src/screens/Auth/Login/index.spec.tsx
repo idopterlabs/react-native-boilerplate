@@ -8,14 +8,13 @@ import {
   waitFor,
 } from '@testing-library/react-native';
 
+import MockedNavigator from '@routes/MockedNavigator';
 import { alertSpy } from '@tests/actions/alertSpy';
 
-import { mockedNavigate } from '@tests/mocks/rnNavigation';
 import { mockedUpdateStateUser } from '@tests/mocks/authContext';
+import { mockedNavigate } from '@tests/mocks/rnNavigation';
 
 import exampleMethodName from '@tests/responses/exampleMethodName';
-
-import MockedNavigator from '@routes/MockedNavigator';
 
 import { states } from '@utils/lists';
 

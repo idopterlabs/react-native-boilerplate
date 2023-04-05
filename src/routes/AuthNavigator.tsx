@@ -2,11 +2,10 @@ import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { AuthRouter } from '@typings/routes';
-
 import NavigationBar from '@components/NavigationBar';
 
 import Login from '@screens/Auth/Login';
+import { AuthRouter } from '@typings/routes';
 
 const AuthStack = createStackNavigator<AuthRouter>();
 

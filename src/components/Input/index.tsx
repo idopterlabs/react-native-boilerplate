@@ -88,6 +88,7 @@ const TextInput = forwardRef<TextInputRN, Props>(
 
     const textInputOptions: Props = {
       autoCorrect: false,
+      autoCapitalize: 'words',
       ...props,
     };
 
@@ -97,11 +98,6 @@ const TextInput = forwardRef<TextInputRN, Props>(
       textInputOptions.autoCorrect = false;
       textInputOptions.secureTextEntry = !isShowPassword;
       textInputOptions.autoCapitalize = undefined;
-    } else if (
-      !textInputOptions.autoCapitalize &&
-      textInputOptions.autoCapitalize !== undefined
-    ) {
-      textInputOptions.autoCapitalize = 'words';
     }
 
     if (textInputOptions.label) {

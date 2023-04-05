@@ -1,11 +1,7 @@
 import React from 'react';
 
-import { act, cleanup } from '@testing-library/react-native';
 import { renderHook } from '@testing-library/react-hooks';
-
-import { User } from '@typings/common';
-
-import Storage from '@utils/storage';
+import { act, cleanup } from '@testing-library/react-native';
 
 import {
   AuthContextProvider,
@@ -13,6 +9,9 @@ import {
   useAuth,
   userInitialState,
 } from '@contexts/AuthContext';
+import { User } from '@typings/common';
+
+import Storage from '@utils/storage';
 
 describe('Auth Context Provider', () => {
   beforeEach(async () => {

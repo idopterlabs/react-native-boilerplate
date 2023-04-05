@@ -1,13 +1,13 @@
 import styled, { DefaultTheme } from 'styled-components/native';
 
 import { Text, TextProps } from 'react-native-paper';
-import { MaskedTextInput as MaskedTextInputComponent } from 'react-native-mask-text';
-import { KeyboardAwareScrollViewProps } from 'react-native-keyboard-aware-scroll-view';
 
-import InputComponent from '@components/Input';
-import SelectComponent from '@components/Select';
+import { KeyboardAwareScrollViewProps } from 'react-native-keyboard-aware-scroll-view';
+import { MaskedTextInput as MaskedTextInputComponent } from 'react-native-mask-text';
 
 import Logo from '@assets/svg/logo.svg';
+import InputComponent from '@components/Input';
+import SelectComponent from '@components/Select';
 
 import {
   ContainerView as ContainerViewComponent,
