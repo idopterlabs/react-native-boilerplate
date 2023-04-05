@@ -26,6 +26,7 @@ plugins.push([
       '@components': './src/components',
       '@configs': './src/configs',
       '@contexts': './src/contexts',
+      '@hooks/*': ['./src/hooks/*'],
       '@theme': './src/theme',
       '@typings': './src/typings',
       '@routes': './src/routes',

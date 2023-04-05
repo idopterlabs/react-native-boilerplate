@@ -12,12 +12,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Criado novo componente para fazer Scroll in FlatList `ContainerScrollInFlatList`
 - Criado arquivo para configurar fontes `src/theme/fonts`
 - Configurado plugin do typescript para o styled
+- Adicionado nova regra no eslint para ordenação das importações
+- Adicionado nova pasta na arquitetura `src/hooks/*/`
 
 ### Changed
 - Atualizado todos as dependências para versão mais recente stable
 - Trocado versão do Node.js para o 18
 - Atualizado ReactNative para 0.70.7
 - Atualizado para o Paper 5
+- Alterado estrutura de screen para permitir pastas de componentes dentro dela 
 
 ### Fixed
 - Removido patch para label personalizado, pois foi corrigido no dependência
@@ -39,7 +42,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Adicionado controle de features do app via variável de ambiente (`RN_FEATURES_OFF`)
 - Adicionado configurações para pipeline de teste via GitLab
 - Adicionado novo utilitário padrão onde pode ser trocado fácil o banco de dados de um app
-- Adicionado nova regra no eslint para ordenação das importações
 
 ### Changed
 

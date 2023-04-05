@@ -105,17 +105,26 @@ A principal dele é as cores ([`src/theme/colors.ts`](./src/theme/colors.ts)), n
 </br> ┃ ┃ ┣ 📜`AllProviders.tsx` **(Importação de todos os Contextos usado no app)**
 </br> ┃ ┃ ┣ 📜`[Nome do Contexto]Context.spec.tsx` **(Implementação de controle de um contexto)**
 </br> ┃ ┃ ┗ 📜`[Nome do Contexto]Context.tsx` **(Testes de um contexto)**
+</br> ┃ ┣ 📂`hooks` **(Hooks compartilhado entre telas)**
+</br> ┃ ┃ ┣ 📜`Use[Nome do Hook]Context.spec.tsx` **(Implementação de um hook)**
 </br> ┃ ┣ 📂`routes` **(Gerenciamento de rotas)**
-</br> ┃ ┃ ┣ 📜`AppNavigator.tsx` **(Gerenciamento principal de rotas do app - usúario autendicado)**
-</br> ┃ ┃ ┣ 📜`AuthNavigator.tsx` **(Gerenciamento de rotas de um usúario não autendicado)**
+</br> ┃ ┃ ┣ 📜`AppNavigator.tsx` **(Gerenciamento principal de rotas do app - usúario autenticado)**
+</br> ┃ ┃ ┣ 📜`AuthNavigator.tsx` **(Gerenciamento de rotas de um usúario não autenticado)**
 </br> ┃ ┃ ┗ 📜`MockedNavigator.tsx` **(Gerenciamento de rotas para testes)**
 </br> ┃ ┣ 📂`screens` **(Telas usado no App)**
-</br> ┃ ┃ ┣ 📂`App` **(Telas principal do app - usúario autendicado)**
-</br> ┃ ┃ ┃ ┗ 📂`[Nome da Tela]`
+</br> ┃ ┃ ┣ 📂`App` **(Telas principal do app - usúario autenticado)**
+</br> ┃ ┃ ┃ ┣ 📂`[Nome do conjunto de tela]`
+</br> ┃ ┃ ┃ ┃ ┗ 📂`[Nome da Tela]`
+</br> ┃ ┃ ┃ ┣ 📂`[Nome da Tela]`
 </br> ┃ ┃ ┃ ┃ ┣ 📜`index.tsx` **(Implementação da da tela)**
 </br> ┃ ┃ ┃ ┃ ┣ 📜`index.spec.tsx` **(Teste da tela)**
-</br> ┃ ┃ ┃ ┃ ┗ 📜`styles.ts` **(Folha de estilo da tela)**
-</br> ┃ ┃ ┣ 📂`Auth` **(Telas para o usúario não autendicado)**
+</br> ┃ ┃ ┃ ┃ ┣ 📜`styles.ts` **(Folha de estilo da tela)**
+</br> ┃ ┃ ┃ ┃ ┣ 📂`components` **(Componentes usado na tela apenas)**
+</br> ┃ ┃ ┃ ┃ ┃ ┣ 📂`[Nome do componente]`
+</br> ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜`index.tsx` **(Implementação do componente)**
+</br> ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜`index.spec.tsx` **(Teste do componente)**
+</br> ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜`styles.ts` **(Folha de estilo do componente)**
+</br> ┃ ┃ ┣ 📂`Auth` **(Telas para o usúario não autenticado)**
 </br> ┃ ┃ ┃ ┗ 📂 `[Nome da Tela]`
 </br> ┃ ┃ ┗ 📂`SplashScreen` **(Tela de carregamento do app)**
 </br> ┃ ┣ 📂`services` **(Serviços a serem consumido pelo app)**
