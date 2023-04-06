@@ -1,6 +1,7 @@
 import { User } from '@typings/common';
 
 export const mockedUpdateStateUser = jest.fn();
+
 jest.mock('@contexts/AuthContext', () => {
   return {
     useAuth: () => {

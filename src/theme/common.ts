@@ -1,25 +1,36 @@
-import { StatusBar as StatusBarReact } from 'react-native';
-
 import styled from 'styled-components/native';
 
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {
+  ActivityIndicator,
+  Button,
+  ButtonProps,
+  Card,
+  TouchableRipple,
+} from 'react-native-paper';
+
+import { Keyboard, StatusBar as StatusBarReact } from 'react-native';
+
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
-import { ActivityIndicator } from 'react-native-paper';
-
-const statusBarColorContent = (themeColor: string): string => {
-  return themeColor === 'dark' ? 'light-content' : 'dark-content';
-};
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const ContainerSafeAreaView = styled(SafeAreaView)`
   flex: 1;
-  background: ${(props) => props.theme.colors.backgroundLight};
+  background: ${(props) => props.theme.colors.background};
 `;
 
 export const ContainerView = styled.View`
   flex: 1;
-  background: ${(props) => props.theme.colors.backgroundLight};
+  background: ${(props) => props.theme.colors.background};
 `;
+
+export const CloseKeyboardTouchableArea = styled.TouchableWithoutFeedback.attrs(
+  (props) => {
+    return {
+      ...props,
+      onPress: () => Keyboard.dismiss(),
+    };
+  },
+)``;
 
 export const ContainerScroll = styled(KeyboardAwareScrollView).attrs(
   (props) => {
@@ -28,7 +39,7 @@ export const ContainerScroll = styled(KeyboardAwareScrollView).attrs(
       showsVerticalScrollIndicator: true,
       nestedScrollEnabled: true,
       contentContainerStyle: {
-        paddingBottom: props.theme.dimensions.marginHorizontal / 2,
+        paddingBottom: props.theme.dimensions.marginTopElementsForm,
       },
     };
   },
@@ -37,26 +48,11 @@ export const ContainerScroll = styled(KeyboardAwareScrollView).attrs(
   width: 100%;
 `;
 
-export const PrimaryStatusBar = styled(StatusBarReact).attrs((props) => {
+export const StatusBar = styled(StatusBarReact).attrs((props) => {
   return {
-    barStyle: statusBarColorContent(props.theme.colorScheme),
-    backgroundColor: props.theme.colors.primaryStatusBar,
-    translucent: true,
-  };
-})``;
-
-export const SecondaryStatusBar = styled(StatusBarReact).attrs((props) => {
-  return {
-    barStyle: statusBarColorContent(props.theme.colorScheme),
-    backgroundColor: props.theme.colors.secondaryStatusBar,
-    translucent: true,
-  };
-})``;
-
-export const SplashScreenStatusBar = styled(StatusBarReact).attrs((props) => {
-  return {
-    barStyle: statusBarColorContent(props.theme.colorScheme),
-    backgroundColor: props.theme.colors.backgroundLight,
+    barStyle:
+      props.theme.colorScheme === 'dark' ? 'light-content' : 'dark-content',
+    backgroundColor: props.theme.colors.background,
     translucent: true,
   };
 })``;
@@ -68,3 +64,61 @@ export const LoadingIndicator = styled(ActivityIndicator).attrs((props) => {
     size: 'large',
   };
 })``;
+
+export const DefaultButton = styled(Button).attrs(
+  (props): Omit<ButtonProps, 'children'> => {
+    return {
+      mode: 'contained',
+      contentStyle: {
+        height: props.theme.dimensions.heightElementsForm,
+      },
+      textColor:
+        props.theme.colorScheme === 'dark'
+          ? props.theme.colors.text
+          : props.theme.colors.onPrimary,
+    };
+  },
+)``;
+
+export const DefaultTonalButton = styled(Button).attrs(
+  (props): Omit<ButtonProps, 'children'> => {
+    return {
+      mode: 'contained-tonal',
+      contentStyle: {
+        height: props.theme.dimensions.heightElementsForm,
+      },
+    };
+  },
+)``;
+
+export const DefaultOutlinedButton = styled(Button).attrs(
+  (props): Omit<ButtonProps, 'children'> => {
+    return {
+      mode: 'outlined',
+      contentStyle: {
+        height: props.theme.dimensions.heightElementsForm,
+      },
+    };
+  },
+)`
+  border-color: ${(props) => props.theme.colors.primary};
+`;
+
+export const DefaultTextButton = styled(Button).attrs((props) => {
+  return {
+    mode: 'text',
+    contentStyle: {
+      height: props.theme.dimensions.heightElementsForm,
+    },
+  };
+})``;
+
+export const DefaultCard = styled(Card)`
+  overflow: hidden;
+  border-color: ${(props) => props.theme.colors.outlineVariant};
+  width: 100%;
+`;
+
+export const TouchableArea = styled(TouchableRipple)`
+  width: 100%;
+`;

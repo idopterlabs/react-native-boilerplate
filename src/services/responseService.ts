@@ -1,14 +1,13 @@
-import { Alert } from 'react-native';
-
 import { AxiosError, AxiosResponse } from 'axios';
 
+import { Alert } from 'react-native';
+
+import { Data as PropsSnackbarError } from '@components/SnackbarError';
+import { Callback } from '@typings/common';
 import {
   DefaultChangesetError,
   ResponseDataWithError,
 } from '@typings/requests';
-import { Callback } from '@typings/common';
-
-import { Data as PropsSnackbarError } from '@components/SnackbarError';
 
 import { uppercaseFirstLetter } from '@utils/normalization';
 

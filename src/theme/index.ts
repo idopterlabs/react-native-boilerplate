@@ -1,8 +1,7 @@
-import { Colors as colorsPaper } from 'react-native-paper';
-
 import colorsLight from './colors';
 import colorsDark from './colors.dark';
 import dimensions from './dimensions';
+import fonts from './fonts';
 
 export default {
   colors: {
@@ -10,5 +9,5 @@ export default {
     dark: colorsDark,
   },
   dimensions,
-  colorsMaterial: colorsPaper,
+  fonts,
 };

@@ -1,7 +1,7 @@
-export type AppStackRouter = {
+export type AppRouter = {
   Home: undefined;
 };
 
-export type AuthStackRouter = {
+export type AuthRouter = {
   Login: undefined;
 };

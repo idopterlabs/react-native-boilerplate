@@ -1,14 +1,23 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-
-import { User } from '@typings/common';
+import React, {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 import { setAccessToken } from '@services/api';
+import { User } from '@typings/common';
 
 import Storage from '@utils/storage';
 
 export const StorageKeys = {
   user: 'user:data',
 };
+
+interface Props {
+  children?: ReactNode;
+}
 
 export interface AuthContextData {
   user: User;
@@ -22,7 +31,7 @@ export const AuthContext = createContext<AuthContextData>(
   {} as AuthContextData,
 );
 
-export const AuthContextProvider: React.FC = ({ children }) => {
+export const AuthContextProvider: React.FC<Props> = ({ children }) => {
   const [user, setUser] = useState<User>(userInitialState);
   const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
   const [isLoading, setLoading] = useState<boolean>(true);

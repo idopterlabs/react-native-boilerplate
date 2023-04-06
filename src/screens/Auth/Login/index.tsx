@@ -1,35 +1,35 @@
 import React, { useState } from 'react';
 
-import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import featuresFlag from '@configs/featuresFlag';
 
+import { useAuth } from '@contexts/AuthContext';
+import { exampleMethodName } from '@services/api';
 import { ParamsExampleMethodName } from '@typings/requests';
 
+import { getAppVersion } from '@utils/device';
 import { states } from '@utils/lists';
-
-import { exampleMethodName } from '@services/api';
 
 import { extractPhoneNumber } from '@utils/normalization';
 
-import { useAuth } from '@contexts/AuthContext';
-
-import { FormInputs, useValidationSchema } from './useValidationSchema';
-
 import {
   ContainerScroll,
+  CloseKeyboardTouchableArea,
   Input,
   Select,
   MaskedTextInput,
   ContainerView,
-  BoxInputView,
-  ContainerBottomView,
+  ContainerBoxView,
   LoginButton,
   LoadingIndicator,
   TitleText,
   LogoSvg,
+  VersionView,
+  VersionText,
 } from './styles';
+import { FormInputs, useValidationSchema } from './useValidationSchema';
 
 const Login = () => {
   const { saveUser } = useAuth();
@@ -73,58 +73,64 @@ const Login = () => {
   };
 
   return (
-    <ContainerView>
-      <ContainerScroll>
-        <TitleText>Bem-vindo</TitleText>
-        {featuresFlag.logo && <LogoSvg />}
-        <BoxInputView>
-          <Input
-            testID="textInput:phoneNumber"
-            name="phone"
-            control={control}
-            param={form.phone}
-            label="Telefone"
-            placeholder="Telefone"
-            keyboardType="phone-pad"
-            hasError={errors?.phone?.message ? true : false}
-            errorMessage={errors?.phone?.message}
-            isShowRequired={true}
-            render={(props) => (
-              <MaskedTextInput
-                onChangeText={
-                  props.onChangeText as (text: string, rawText: string) => void
-                }
-                {...props}
-                mask="(99) 99999-9999"
-                maxLength={16}
-              />
+    <CloseKeyboardTouchableArea>
+      <ContainerView>
+        <ContainerScroll>
+          <ContainerBoxView>
+            <TitleText>Bem-vindo</TitleText>
+            {featuresFlag.logo && <LogoSvg />}
+          </ContainerBoxView>
+          <ContainerBoxView>
+            <Input
+              testID="textInput:phoneNumber"
+              name="phone"
+              control={control}
+              param={form.phone}
+              label="Telefone"
+              placeholder="Telefone"
+              keyboardType="phone-pad"
+              hasError={errors?.phone?.message ? true : false}
+              errorMessage={errors?.phone?.message}
+              isShowRequired={true}
+              render={(props) => (
+                <MaskedTextInput
+                  onChangeText={
+                    props.onChangeText as (
+                      text: string,
+                      rawText: string,
+                    ) => void
+                  }
+                  {...props}
+                  mask="(99) 99999-9999"
+                  maxLength={16}
+                />
+              )}
+            />
+            <Select
+              name="state"
+              testID="select:state"
+              control={control}
+              param={form.state}
+              data={states}
+              placeholder="Estado"
+              labelField="label"
+              valueField="value"
+              hasError={errors?.state?.message ? true : false}
+              errorMessage={errors?.state?.message}
+              isShowRequired={true}
+              label="Estado"
+            />
+            {isLoading && <LoadingIndicator />}
+            {!isLoading && (
+              <LoginButton onPress={handleSubmit(onSubmit)}>Entrar</LoginButton>
             )}
-          />
-        </BoxInputView>
-        <BoxInputView>
-          <Select
-            name="state"
-            testID="select:state"
-            control={control}
-            param={form.state}
-            data={states}
-            placeholder="Estado"
-            labelField="label"
-            valueField="value"
-            hasError={errors?.state?.message ? true : false}
-            errorMessage={errors?.state?.message}
-            isShowRequired={true}
-            label="Estado"
-          />
-        </BoxInputView>
-        <ContainerBottomView>
-          {isLoading && <LoadingIndicator />}
-          {!isLoading && (
-            <LoginButton onPress={handleSubmit(onSubmit)}>Entrar</LoginButton>
-          )}
-        </ContainerBottomView>
-      </ContainerScroll>
-    </ContainerView>
+          </ContainerBoxView>
+          <VersionView>
+            <VersionText>v{getAppVersion()}</VersionText>
+          </VersionView>
+        </ContainerScroll>
+      </ContainerView>
+    </CloseKeyboardTouchableArea>
   );
 };
 

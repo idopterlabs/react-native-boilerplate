@@ -1,47 +1,37 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { ThemeContext } from 'styled-components/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-import Home from '@screens/App/Home';
-
-import { AppStackRouter } from '@typings/routes';
+import NavigationBar from '@components/NavigationBar';
 
 import { useAuth } from '@contexts/AuthContext';
 
-const AppStack = createNativeStackNavigator<AppStackRouter>();
+import Home from '@screens/App/Home';
+import { AppRouter } from '@typings/routes';
+
+const AppStack = createStackNavigator<AppRouter>();
 
 export default () => {
   const { deleteUser } = useAuth();
-  const themeContext = useContext(ThemeContext);
 
   const onLogout = () => {
     deleteUser();
   };
 
   return (
-    <AppStack.Navigator initialRouteName="Home">
+    <AppStack.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        header: (props) => <NavigationBar props={props} />,
+      }}>
       <AppStack.Screen
         name="Home"
         component={Home}
         options={() => ({
           animation: 'slide_from_right',
           headerShown: true,
-          headerTitle: 'Template',
-          headerBackVisible: false,
-          headerRight: () => (
-            <IconMaterialCommunityIcons
-              onPress={onLogout}
-              name="logout"
-              size={30}
-              color="#000"
-            />
-          ),
-          headerStyle: {
-            backgroundColor: themeContext.colors.stackBackground,
-          },
+          title: 'Template',
+          actions: [{ iconName: 'logout', onPress: onLogout }],
         })}
       />
     </AppStack.Navigator>

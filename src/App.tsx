@@ -1,30 +1,33 @@
+/* eslint-disable no-restricted-imports */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
-import { Appearance, LogBox, NativeEventSubscription } from 'react-native';
-
-import {
-  DefaultTheme as DefaultThemePaper,
-  Provider as PaperProvider,
-} from 'react-native-paper';
-import { Theme as ThemePaper } from 'react-native-paper/lib/typescript/types';
-
-import {
-  DarkTheme,
-  DefaultTheme,
-  Theme as ThemeNavigation,
-} from '@react-navigation/native';
-
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import {
   ThemeProvider,
   DefaultTheme as ThemeStyled,
 } from 'styled-components/native';
+import {
+  MD3LightTheme as DefaultThemeLightPaper,
+  MD3DarkTheme as DefaultThemeDarkPaper,
+  Provider as PaperProvider,
+  configureFonts,
+} from 'react-native-paper';
 
-import theme from '@theme/index';
+import { ThemeProp as ThemePaper } from 'react-native-paper/lib/typescript/src/types';
+
+import {
+  DefaultTheme as DefaultThemeLightNavigation,
+  DarkTheme as DefaultThemeDarkNavigation,
+  Theme as ThemeNavigation,
+} from '@react-navigation/native';
+import { Appearance, LogBox, NativeEventSubscription } from 'react-native';
+
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import Routes from '@routes/index';
+import theme from '@theme/index';
 
 import AllProviders from './contexts/AllProviders';
 
@@ -44,6 +47,7 @@ export default () => {
       colors: theme.colors[colorSchemeName],
       dimensions: theme.dimensions,
       colorScheme: colorSchemeName,
+      fonts: theme.fonts,
     };
 
     return themeStyled;
@@ -51,21 +55,17 @@ export default () => {
 
   const getPaperTheme = (): ThemePaper => {
     const colorSchemeName = isDarkMode ? 'dark' : 'light';
+    const currentSchemePaper: ThemePaper = isDarkMode
+      ? DefaultThemeDarkPaper
+      : DefaultThemeLightPaper;
+
     const themePaper: ThemePaper = {
-      ...DefaultThemePaper,
-      dark: isDarkMode,
-      roundness: 6,
-      fonts: {
-        ...DefaultThemePaper.fonts,
-      },
+      ...currentSchemePaper,
+      mode: 'exact',
+      fonts: configureFonts({ config: theme.fonts }),
       colors: {
-        ...DefaultThemePaper.colors,
-        primary: theme.colors[colorSchemeName].primary,
-        accent: theme.colors[colorSchemeName].secondary,
-        text: theme.colors[colorSchemeName].primaryText,
-        error: theme.colors[colorSchemeName].attention,
-        disabled: theme.colors[colorSchemeName].disabled,
-        placeholder: theme.colors[colorSchemeName].placeholder,
+        ...currentSchemePaper.colors,
+        ...theme.colors[colorSchemeName],
       },
     };
 
@@ -73,12 +73,19 @@ export default () => {
   };
 
   const getNavigationTheme = (): ThemeNavigation => {
-    const currentScheme = isDarkMode ? DarkTheme : DefaultTheme;
+    const colorSchemeName = isDarkMode ? 'dark' : 'light';
+    const currentSchemeNavigation: ThemeNavigation = isDarkMode
+      ? DefaultThemeDarkNavigation
+      : DefaultThemeLightNavigation;
+
     const themeNavigation: ThemeNavigation = {
-      ...currentScheme,
+      ...currentSchemeNavigation,
       dark: isDarkMode,
       colors: {
-        ...currentScheme.colors,
+        ...currentSchemeNavigation.colors,
+        primary: theme.colors[colorSchemeName].primary,
+        background: theme.colors[colorSchemeName].surface,
+        text: theme.colors[colorSchemeName].text,
       },
     };
 
@@ -87,6 +94,7 @@ export default () => {
 
   const onAppearanceChange = () => {
     const colorScheme = Appearance.getColorScheme();
+
     setDarkMode(colorScheme === 'dark');
   };
 

@@ -2,7 +2,7 @@
 
 | | | | |
 | - | - | - | - |
-| ![image](https://user-images.githubusercontent.com/5731176/215854212-c04da10b-bc73-4705-af33-ad652ce0e646.png) | ![image](https://user-images.githubusercontent.com/5731176/215854280-ba446d06-07fe-4fcd-8ab6-db3148b2471c.png) | ![image](https://user-images.githubusercontent.com/5731176/215854322-dc032f35-9ea0-4f76-8948-7bebf440799c.png) | ![image](https://user-images.githubusercontent.com/5731176/215854860-50e69246-086d-463e-b532-df2f1ee7f8ae.png) |
+| ![image](https://user-images.githubusercontent.com/5731176/230104295-f879b18d-8e95-47ba-bb6d-b65a42a62633.png) | ![image](https://user-images.githubusercontent.com/5731176/230104356-fdb4ecfe-dbe3-4a0a-bdef-c2f025a8148a.png) | ![image](https://user-images.githubusercontent.com/5731176/230104428-29eda9ae-fbce-44f6-b431-a34073a20d84.png) | ![image](https://user-images.githubusercontent.com/5731176/230104485-38b8c275-0482-48f3-a0a7-cc5c2ec12ee5.png) |
 
 - 🚀 Typescript
 - 🚀 Testes
@@ -105,17 +105,26 @@ A principal dele é as cores ([`src/theme/colors.ts`](./src/theme/colors.ts)), n
 </br> ┃ ┃ ┣ 📜`AllProviders.tsx` **(Importação de todos os Contextos usado no app)**
 </br> ┃ ┃ ┣ 📜`[Nome do Contexto]Context.spec.tsx` **(Implementação de controle de um contexto)**
 </br> ┃ ┃ ┗ 📜`[Nome do Contexto]Context.tsx` **(Testes de um contexto)**
+</br> ┃ ┣ 📂`hooks` **(Hooks compartilhado entre telas)**
+</br> ┃ ┃ ┣ 📜`Use[Nome do Hook]Context.spec.tsx` **(Implementação de um hook)**
 </br> ┃ ┣ 📂`routes` **(Gerenciamento de rotas)**
-</br> ┃ ┃ ┣ 📜`AppNavigator.tsx` **(Gerenciamento principal de rotas do app - usúario autendicado)**
-</br> ┃ ┃ ┣ 📜`AuthNavigator.tsx` **(Gerenciamento de rotas de um usúario não autendicado)**
+</br> ┃ ┃ ┣ 📜`AppNavigator.tsx` **(Gerenciamento principal de rotas do app - usúario autenticado)**
+</br> ┃ ┃ ┣ 📜`AuthNavigator.tsx` **(Gerenciamento de rotas de um usúario não autenticado)**
 </br> ┃ ┃ ┗ 📜`MockedNavigator.tsx` **(Gerenciamento de rotas para testes)**
 </br> ┃ ┣ 📂`screens` **(Telas usado no App)**
-</br> ┃ ┃ ┣ 📂`App` **(Telas principal do app - usúario autendicado)**
-</br> ┃ ┃ ┃ ┗ 📂`[Nome da Tela]`
+</br> ┃ ┃ ┣ 📂`App` **(Telas principal do app - usúario autenticado)**
+</br> ┃ ┃ ┃ ┣ 📂`[Nome do conjunto de tela]`
+</br> ┃ ┃ ┃ ┃ ┗ 📂`[Nome da Tela]`
+</br> ┃ ┃ ┃ ┣ 📂`[Nome da Tela]`
 </br> ┃ ┃ ┃ ┃ ┣ 📜`index.tsx` **(Implementação da da tela)**
 </br> ┃ ┃ ┃ ┃ ┣ 📜`index.spec.tsx` **(Teste da tela)**
-</br> ┃ ┃ ┃ ┃ ┗ 📜`styles.ts` **(Folha de estilo da tela)**
-</br> ┃ ┃ ┣ 📂`Auth` **(Telas para o usúario não autendicado)**
+</br> ┃ ┃ ┃ ┃ ┣ 📜`styles.ts` **(Folha de estilo da tela)**
+</br> ┃ ┃ ┃ ┃ ┣ 📂`components` **(Componentes usado na tela apenas)**
+</br> ┃ ┃ ┃ ┃ ┃ ┣ 📂`[Nome do componente]`
+</br> ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜`index.tsx` **(Implementação do componente)**
+</br> ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜`index.spec.tsx` **(Teste do componente)**
+</br> ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜`styles.ts` **(Folha de estilo do componente)**
+</br> ┃ ┃ ┣ 📂`Auth` **(Telas para o usúario não autenticado)**
 </br> ┃ ┃ ┃ ┗ 📂 `[Nome da Tela]`
 </br> ┃ ┃ ┗ 📂`SplashScreen` **(Tela de carregamento do app)**
 </br> ┃ ┣ 📂`services` **(Serviços a serem consumido pelo app)**

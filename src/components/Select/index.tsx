@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef, Ref } from 'react';
 
 import { Controller } from 'react-hook-form';
 import { Control } from 'react-hook-form/dist/types';
+import { StyleProp, ViewStyle } from 'react-native';
+import { IDropdownRef } from 'react-native-element-dropdown';
 
 import ListEmptyLabel from './ListEmptyLabel';
 
 import {
-  ErrorMessage,
+  ContainerView,
+  ErrorMessageText,
   Dropdown,
   LabelText,
   AlertText,
-  ContainerView,
   FixLabelBackgroundView,
   LabelBackgroundView,
   PlaceholderText,
@@ -40,147 +42,171 @@ interface Props {
   placeholderTextColor?: string;
   testID?: string;
   isShowRequired?: boolean;
+  style?: StyleProp<ViewStyle> | undefined;
 }
 
-export default ({
-  control,
-  name,
-  rules,
-  param,
-  hasError,
-  errorMessage,
-  data,
-  label,
-  labelField,
-  valueField,
-  keyItem,
-  onValueChange,
-  isDisabled,
-  testID,
-  isShowRequired = false,
-  ...rest
-}: Props) => {
-  const [isFocus, setIsFocus] = useState<boolean>(false);
-  const [currentValue, setNewValue] = useState<string>('');
+const Select = forwardRef<IDropdownRef, Props>(
+  (
+    {
+      control,
+      name,
+      rules,
+      param,
+      hasError,
+      errorMessage,
+      data,
+      label,
+      labelField,
+      valueField,
+      keyItem,
+      onValueChange,
+      isDisabled,
+      testID,
+      isShowRequired = false,
+      style = {},
+      ...rest
+    }: Props,
+    ref?: Ref<IDropdownRef>,
+  ) => {
+    const [isFocus, setIsFocus] = useState<boolean>(false);
+    const [currentValue, setNewValue] = useState<string>('');
 
-  if (rest.placeholder) {
-    // @ts-ignore
-    rest.placeholder = (
-      <PlaceholderText>
-        {rest.placeholder}
-        {isShowRequired && <AlertText>*</AlertText>}
-      </PlaceholderText>
-    );
-  }
+    if (!rest.placeholder) {
+      rest.placeholder = label;
+    }
 
-  return (
-    <ContainerView>
-      {control && name ? (
-        <>
-          {label &&
-            (isFocus ||
-              (currentValue !== '' && currentValue !== undefined)) && (
-              <LabelBackgroundView>
-                <FixLabelBackgroundView />
-                <LabelText
-                  isFocus={isFocus ? true : false}
-                  isDisabled={isDisabled ? true : false}
-                  hasError={hasError ? true : false}>
-                  {label}
-                  {isShowRequired && <AlertText>*</AlertText>}
-                </LabelText>
-              </LabelBackgroundView>
-            )}
-          <Controller
-            control={control}
-            render={
-              /* istanbul ignore next */ ({ field: { onChange, value } }) => {
-                useEffect(() => {
-                  if (currentValue !== value) {
-                    setNewValue(value);
-                  }
-                }, [value]);
-
-                return (
-                  <>
-                    <Dropdown
-                      {...rest}
-                      itemTestIDField={'itemTestIDField'}
-                      testID={testID}
-                      flatListProps={{
-                        ListEmptyComponent: ListEmptyLabel({ isSelect: true }),
-                      }}
-                      isDisabled={isDisabled ? true : false}
-                      isFocus={isFocus}
-                      hasError={hasError ? true : false}
-                      data={data}
-                      labelField={labelField}
-                      valueField={valueField}
-                      value={value}
-                      onChange={
-                        /* istanbul ignore next */ (option: {
-                          [x: string]: any;
-                          value: React.SetStateAction<string>;
-                        }) => {
-                          if (onValueChange) {
-                            onValueChange(option);
-                          }
-
-                          setNewValue(keyItem ? option[keyItem] : option.value);
-                          keyItem
-                            ? onChange(option[keyItem])
-                            : onChange(option.value);
-                          setIsFocus(false);
-                        }
-                      }
-                      onFocus={
-                        /* istanbul ignore next */ () => setIsFocus(true)
-                      }
-                      onBlur={
-                        /* istanbul ignore next */ () => setIsFocus(false)
-                      }
-                    />
-                  </>
-                );
-              }
-            }
-            name={name}
-            rules={rules}
-            defaultValue={param}
-          />
-          {hasError && <ErrorMessage>{errorMessage}</ErrorMessage>}
-        </>
-      ) : (
-        <Dropdown
-          {...rest}
-          itemTestIDField={'itemTestIDField'}
-          testID={testID}
-          flatListProps={{
-            ListEmptyComponent: ListEmptyLabel({ isSelect: true }),
-          }}
+    if (rest.placeholder) {
+      // @ts-ignore
+      rest.placeholder = (
+        <PlaceholderText
+          isFocus={isFocus ? true : false}
           isDisabled={isDisabled ? true : false}
-          isFocus={isFocus}
-          hasError={hasError ? true : false}
-          data={data}
-          labelField={labelField}
-          valueField={valueField}
-          onChange={
-            /* istanbul ignore next */ (option: {
-              [x: string]: any;
-              value: React.SetStateAction<string>;
-            }) => {
-              if (onValueChange) {
-                onValueChange(option);
-              }
+          hasError={hasError ? true : false}>
+          {rest.placeholder}
+          {isShowRequired && <AlertText>*</AlertText>}
+        </PlaceholderText>
+      );
+    }
 
-              setNewValue(keyItem ? option[keyItem] : option.value);
-              setIsFocus(false);
+    return (
+      <ContainerView style={style}>
+        {control && name ? (
+          <>
+            {label &&
+              (isFocus ||
+                (currentValue !== '' && currentValue !== undefined)) && (
+                <LabelBackgroundView>
+                  <FixLabelBackgroundView />
+                  <LabelText
+                    isFocus={isFocus ? true : false}
+                    isDisabled={isDisabled ? true : false}
+                    hasError={hasError ? true : false}>
+                    {label}
+                    {isShowRequired && <AlertText>*</AlertText>}
+                  </LabelText>
+                </LabelBackgroundView>
+              )}
+            <Controller
+              control={control}
+              render={
+                /* ts-ignore */
+                /* istanbul ignore next */ ({ field: { onChange, value } }) => {
+                  // eslint-disable-next-line react-hooks/rules-of-hooks
+                  useEffect(() => {
+                    if (currentValue !== value) {
+                      setNewValue(value);
+                    }
+                  }, [value]);
+
+                  return (
+                    <>
+                      <Dropdown
+                        {...rest}
+                        ref={ref}
+                        itemTestIDField={'itemTestIDField'}
+                        testID={testID}
+                        flatListProps={{
+                          ListEmptyComponent: ListEmptyLabel({
+                            isSelect: true,
+                          }),
+                        }}
+                        isDisabled={isDisabled ? true : false}
+                        isFocus={isFocus}
+                        hasError={hasError ? true : false}
+                        data={data}
+                        labelField={labelField}
+                        valueField={valueField}
+                        value={value}
+                        onChange={
+                          /* istanbul ignore next */ (option: {
+                            [x: string]: any;
+                            value: React.SetStateAction<string>;
+                          }) => {
+                            if (onValueChange) {
+                              onValueChange(option);
+                            }
+
+                            setNewValue(
+                              keyItem ? option[keyItem] : option.value,
+                            );
+                            keyItem
+                              ? onChange(option[keyItem])
+                              : onChange(option.value);
+                            setIsFocus(false);
+                          }
+                        }
+                        onFocus={
+                          /* istanbul ignore next */ () => setIsFocus(true)
+                        }
+                        onBlur={
+                          /* istanbul ignore next */ () => setIsFocus(false)
+                        }
+                      />
+                    </>
+                  );
+                }
+              }
+              name={name}
+              rules={rules}
+              defaultValue={param}
+            />
+            {hasError && <ErrorMessageText>{errorMessage}</ErrorMessageText>}
+          </>
+        ) : (
+          <Dropdown
+            {...rest}
+            itemTestIDField={'itemTestIDField'}
+            testID={testID}
+            ref={ref}
+            flatListProps={{
+              ListEmptyComponent: ListEmptyLabel({ isSelect: true }),
+            }}
+            isDisabled={isDisabled ? true : false}
+            isFocus={isFocus}
+            hasError={hasError ? true : false}
+            data={data}
+            labelField={labelField}
+            valueField={valueField}
+            onChange={
+              /* istanbul ignore next */ (option: {
+                [x: string]: any;
+                value: React.SetStateAction<string>;
+              }) => {
+                if (onValueChange) {
+                  onValueChange(option);
+                }
+
+                setNewValue(keyItem ? option[keyItem] : option.value);
+                setIsFocus(false);
+              }
             }
-          }
-          onFocus={/* istanbul ignore next */ () => setIsFocus(true)}
-          onBlur={/* istanbul ignore next */ () => setIsFocus(false)}
-        />
-      )}
-    </ContainerView>
-  );
-};
+            onFocus={/* istanbul ignore next */ () => setIsFocus(true)}
+            onBlur={/* istanbul ignore next */ () => setIsFocus(false)}
+          />
+        )}
+      </ContainerView>
+    );
+  },
+);
+
+export default Select;
