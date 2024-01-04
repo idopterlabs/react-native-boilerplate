@@ -11,7 +11,6 @@
 - 🚀 Design consolidado
 - 🚀 Splashscreen
 - 🚀 Serviços para HTTP Request e tratamento de erros
-- 🚀 Monitoramento de bugs via AppCenter
 - 🚀 CI via Gitlab
 
 ## Sobre
@@ -71,10 +70,6 @@ yarn react-native generate-bootsplash src/assets/images/logoSplashScreen.png --b
 Uma segunda tela de abertura pode ser configurada em [`src/screens/SplashScreen`](./src/screens/SplashScreen/) (Recomendado deixar como Splashscreen nativo, para não ter efeito de "piscada de tela" entre as transições), essa não está limitada a apenas utilização de uma imagem, elementos como barra de carregamento podem ser adicionando. Essa tela é carregada após o SplashScreen nativo do sistema operacional (Android/iOS), essa tela em questão deve ser usado para esperar o carregamento ou verificação de dados do app, tal como se o usuário está autenticado.
 
 Para mais informações de padrões da SplashScreen veja em [Android Guide - Splash screens](https://developer.android.com/guide/topics/ui/splash-screen#splash_screen_dimensions).
-
-### App Center
-
-Usamos o AppCenter para gerar build e monitorar crash, devido isso você deverá fornecer o "APP SECRET" do projeto registrado no AppCenter em `appcenter-config.json`.
 
 ## Folha de Estilo
 
@@ -161,9 +156,6 @@ A principal dele é as cores ([`src/theme/colors.ts`](./src/theme/colors.ts)), n
 </br> ┣ 📜`.ruby-version` **(Configurações da versão do Roby)**
 </br> ┣ 📜`.watchmanconfig`
 </br> ┣ 📜`app.json`
-</br> ┣ 📜`appcenter-config.json`
-</br> ┣ 📜`appcenter-post-clone.sh`
-</br> ┣ 📜`appcenter-pre-build.sh`
 </br> ┣ 📜`babel.config.js` **(Configurações do babel)**
 </br> ┣ 📜`Gemfile`
 </br> ┣ 📜`index.js`
@@ -390,7 +382,6 @@ Os mocks a serem consumido no projeto podem ser criados em [`src/tests/mocks/`](
 
 ### Utilitário
 
-- [appcenter](https://docs.microsoft.com/en-us/appcenter/sdk/getting-started/react-native): Integração com AppCenter
 - [axios](https://axios-http.com/docs/intro): HTTP Cliente.
 - [luxon](https://moment.github.io/luxon/#/): Formatação de data
 - [patch-package](https://www.npmjs.com/package/patch-package): Aplicação de correção em pacotes

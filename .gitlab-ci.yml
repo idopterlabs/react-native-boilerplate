@@ -1,10 +1,52 @@
-image: node:16.10.0
-
 variables:
   TZ: "America/Sao_Paulo"
   FF_USE_FASTZIP: "true"
   ARTIFACT_COMPRESSION_LEVEL: "fast"
   CACHE_COMPRESSION_LEVEL: "fast"
+  LC_ALL: "en_US.UTF-8"
+  LANG: "en_US.UTF-8"
+  keychain_password: "idopterlabs"
+  NODE_VERSION: "18.15.0"
+
+.macos_saas_runners:
+  tags:
+    - saas-macos-medium-m1
+  image: macos-13-xcode-14
+  before_script:
+    - brew install yarn
+    - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+    - bundle config set --local path 'vendor/ruby'
+    - gem install fastlane -NV --no-verbose --quiet
+    - gem install cocoapods -NV --no-verbose --quiet
+    - gem install activesupport -NV --no-verbose --quiet
+    - node --version
+    - yarn --version
+    - fastlane --version
+
+.linux_only_node_saas_runners:
+  image: node:$NODE_VERSION
+  before_script:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+    - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+    - node --version
+    - yarn --version
+
+.linux_android_saas_runners:
+  image: fabernovel/android:api-33-v1.7.0
+  before_script:
+    - apt-get update -y && apt-get install -y curl bash ruby ruby-dev libsodium-dev
+    - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+    - export NVM_DIR="$HOME/.nvm" && . "$NVM_DIR/nvm.sh" --no-use
+    - nvm install "$NODE_VERSION" && nvm use "$NODE_VERSION"
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+    - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+    - bundle config set --local path 'vendor/ruby'
+    - curl -s https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer | bash
+    - gem install fastlane -NV --no-verbose --quiet
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+    - node --version
+    - yarn --version
+    - fastlane --version
 
 cache:
   - key:
@@ -17,21 +59,28 @@ cache:
     paths:
       - .yarn
     policy: pull-push
+  - key:
+      files:
+        - android/Gemfile.lock
+    paths:
+      - vendor/ruby
+    policy: pull-push
 
-before_script:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+.use_cache_gradle:
+  cache:
+    - key: gradle-$CI_JOB_IMAGE
+      paths:
+        - .gradle/wrapper
+        - .gradle/caches
+      policy: pull-push
 
 stages:
-  - build-deps
   - test
-
-build-deps:
-  stage: build-deps
-  script:
-    - yarn install --cache-folder .yarn
+  - build
 
 run_tests:
+  extends:
+    - .linux_only_node_saas_runners
   stage: test
   coverage: '/All\sfiles[\s]*\|[\s]*(\d+\.\d+)/'
   artifacts:
@@ -40,4 +89,79 @@ run_tests:
       junit:
         - junit.xml
   script:
-    - yarn test:ci
+    - yarn install --cache-folder .yarn
+    - yarn test
+
+run_android_build_idopterlabs:
+  extends:
+    - .linux_android_saas_runners
+    - .use_cache_gradle
+  stage: build
+  only: ["web"]
+  needs: ["run_tests"]
+  artifacts:
+    name: "$CI_COMMIT_REF_NAME"
+    paths:
+      - android/app/build/outputs/apk/release/app-release.apk
+    expire_in: 3 days
+  script:
+    - yarn install --cache-folder .yarn
+    - cd android && fastlane idopterlabs
+
+run_android_build_staging:
+  extends:
+    - .linux_android_saas_runners
+    - .use_cache_gradle
+  stage: build
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  needs: ["run_tests"]
+  artifacts:
+    name: "$CI_COMMIT_REF_NAME"
+    paths:
+      - android/app/build/outputs/apk/release/app-release.apk
+    expire_in: 1 week
+  script:
+    - yarn install --cache-folder .yarn
+    - cd android && fastlane staging
+
+run_android_build_production:
+  extends:
+    - .linux_android_saas_runners
+    - .use_cache_gradle
+  stage: build
+  rules:
+    - if: $CI_COMMIT_BRANCH == "production"
+  needs: ["run_tests"]
+  artifacts:
+    name: "$CI_COMMIT_REF_NAME"
+    paths:
+      - android/app/build/outputs/bundle/release/app-release.aab
+    expire_in: 3 weeks
+  script:
+    - yarn install --cache-folder .yarn
+    - cd android && fastlane production
+
+run_ios_build_idopterlabs:
+  extends:
+    - .macos_saas_runners
+  stage: build
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  needs: ["run_tests"]
+  script:
+    - yarn install --cache-folder .yarn
+    - cd ios && pod update hermes-engine --no-repo-update --allow-root
+    - fastlane idopterlabs
+
+run_ios_build_production:
+  extends:
+    - .macos_saas_runners
+  stage: build
+  rules:
+    - if: $CI_COMMIT_BRANCH == "production"
+  needs: ["run_tests"]
+  script:
+    - yarn install --cache-folder .yarn
+    - cd ios && pod update hermes-engine --no-repo-update --allow-root
+    - fastlane production

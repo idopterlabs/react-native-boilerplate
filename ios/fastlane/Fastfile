@@ -1,0 +1,164 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+discord_webooks = ""
+
+platform :ios do
+  desc "Submit a new Beta Build to TestFlight (Only Idopterlabs)"
+  lane :idopterlabs do
+    setup_ci
+    app_store_connect_api_key
+    
+    match(type: 'appstore', readonly: is_ci, readonly: true)
+
+    increment_build
+
+    build_app(
+      workspace: "Template.xcworkspace",
+      scheme: "Template",
+      export_method: "app-store"
+    )
+
+    upload_to_testflight(
+      notify_external_testers: false,
+      changelog: "Nova versão de Staging | New version to Staging",
+      demo_account_required: false,
+      distribute_external: false,
+      skip_waiting_for_build_processing: true,
+      groups: ["Idopterlabs"]
+    )
+
+    discord_staging
+  end
+
+  desc "Submit a new Beta Build to TestFlight (Staging)"
+  lane :staging do
+    setup_ci
+    app_store_connect_api_key
+    
+    match(type: 'appstore', readonly: is_ci, readonly: true)
+
+    increment_build
+
+    build_app(
+      workspace: "Template.xcworkspace",
+      scheme: "Template",
+      export_method: "app-store"
+    )
+
+    upload_to_testflight(
+      notify_external_testers: false,
+      changelog: "Nova versão de Staging | New version to Staging",
+      demo_account_required: false,
+      distribute_external: true,
+      skip_waiting_for_build_processing: false,
+      groups: ["Idopterlabs", "Client Beta"]
+    )
+
+    discord_staging
+  end
+
+  desc "Deploy a new version to the App Store"
+  lane :production do
+    setup_ci
+    app_store_connect_api_key
+    
+    match(type: 'appstore', readonly: is_ci, readonly: true)
+
+    increment_build
+
+    build_app(
+      workspace: "Template.xcworkspace",
+      scheme: "Template",
+      export_method: "app-store"
+    )
+
+    upload_to_app_store(
+      force: true,
+      submit_for_review: false,
+      automatic_release: true,
+      skip_screenshots: true,
+      skip_metadata: true,
+      precheck_include_in_app_purchases: false
+    )
+
+    discord_production
+  end
+
+  desc "Increment build number"
+  lane :increment_build do
+    build_number_beta = latest_testflight_build_number(initial_build_number: 1)
+    build_number_store = app_store_build_number || 1
+    current_builder_number = build_number_beta + 1
+
+    if build_number_store >= build_number_beta
+      current_builder_number = build_number_store + 1
+    end
+
+    increment_build_number({
+      build_number: current_builder_number
+    })
+  end
+
+  desc "Send notification latest build to Discord (Staging)"
+  lane :discord_staging do
+    latest_release = app_store_build_number || 1
+
+    discord_notifier(
+      webhook_url: discord_webooks,
+      title: "Test Flight",
+      description: "Nova versão do app disponível para download",
+      color: "#ffa000",
+      fields:[
+        {
+          name: "Build Number", 
+          value: latest_release,
+          inline: true
+        },
+        {
+          name: "Type", 
+          value: "Staging",
+          inline: true
+        }
+      ]  
+    )
+  end
+
+  desc "Send notification latest build to Discord (Production)"
+  lane :discord_production do
+    latest_release = latest_testflight_build_number(initial_build_number: 1)
+
+    discord_notifier(
+      webhook_url: discord_webooks,
+      title: "App Store",
+      description: "Nova versão do app disponível para revisão",
+      color: "#ffa000",
+      fields:[
+        {
+          name: "Build Number", 
+          value: latest_release,
+          inline: true
+        },
+        {
+          name: "Type", 
+          value: "Production",
+          inline: true
+        }
+      ]  
+    )
+  end
+end
