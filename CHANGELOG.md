@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.1] - 2024-01-04
+## [1.2.3] - 2024-01-04
 
 ### Added
 
@@ -14,6 +14,37 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
  
 - Removido AppCenter configurações
 
+## [1.2.1] - 2023-09-04
+
+### Fixed
+- Corrigido problema do DarkMode não funcionar em alguns dispositivos
+
+## [1.2.0] - 2023-04-05
+
+| | | | |
+| - | - | - | - |
+| ![image](https://user-images.githubusercontent.com/5731176/230104295-f879b18d-8e95-47ba-bb6d-b65a42a62633.png) | ![image](https://user-images.githubusercontent.com/5731176/230104356-fdb4ecfe-dbe3-4a0a-bdef-c2f025a8148a.png) | ![image](https://user-images.githubusercontent.com/5731176/230104428-29eda9ae-fbce-44f6-b431-a34073a20d84.png) | ![image](https://user-images.githubusercontent.com/5731176/230104485-38b8c275-0482-48f3-a0a7-cc5c2ec12ee5.png) |
+
+### Added
+- Implementado Material You
+- Criado novo componente para fechar teclado ao clicar fora dele `CloseKeyboardTouchableArea`
+- Criado novo componente para fazer Scroll in FlatList `ContainerScrollInFlatList`
+- Criado arquivo para configurar fontes `src/theme/fonts`
+- Configurado plugin do typescript para o styled
+- Adicionado nova regra no eslint para ordenação das importações
+- Adicionado nova pasta na arquitetura `src/hooks/*/`
+
+### Changed
+- Atualizado todos as dependências para versão mais recente stable
+- Trocado versão do Node.js para o 18
+- Atualizado ReactNative para 0.70.7
+- Atualizado para o Paper 5
+- Alterado estrutura de screen para permitir pastas de componentes dentro dela 
+
+### Fixed
+- Removido patch para label personalizado, pois foi corrigido no dependência
+- Removido patch para select em ordem errado, pois foi corrigido no dependência
+- Adicionado regra faltando no Babel para o react-native-reanimated
 
 ## [1.1.0] - 2023-01-31
 
@@ -28,7 +59,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Adicionado tipo de estilo (dark/light) na status bar
 - Adicionado comando no NPM para verificar tipagem do Typescript em todo o projeto (`yarn ts-check`)
 - Adicionado controle de features do app via variável de ambiente (`RN_FEATURES_OFF`)
-- Adicionado configurações para pipeline de teste via Gitlab
+- Adicionado configurações para pipeline de teste via GitLab
 - Adicionado novo utilitário padrão onde pode ser trocado fácil o banco de dados de um app
 
 ### Changed

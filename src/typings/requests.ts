@@ -9,6 +9,7 @@ export interface AxiosErrorApplication extends AxiosError<any, any> {
 }
 
 export type DefaultChangesetError = { [key: string]: string[] };
+
 export type ResponseDataWithError =
   | string
   | {

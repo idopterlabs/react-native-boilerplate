@@ -1,5 +1,6 @@
-import { cleanup } from '@testing-library/react-native';
 import { AxiosError } from 'axios';
+
+import { cleanup } from '@testing-library/react-native';
 
 import { alertSpy } from '@tests/actions/alertSpy';
 

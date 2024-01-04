@@ -1,8 +1,8 @@
 import styled from 'styled-components/native';
 
-import { second } from '@utils/units';
-
 import { Snackbar as SnackbarComponent } from 'react-native-paper';
+
+import { second } from '@utils/units';
 
 export interface Props {
   currentPosition: 'top' | 'bottom';

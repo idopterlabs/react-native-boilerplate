@@ -1,4 +1,5 @@
 import DeviceInfo from 'react-native-device-info';
+
 import { RN_ENV } from '@env';
 
 /* istanbul ignore next */
