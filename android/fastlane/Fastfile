@@ -1,0 +1,161 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+firebase_credential = "./fastlane/credentials/XXXXXXXXX.json"
+firebase_project_id = 12345678900000 # Get in Firebase Console >> Project settings >> Geral >> Project number 
+firebase_app_id = "0:12345678900000:android:0000000000" # Get in Firebase Console >> Project settings >> Geral >> Your apps >> Android App >> App ID 
+discord_webooks = "" #
+
+platform :android do
+  desc "Submit a new Beta Build to Firebase App Distribution (Only Idopterlabs)"
+  lane :idopterlabs do
+    increment_version
+  
+    gradle(task: "clean assembleRelease")
+    release = firebase_app_distribution(
+      app: firebase_app_id,
+      groups: "idopterlabs",
+      release_notes: "Nova versão de Interno | New version to Internal",
+      service_credentials_file: firebase_credential
+    )
+
+    discord
+  end
+
+  desc "Submit a new Beta Build to Firebase App Distribution (Staging)"
+  lane :staging do
+    increment_version
+  
+    gradle(task: "clean assembleRelease")
+    release = firebase_app_distribution(
+      app: firebase_app_id,
+      groups: "idopterlabs, client-beta",
+      release_notes: "Nova versão de Staging | New version to Staging",
+      service_credentials_file: firebase_credential
+    )
+
+    discord
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :production do
+    increment_version
+
+    gradle(task: "clean bundleRelease")
+    release = firebase_app_distribution(
+      app: firebase_app_id,
+      groups: "production",
+      release_notes: "Nova versão de Produção | New version to Production",
+      service_credentials_file: firebase_credential,
+      android_artifact_type: "AAB"
+    )
+
+    latest_release = firebase_app_distribution_get_latest_release(
+      app: firebase_app_id,
+      service_credentials_file: firebase_credential
+    )
+    upload_to_play_store(
+      version_name: "%s (%s)" % [latest_release[:displayVersion], latest_release[:buildVersion]],
+      changes_not_sent_for_review: true,
+    )
+
+    discord
+  end
+
+  desc "Increment the build number to an unreleased release version"
+  lane :increment_version do
+    latest_release = firebase_app_distribution_get_latest_release(
+      app: firebase_app_id,
+      service_credentials_file: firebase_credential
+    )
+    increment_version_code({ 
+      version_code: latest_release[:buildVersion].to_i + 1
+    })
+  end
+
+  desc "Create default groups and send invites default"
+  lane :create_groups do
+    firebase_app_distribution_create_group(
+      display_name: "Client Beta",
+      alias: "client-beta",
+      project_number: firebase_project_id,
+      service_credentials_file: firebase_credential
+    )
+
+    firebase_app_distribution_create_group(
+      display_name: "Idopterlabs",
+      alias: "idopterlabs",
+      project_number: firebase_project_id,
+      service_credentials_file: firebase_credential
+    )
+
+    firebase_app_distribution_create_group(
+      display_name: "Production",
+      alias: "production",
+      project_number: firebase_project_id,
+      service_credentials_file: firebase_credential
+    )
+
+    firebase_app_distribution_add_testers(
+      group_alias: "idopterlabs",
+      emails: "dev.001@idopterlabs.com.br,dev.002@idopter.com.br",
+      project_number: firebase_project_id,
+      service_credentials_file: firebase_credential,
+    )
+  end
+
+  desc "Send notification latest build to Discord"
+  lane :discord do
+    latest_release = firebase_app_distribution_get_latest_release(
+      app: firebase_app_id,
+      service_credentials_file: firebase_credential
+    )
+
+    discord_notifier(
+      webhook_url: discord_webooks,
+      title: "App Distribution",
+      description: "Nova versão do app disponível para download",
+      color: "#ffa000",
+      fields:[
+        {
+          name: "Version Name", 
+          value: latest_release[:displayVersion],
+          inline: true
+        },
+        {
+          name: "Build Number", 
+          value: latest_release[:buildVersion],
+          inline: true
+        },
+        {
+          name: "Release Notes", 
+          value: latest_release[:releaseNotes][:text]
+        },
+        {
+          name: "Firebase Console", 
+          value: "[Open](%s)" % [latest_release[:firebaseConsoleUri]],
+          inline: true
+        },
+        {
+          name: "App Distribution", 
+          value: "[Open](%s)" % [latest_release[:testingUri]],
+          inline: true
+        }
+      ]  
+    )
+  end
+end
